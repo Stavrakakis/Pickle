@@ -11,8 +11,16 @@
     ],
     "exclude": [],
     "files": [
-        "ChatModel.ts",
-        "IChatModel.d.ts",
-        "app.tsx"
+        "Actions/Action.ts",
+        "Channels/Channel.ts",
+        "Channels/ChannelActivationAction.ts",
+        "Channels/ChannelStore.ts",
+        "Channels/NewChannelAction.ts",
+        "Channels/NewMessageAction.ts",
+        "Dispatcher/Dispatcher.ts",
+        "app.tsx",
+        "ChannelPanel/ChannelListItem.tsx",
+        "ChannelPanel/ChannelPanel.tsx",
+        "ChatPanel/ChatPanel.tsx"
     ]
 }

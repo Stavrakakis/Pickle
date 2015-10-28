@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/kriasoft/react-starter-kit#readme",
   "devDependencies": {
-    "react": "^0.14.0"
+    "events": "^1.1.0",
+    "flux": "^2.1.1",
+    "react": "^0.14.0",
+    "react-addons-linked-state-mixin": "^0.14.0"
   },
   "dependencies": {
     "ts-loader": "^0.6.0",
