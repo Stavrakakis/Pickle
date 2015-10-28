@@ -15,19 +15,20 @@ class ChannelStore extends Events.EventEmitter {
   public static NEW_CHANNEL = "new_channel";
   public static CHANNEL_ACTIVATED = "channel_activated";
 
-  private _messages: Array<string>;
   private _channels: Array<Channel>;
 
   constructor() {
 
     super();
     this._channels = [new Channel("Bristol"), new Channel("Edinburgh")];
-    this._messages = [];
 
     Dispatcher.register((action: Action) => {
       if (action instanceof NewMessageAction) {
           let newMessageAction = (<NewMessageAction>action);
-          this._messages.push(newMessageAction.message);
+
+          let channel = this._channels.filter(c => c.name == newMessageAction.channel.name)[0];
+          channel.recentMessages.push(newMessageAction.message);
+
           this.emit(ChannelStore.NEW_MESSAGE, newMessageAction.message);
       }
 

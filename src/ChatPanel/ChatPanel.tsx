@@ -22,19 +22,25 @@ export default class ChatPanel extends React.Component<any, any> {
     this.messages = this.channelStore.getMessagesForChannel(this.state.activeChannel);
   }
 
+  onMessageChanged = (event) => {
+    this.setState({
+        message: event.target.value
+      });
+  }
+
   onNewMessage = (newMessage: NewMessageAction) => {
     this.setState({
        messages: this.channelStore.getMessagesForChannel(this.state.activeChannel)
       });
   };
+
   messageUpdated = (event) => {
     this.setState({message: event.target.value});
   }
 
-  newMessage = (event) => {
+  sendMessage = (event) => {
     event.preventDefault();
-
-    dispatcher.dispatch(new NewMessageAction(this.state.message));
+    dispatcher.dispatch(new NewMessageAction(this.state.activeChannel, this.state.message));
     this.setState({message: null});
   }
 
@@ -56,6 +62,10 @@ export default class ChatPanel extends React.Component<any, any> {
         <div>
           <header>Chat Panel - {this.state.activeChannel.name}</header>
           <div>{messages}</div>
+          <form onSubmit={this.sendMessage}>
+            <input type="text" value={this.state.message} onChange={this.onMessageChanged}/>
+            <button type="submit">Send</button>
+          </form>
         </div>
       );
   };
