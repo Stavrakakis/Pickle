@@ -6,6 +6,12 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using System.Security.Cryptography.X509Certificates;
 using Pickle.Api.Configuration;
+using System.IdentityModel.Tokens;
+using System.Collections.Generic;
+using Microsoft.AspNet.Authentication.OpenIdConnect;
+using System.Security.Claims;
+using Microsoft.AspNet.Authentication;
+using System.Threading.Tasks;
 
 namespace Pickle.Api
 {
@@ -15,7 +21,17 @@ namespace Pickle.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataProtection();
-            services.AddSignalR();
+            services.AddMvc();
+            services.AddCors();
+
+            var policy = new Microsoft.AspNet.Cors.Core.CorsPolicy();
+
+            policy.Headers.Add("*");
+            policy.Methods.Add("*");
+            policy.Origins.Add("*");
+            policy.SupportsCredentials = true;
+
+            services.ConfigureCors(x => x.AddPolicy("mypolicy", policy));
         }
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env)
@@ -41,8 +57,8 @@ namespace Pickle.Api
                     }
                 });
             });
-            
-            app.UseSignalR();
+
+            app.UseCors("mypolicy");
         }
 
         private void ConfigureIdentityProviders(IAppBuilder app, string signInAsType)

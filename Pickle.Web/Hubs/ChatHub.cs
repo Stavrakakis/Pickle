@@ -2,7 +2,7 @@
 using Microsoft.AspNet.SignalR;
 using System.Collections.Generic;
 
-namespace Pickle.Api.Hubs
+namespace Pickle.Web.Hubs
 {
     public class ChatHub : Hub
     {

@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Authentication;
+using Microsoft.AspNet.Authentication.OpenIdConnect;
+using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
-using Owin;
-using Microsoft.AspNet.Authentication.OpenIdConnect;
-using System.Security.Claims;
-using Microsoft.AspNet.Authentication;
-using System.Threading.Tasks;
-using System.IdentityModel.Tokens;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Pickle.Web
 {
@@ -16,8 +15,12 @@ namespace Pickle.Web
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR();
             services.AddMvc();
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableDetailedErrors = true;
+
+            });
         }
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env)
@@ -64,12 +67,14 @@ namespace Pickle.Web
                         // this skips nonce checking & cleanup 
                         // see https://github.com/aspnet/Security/issues/372
                         n.HandleResponse();
+
                         return Task.FromResult(0);
                     }
                 };
             });
 
             app.UseMvcWithDefaultRoute();
+            app.UseSignalR();
         }
     }
 }
