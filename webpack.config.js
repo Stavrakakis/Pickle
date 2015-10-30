@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/app.tsx',
   output: {
-    filename: 'src/bundle.js'
+    filename: './wwwroot/js/bundle.js'
   },
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.js', '.tsx']

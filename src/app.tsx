@@ -46,7 +46,7 @@ namespace app.components {
     // https://facebook.github.io/react/docs/jsx-in-depth.html
     // if you need additional help
     public render() {
-      
+
         var chatPanels = this.state.activeChatChannels.map((channel) => {
             return <ChatPanel store={this.channelStore} activeChannel={channel}/>
           });

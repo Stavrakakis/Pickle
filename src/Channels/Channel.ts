@@ -5,9 +5,6 @@ export default class Channel {
 
   constructor(name: string) {
     this.name = name;
-    this.recentMessages = [
-      "Hello, this is a first message",
-      "Sup, a second message"
-    ];
+    this.recentMessages = [];
   }
 }
