@@ -8,44 +8,49 @@ import ChannelListItem from "./ChannelListItem";
 
 export default class ChannelPanel extends React.Component<any, any> {
 
-  private channelStore: ChannelStore;
-  private channels: Array<Channel>;
+    private channelStore: ChannelStore;
 
-  constructor(props : any) {
-    super(props);
+    constructor(props: any) {
+        super(props);
 
-    this.channelStore = props.store;
-    this.channels = [];
-    this.state = {};
-  
-  }
+        this.channelStore = props.store;
+        this.state = {
+            channels: []
+        };
+    }
 
-  channelClicked = (event) => {
-      console.log(event);
-  }
+    channelClicked = (event) => {
+        console.log(event);
+    }
 
-  onNewChannel = (newChannel: NewChannelAction) => {
-    
-	this.channelStore.getChannels().then((channels) => {
-		this.setState({
-			channels: channels
-		});
-	});	
-  }
+    onNewChannel = (newChannel: NewChannelAction) => {
 
-  componentDidMount() {
-      this.props.store.addListener(ChannelStore.NEW_CHANNEL, this.onNewChannel);
-  }
+        this.channelStore.getChannels().then((channels) => {
+            this.setState({
+                channels: channels
+            });
+        });
+    }
 
-  public render() {
-    var channelList = this.channels.map((channel) => { return <ChannelListItem channel={channel}/>});
+    componentDidMount() {
+        this.props.store.addListener(ChannelStore.NEW_CHANNEL, this.onNewChannel);
 
-    return (
-      <div>
+        this.channelStore.getChannels().then((channels) => {
+            this.setState({
+                channels: channels
+            });
+        });
+    }
+
+    public render() {
+        var channelList = this.state.channels.map((channel) => { return <ChannelListItem channel={channel}/> });
+
+        return (
+            <div>
         <ul>
           {channelList}
-        </ul>
-      </div>
-      );
-  };
+            </ul>
+                </div>
+        );
+    };
 }

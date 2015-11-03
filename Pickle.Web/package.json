@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start tests/karma.conf.js"
+    "test": "karma start test/karma.conf.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,23 +13,20 @@
   },
   "homepage": "https://github.com/kriasoft/react-starter-kit#readme",
   "devDependencies": {
-    "browserify": "^12.0.1",
-    "browserify-typescript": "0.0.1",
     "events": "^1.1.0",
-    "express": "^4.13.3",
     "flux": "^2.1.1",
     "karma": "^0.13.15",
     "karma-browserify": "^4.4.0",
+    "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.1",
     "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
+    "karma-webpack": "^1.7.0",
     "phantomjs": "^1.9.18",
     "react": "^0.14.0",
     "react-addons-linked-state-mixin": "^0.14.0",
-    "tsify": "^0.12.2"
-  },
-  "dependencies": {
     "ts-loader": "^0.6.0",
-    "typescript": "^1.6.2"
+    "typescript": "^1.6.2",
+    "webpack": "^1.12.2"
   }
 }

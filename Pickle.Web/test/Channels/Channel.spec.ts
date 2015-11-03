@@ -1,4 +1,4 @@
-import "../global.ts";
+import "../test-globals.ts";
 
 import Channel from "../../app/Channels/Channel";
 

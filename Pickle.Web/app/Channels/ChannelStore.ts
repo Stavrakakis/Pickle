@@ -8,6 +8,7 @@ import NewMessageAction = require("./NewMessageAction");
 import ChannelActivationAction = require("./ChannelActivationAction");
 import NewChannelAction = require("./NewChannelAction");
 import Events = require("events");
+
 import Channel from "./Channel";
 import jquery = require("jquery");
 
@@ -26,9 +27,6 @@ class ChannelStore extends Events.EventEmitter {
       if (action instanceof NewMessageAction) {
           let newMessageAction = (<NewMessageAction>action);
 
-          //let channel = this._channels.filter(c => c.name == newMessageAction.channel.name)[0];
-          //channel.recentMessages.push(newMessageAction.message);
-          
           var uri ="https://localhost:44306/api/messages/" + newMessageAction.channel.id;
           var self = this;
           return jquery.ajax(
@@ -47,7 +45,6 @@ class ChannelStore extends Events.EventEmitter {
 
       if (action instanceof NewChannelAction) {
           let newChannelAction = (<NewChannelAction>action);
-          //this._channels.push(newChannelAction.channel);
           this.emit(ChannelStore.NEW_CHANNEL, (newChannelAction.channel));
       }
 

@@ -5,13 +5,8 @@ class Action {
     constructor( source: Action.Source ) {
         this._source = source
     }
-
-    /**
-     * The Source of the action
-     * Make sure the source is immutable to avoid change
-     * during Dispatch
-     */
-    get source() {
+    
+    getSource() {
         return this._source
     }
 }
