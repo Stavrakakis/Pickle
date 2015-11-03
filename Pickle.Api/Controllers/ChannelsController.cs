@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Pickle.Api.Models;
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Pickle.Api.Controllers
 {
     public class ChannelsController : Controller
