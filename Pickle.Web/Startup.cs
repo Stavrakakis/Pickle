@@ -3,6 +3,7 @@ using Microsoft.AspNet.Authentication.OpenIdConnect;
 using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
+using Pickle.Web.Middleware;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
@@ -19,12 +20,19 @@ namespace Pickle.Web
             services.AddSignalR(options =>
             {
                 options.Hubs.EnableDetailedErrors = true;
-
             });
         }
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env)
         {
+            app.UseApiMapping(
+                new ApiMappingOptions
+                {
+                    MapFromUri = "/api",
+                    MapToUri = "https://localhost:44306/api",
+                    UseBearerTokenFromCookie = true
+                });
+
             // really? still?
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 

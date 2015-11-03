@@ -15,7 +15,6 @@ namespace Pickle.Web.Hubs
             return base.OnConnected();
         }
 
-
         public void Send(string message)
         {
             var user = Context.User.Identity;

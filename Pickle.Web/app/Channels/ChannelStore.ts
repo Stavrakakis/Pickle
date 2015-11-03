@@ -27,7 +27,7 @@ export default class ChannelStore extends Events.EventEmitter implements IChanne
             if (action instanceof NewMessageAction) {
                 let newMessageAction = (<NewMessageAction>action);
 
-                var uri = "https://localhost:44306/api/messages/" + newMessageAction.channel.id;
+                var uri = "/api/messages/" + newMessageAction.channel.id;
                 var self = this;
                 return jquery.ajax(
                     {
@@ -57,7 +57,7 @@ export default class ChannelStore extends Events.EventEmitter implements IChanne
     }
 
     getChannels(): JQueryPromise<Array<Channel>> {
-        return jquery.get("https://localhost:44306/api/channels", function (result) {
+        return jquery.get("/api/channels", function (result) {
             let data: Array<Channel> = result.map((apiModel) => { return new Channel(apiModel.id, apiModel.name); });
             return data;
         });
@@ -65,7 +65,7 @@ export default class ChannelStore extends Events.EventEmitter implements IChanne
 
     getMessagesForChannel(channel: Channel): JQueryPromise<Array<string>> {
 
-        return jquery.get("https://localhost:44306/api/messages/" + channel.id, function (messages) {
+        return jquery.get("/api/messages/" + channel.id, function (messages) {
 
             return messages;
         });
