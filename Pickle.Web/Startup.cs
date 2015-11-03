@@ -41,7 +41,6 @@ namespace Pickle.Web
                 options.ResponseType = "code id_token token";
                 options.Scope = "openid email profile";
                 options.RedirectUri = "https://localhost:44303/";
-
                 options.SignInScheme = "Cookies";
                 options.AutomaticAuthentication = true;
 

@@ -11,13 +11,10 @@ import Events = require("events");
 import Channel from "./Channel";
 import jquery = require("jquery");
 import IChannelStore from "./IChannelStore";
+import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 
 class ChannelStore extends Events.EventEmitter implements IChannelStore {
-
-    public static NEW_MESSAGE = "new_message";
-    public static NEW_CHANNEL = "new_channel";
-    public static CHANNEL_ACTIVATED = "channel_activated";
-    
+        
     constructor() {
 
         super();
@@ -36,7 +33,7 @@ class ChannelStore extends Events.EventEmitter implements IChannelStore {
                         contentType: "application/json",
                         data: JSON.stringify({ message: newMessageAction.message }),
                         success: function (messages) {
-                            self.emit(ChannelStore.NEW_MESSAGE, newMessageAction.message);
+                            self.emit(ChannelStoreEvents.NEW_MESSAGE, newMessageAction.message);
                         }
                     }
                 );
@@ -44,13 +41,13 @@ class ChannelStore extends Events.EventEmitter implements IChannelStore {
 
             if (action instanceof NewChannelAction) {
                 let newChannelAction = (<NewChannelAction>action);
-                this.emit(ChannelStore.NEW_CHANNEL, (newChannelAction.channel));
+                this.emit(ChannelStoreEvents.NEW_CHANNEL, (newChannelAction.channel));
             }
 
             if (action instanceof ChannelActivationAction) {
                 let channelActivationAction = (<ChannelActivationAction>action);
 
-                this.emit(ChannelStore.CHANNEL_ACTIVATED, channelActivationAction);
+                this.emit(ChannelStoreEvents.CHANNEL_ACTIVATED, channelActivationAction);
             }
         });
     }

@@ -2,13 +2,15 @@
 
 import dispatcher = require("../Dispatcher/Dispatcher")
 import NewChannelAction = require("../Channels/NewChannelAction");
-import ChannelStore = require("../Channels/ChannelStore");
+
 import Channel from "../Channels/Channel";
+import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 import ChannelListItem from "./ChannelListItem";
+import IChannelStore from "../Channels/IChannelStore";
 
 export default class ChannelPanel extends React.Component<any, any> {
 
-    private channelStore: ChannelStore;
+    private channelStore: IChannelStore;
 
     constructor(props: any) {
         super(props);
@@ -33,7 +35,7 @@ export default class ChannelPanel extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        this.props.store.addListener(ChannelStore.NEW_CHANNEL, this.onNewChannel);
+        this.props.store.addListener(ChannelStoreEvents.NEW_CHANNEL, this.onNewChannel);
 
         this.channelStore.getChannels().then((channels) => {
             this.setState({

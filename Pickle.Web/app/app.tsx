@@ -2,12 +2,14 @@
 /// <reference path="./Actions/Action.ts"/>
 
 import dispatcher = require("./Dispatcher/Dispatcher")
-import NewMessageAction = require("./Channels/NewMessageAction");
-import ChannelActivationAction = require("./Channels/ChannelActivationAction");
-import ChannelStore = require("./Channels/ChannelStore");
+
 import Channel from "./Channels/Channel";
+import ChannelActivationAction = require("./Channels/ChannelActivationAction");
+import ChannelStoreEvents from "./Channels/ChannelStoreEvents";
+import ChannelStore = require("./Channels/ChannelStore");
 import ChannelPanel from "./ChannelPanel/ChannelPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
+import NewMessageAction = require("./Channels/NewMessageAction");
 
 namespace app.components {
 
@@ -39,7 +41,7 @@ namespace app.components {
         }
 
         componentDidMount() {
-            this.channelStore.addListener(ChannelStore.CHANNEL_ACTIVATED, this.onChannelActivated);
+            this.channelStore.addListener(ChannelStoreEvents.CHANNEL_ACTIVATED, this.onChannelActivated);
 
             this.channelStore.getChannels().then((channels) => {
                 this.setState({

@@ -27,7 +27,7 @@
         "typings/react/react-global.d.ts",
         "typings/react/react.d.ts",
         "typings/tsd.d.ts",
-        "app/app.tsx",
+        "app/App.tsx",
         "app/ChannelPanel/ChannelListItem.tsx",
         "app/ChannelPanel/ChannelPanel.tsx",
         "app/ChatPanel/ChatPanel.tsx"
