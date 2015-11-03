@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Pickle.Api.ApiRequestModels;
+using Microsoft.AspNet.Authorization;
 
 namespace Pickle.Api.Controllers
 {
@@ -14,9 +15,12 @@ namespace Pickle.Api.Controllers
             };
 
         [HttpGet]
+        [Authorize]
         [Route("/api/messages/{channelId}")]
-        public Task<IActionResult> GetAllForChannel(string channelId)
+        public Task<IActionResult> GetAll(string channelId)
         {
+            var user = User;
+
             var channel = messages[channelId];
 
             if (channel == null)
@@ -30,8 +34,9 @@ namespace Pickle.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("/api/messages/{channelId}")]
-        public Task<IActionResult> GetAllForChannel(string channelId, [FromBody] NewMessageModel message)
+        public Task<IActionResult> Post(string channelId, [FromBody] NewMessageModel message)
         {
             if (!messages.ContainsKey(channelId))
             {

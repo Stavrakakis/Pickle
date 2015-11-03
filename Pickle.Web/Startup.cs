@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Authentication.OpenIdConnect;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
-using Pickle.Web.Middleware;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
@@ -16,7 +17,15 @@ namespace Pickle.Web
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                  .Configure<MvcOptions>(options => {
+
+                      var jsonOutputFormatter = new JsonOutputFormatter();
+                      jsonOutputFormatter.SerializerSettings.ContractResolver =
+                          new CamelCasePropertyNamesContractResolver();
+                      options.OutputFormatters.Insert(0, jsonOutputFormatter);
+                  });
+
             services.AddSignalR(options =>
             {
                 options.Hubs.EnableDetailedErrors = true;
@@ -25,13 +34,6 @@ namespace Pickle.Web
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env)
         {
-            app.UseApiMapping(
-                new ApiMappingOptions
-                {
-                    MapFromUri = "/api",
-                    MapToUri = "https://localhost:44306/api",
-                    UseBearerTokenFromCookie = true
-                });
 
             // really? still?
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
