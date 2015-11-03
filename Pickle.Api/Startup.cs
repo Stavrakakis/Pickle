@@ -12,6 +12,8 @@ using Microsoft.AspNet.Authentication.OpenIdConnect;
 using System.Security.Claims;
 using Microsoft.AspNet.Authentication;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Mvc;
+using Newtonsoft.Json.Serialization;
 
 namespace Pickle.Api
 {
@@ -21,7 +23,15 @@ namespace Pickle.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataProtection();
-            services.AddMvc();
+            services.AddMvc()
+                  .Configure<MvcOptions>(options => {
+
+                      var jsonOutputFormatter = new JsonOutputFormatter();
+                      jsonOutputFormatter.SerializerSettings.ContractResolver =
+                          new CamelCasePropertyNamesContractResolver();
+                      options.OutputFormatters.Insert(0, jsonOutputFormatter);
+                  });
+
             services.AddCors();
 
             var policy = new Microsoft.AspNet.Cors.Core.CorsPolicy();
