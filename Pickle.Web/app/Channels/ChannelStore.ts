@@ -2,18 +2,22 @@
 /// <reference path="../../typings/node/node.d.ts" />
 /// <reference path="../../typings/jquery/jquery.d.ts" />
 
-import Dispatcher = require("../Dispatcher/Dispatcher");
-import Action = require("../Actions/Action");
-import NewMessageAction = require("./NewMessageAction");
-import ChannelActivationAction = require("./ChannelActivationAction");
-import NewChannelAction = require("./NewChannelAction");
+
 import Events = require("events");
-import Channel from "./Channel";
 import jquery = require("jquery");
+import Dispatcher = require("../Dispatcher/Dispatcher");
+
+import Action = require( "../Actions/Action");
+import NewMessageAction from "./NewMessageAction";
+import ChannelActivationAction from "./ChannelActivationAction";
+import NewChannelAction from "./NewChannelAction";
+import Channel from "./Channel";
 import IChannelStore from "./IChannelStore";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 
-class ChannelStore extends Events.EventEmitter implements IChannelStore {
+
+
+export default class ChannelStore extends Events.EventEmitter implements IChannelStore {
         
     constructor() {
 
@@ -68,5 +72,5 @@ class ChannelStore extends Events.EventEmitter implements IChannelStore {
     }
 }
 
-export = ChannelStore;
+
 

@@ -1,14 +1,23 @@
 /// <reference path="../../typings/react/react-global.d.ts" />
 
 import dispatcher = require("../Dispatcher/Dispatcher");
-import Channel from "../Channels/Channel";
-import ChannelActivationAction = require("../Channels/ChannelActivationAction");
 
-export default class ChannelListItem extends React.Component<any, any> {
+import Channel from "../Channels/Channel";
+import ChannelActivationAction from "../Channels/ChannelActivationAction";
+
+class ChannelListItemProps {
+    channel: Channel;
+}
+
+class ChannelListItemState {
+
+}
+
+export default class ChannelListItem extends React.Component<ChannelListItemProps, ChannelListItemState> {
 
   private channel: Channel;
 
-  constructor(props : any) {
+  constructor(props: ChannelListItemProps) {
     super(props);
     this.channel = props.channel;
   }

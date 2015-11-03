@@ -1,57 +1,74 @@
 /// <reference path="../../typings/react/react-global.d.ts" />
 
 import dispatcher = require("../Dispatcher/Dispatcher")
-import NewMessageAction = require("../Channels/NewMessageAction");
-import ChannelStore = require("../Channels/ChannelStore");
+
+import NewMessageAction from "../Channels/NewMessageAction";
+import ChannelStore from "../Channels/ChannelStore";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 import Channel from "../Channels/Channel";
 
-export default class ChatPanel extends React.Component<any, any> {
+class ChatPanelProps {
+    channelStore: ChannelStore;
+    activeChannel: Channel;
+}
 
-    private channelStore: ChannelStore;
+class ChatPanelState {
+    message: string;
+    messages: Array<String>;
+}
 
-    constructor(props: any) {
+export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanelState> {
+    
+    constructor(props: ChatPanelProps) {
         super(props);
-
-        this.channelStore = props.store;
-
+        
         this.state = {
             message: null,
-            messages: [],
-            activeChannel: props.activeChannel
+            messages: []
         };
     }
 
     onMessageChanged = (event) => {
         this.setState({
-            message: event.target.value
+            message: event.target.value,
+            messages: this.state.messages
         });
     }
 
     onNewMessage = (newMessage: NewMessageAction) => {
-        this.channelStore.getMessagesForChannel(this.state.activeChannel).then((messages) => {
+        this.props.channelStore.getMessagesForChannel(this.props.activeChannel).then((messages) => {
             this.setState({
-                messages: messages
+                messages: messages,
+                message: this.state.message
             });
         });
     };
 
     messageUpdated = (event) => {
-        this.setState({ message: event.target.value });
+        this.setState({
+            message: event.target.value,
+            messages: this.state.messages
+        });
     }
 
     sendMessage = (event) => {
         event.preventDefault();
-        dispatcher.dispatch(new NewMessageAction(this.state.activeChannel, this.state.message));
-        this.setState({ message: null });
+        dispatcher.dispatch(new NewMessageAction(this.props.activeChannel, this.state.message));
+        this.setState({
+            message: null,
+            messages: this.state.messages
+        });
     }
 
     componentDidMount() {
-        this.props.store.addListener(ChannelStoreEvents.NEW_MESSAGE, this.onNewMessage);
+        this.props.channelStore.addListener(ChannelStoreEvents.NEW_MESSAGE, this.onNewMessage);
 
-        this.channelStore.getMessagesForChannel(this.state.activeChannel)
+        this.props.channelStore.getMessagesForChannel(this.props.activeChannel)
             .then((messages) => {
-                this.setState({ messages: messages });
+                this.setState({
+                    message: this.state.message,
+                    messages: messages
+                });
             });
     }
     
@@ -64,7 +81,7 @@ export default class ChatPanel extends React.Component<any, any> {
 
         return (
             <div>
-          <header>Chat Panel - {this.state.activeChannel.name}</header>
+          <header>Chat Panel - {this.props.activeChannel.name}</header>
           <div>{messages}</div>
           <form onSubmit={this.sendMessage}>
             <input type="text" value={this.state.message} onChange={this.onMessageChanged}/>

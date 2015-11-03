@@ -1,21 +1,26 @@
 /// <reference path="../../typings/react/react-global.d.ts" />
 
-import dispatcher = require("../Dispatcher/Dispatcher")
-import NewChannelAction = require("../Channels/NewChannelAction");
+import dispatcher = require("../Dispatcher/Dispatcher");
 
 import Channel from "../Channels/Channel";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 import ChannelListItem from "./ChannelListItem";
-import IChannelStore from "../Channels/IChannelStore";
+import ChannelStore from "../Channels/ChannelStore";
+import NewChannelAction from "../Channels/NewChannelAction";
 
-export default class ChannelPanel extends React.Component<any, any> {
+class ChannelPanelProps {
+    channelStore: ChannelStore;
+}
 
-    private channelStore: IChannelStore;
+class ChannelPanelState {
+    channels: Array<Channel>;
+}
 
-    constructor(props: any) {
+export default class ChannelPanel extends React.Component<ChannelPanelProps, ChannelPanelState> {
+    
+    constructor(props: ChannelPanelProps) {
         super(props);
-
-        this.channelStore = props.store;
+        
         this.state = {
             channels: []
         };
@@ -27,7 +32,7 @@ export default class ChannelPanel extends React.Component<any, any> {
 
     onNewChannel = (newChannel: NewChannelAction) => {
 
-        this.channelStore.getChannels().then((channels) => {
+        this.props.channelStore.getChannels().then((channels) => {
             this.setState({
                 channels: channels
             });
@@ -35,9 +40,9 @@ export default class ChannelPanel extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        this.props.store.addListener(ChannelStoreEvents.NEW_CHANNEL, this.onNewChannel);
+        this.props.channelStore.addListener(ChannelStoreEvents.NEW_CHANNEL, this.onNewChannel);
 
-        this.channelStore.getChannels().then((channels) => {
+        this.props.channelStore.getChannels().then((channels) => {
             this.setState({
                 channels: channels
             });

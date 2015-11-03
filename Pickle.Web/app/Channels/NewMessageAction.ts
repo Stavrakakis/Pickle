@@ -1,11 +1,7 @@
 import Channel from "./Channel";
 import Action = require('../Actions/Action')
 
-/**
- * A Flux Action which is sent to increment the Counter
- * This action is "marked" a view sourced action i.e. an action triggered by user interaction
- */
-class NewMessageAction extends Action{
+export default class NewMessageAction extends Action{
 
     private _message: string;
     private _channel: Channel;
@@ -24,5 +20,3 @@ class NewMessageAction extends Action{
       return this._channel;
     }
 }
-
-export = NewMessageAction
