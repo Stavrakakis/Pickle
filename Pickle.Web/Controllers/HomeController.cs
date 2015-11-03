@@ -8,14 +8,6 @@ namespace Pickle.Web.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            var user = User.Identity;
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult Secure()
-        {
-            var user = User.Identity;
             return View();
         }
     }

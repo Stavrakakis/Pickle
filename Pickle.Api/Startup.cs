@@ -59,6 +59,7 @@ namespace Pickle.Api
             });
 
             app.UseCors("mypolicy");
+            app.UseMvc();
         }
 
         private void ConfigureIdentityProviders(IAppBuilder app, string signInAsType)

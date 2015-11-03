@@ -17,7 +17,7 @@ namespace Pickle.Api.Configuration
 
                     // human involved
                     Flow = Flows.Hybrid,
-
+                    RequireConsent = false,
                     RedirectUris = new List<string>
                     {
                         "https://localhost:44303/",

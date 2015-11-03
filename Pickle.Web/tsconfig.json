@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "jsx": "react",
+        "sourceMap": true,
+        "preserveConstEnums": true,
+        "outDir": "./wwwroot/js/"
+    },
+    "filesGlob": [
+        "**/*.ts",
+        "**/*.tsx",
+        "!node_modules/**"
+    ],
+    "exclude": [],
+    "files": [
+        "app/Actions/Action.ts",
+        "app/Channels/Channel.ts",
+        "app/Channels/ChannelActivationAction.ts",
+        "app/Channels/ChannelStore.ts",
+        "app/Channels/NewChannelAction.ts",
+        "app/Channels/NewMessageAction.ts",
+        "app/Dispatcher/Dispatcher.ts",
+        "typings/flux/flux.d.ts",
+        "typings/jquery/jquery.d.ts",
+        "typings/node/node.d.ts",
+        "typings/react/react-global.d.ts",
+        "typings/react/react.d.ts",
+        "typings/tsd.d.ts",
+        "app/app.tsx",
+        "app/ChannelPanel/ChannelListItem.tsx",
+        "app/ChannelPanel/ChannelPanel.tsx",
+        "app/ChatPanel/ChatPanel.tsx"
+    ]
+}
