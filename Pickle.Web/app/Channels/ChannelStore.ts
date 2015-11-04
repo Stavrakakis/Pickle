@@ -5,9 +5,9 @@
 
 import Events = require("events");
 import jquery = require("jquery");
-import Dispatcher = require("../Dispatcher/Dispatcher");
+import Dispatcher from "../Dispatcher/Dispatcher";
 
-import Action = require( "../Actions/Action");
+import Action from "../Actions/Action";
 import NewMessageAction from "./NewMessageAction";
 import ChannelActivationAction from "./ChannelActivationAction";
 import NewChannelAction from "./NewChannelAction";
@@ -15,10 +15,8 @@ import Channel from "./Channel";
 import IChannelStore from "./IChannelStore";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 
-
-
 export default class ChannelStore extends Events.EventEmitter implements IChannelStore {
-        
+
     constructor() {
 
         super();
@@ -27,8 +25,8 @@ export default class ChannelStore extends Events.EventEmitter implements IChanne
             if (action instanceof NewMessageAction) {
                 let newMessageAction = (<NewMessageAction>action);
 
-                var uri = "/api/messages/" + newMessageAction.channel.id;
-                var self = this;
+                let uri = "/api/messages/" + newMessageAction.channel.id;
+                let self = this;
                 return jquery.ajax(
                     {
                         url: uri,
@@ -36,7 +34,7 @@ export default class ChannelStore extends Events.EventEmitter implements IChanne
                         dataType: "json",
                         contentType: "application/json",
                         data: JSON.stringify({ message: newMessageAction.message }),
-                        success: function (messages) {
+                        success: (): void => {
                             self.emit(ChannelStoreEvents.NEW_MESSAGE, newMessageAction.message);
                         }
                     }
@@ -56,21 +54,20 @@ export default class ChannelStore extends Events.EventEmitter implements IChanne
         });
     }
 
-    getChannels(): JQueryPromise<Array<Channel>> {
-        return jquery.get("/api/channels", function (result) {
-            let data: Array<Channel> = result.map((apiModel) => { return new Channel(apiModel.id, apiModel.name); });
-            return data;
-        });
+    public getChannels(): JQueryPromise<Array<Channel>> {
+        return jquery.get(
+            "/api/channels",
+            function (result: Array<Channel>): Array<Channel> {
+                let data: Array<Channel> = result.map((apiModel: any) => { return new Channel(apiModel.id, apiModel.name); });
+                return data;
+            });
     }
 
-    getMessagesForChannel(channel: Channel): JQueryPromise<Array<string>> {
+    public getMessagesForChannel(channel: Channel): JQueryPromise<Array<string>> {
 
-        return jquery.get("/api/messages/" + channel.id, function (messages) {
+        return jquery.get("/api/messages/" + channel.id, function (messages: Array<string>): Array<string> {
 
             return messages;
         });
     }
 }
-
-
-

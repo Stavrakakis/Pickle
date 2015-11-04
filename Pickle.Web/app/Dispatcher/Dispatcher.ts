@@ -1,10 +1,10 @@
 /// <reference path="../../typings/flux/flux.d.ts" />
 
 import flux = require("flux");
-import Action = require("../Actions/Action");
+import Action from "../Actions/Action";
 
 class Dispatcher extends flux.Dispatcher<Action> {}
 
-var dispatcher = new Dispatcher();
+let dispatcher = new Dispatcher();
 
-export = dispatcher;
+export default dispatcher;

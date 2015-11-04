@@ -9,20 +9,16 @@ namespace Pickle.Api.Configuration
         {
             return new List<Client>
             {
-
                 new Client
                 {
                     ClientName = "Pickle",
                     ClientId = "pickle",
-
-                    // human involved
                     Flow = Flows.Hybrid,
                     RequireConsent = false,
                     RedirectUris = new List<string>
                     {
                         "https://localhost:44303/",
-                    },
-                    
+                    },                    
                     AllowedScopes = new List<string>
                     {
                         "openid",

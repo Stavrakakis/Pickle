@@ -1,42 +1,41 @@
 /// <reference path="../../typings/react/react-global.d.ts" />
 
-import dispatcher = require("../Dispatcher/Dispatcher")
-
+import dispatcher from "../Dispatcher/Dispatcher";
 import NewMessageAction from "../Channels/NewMessageAction";
 import ChannelStore from "../Channels/ChannelStore";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 import Channel from "../Channels/Channel";
 
 class ChatPanelProps {
-    channelStore: ChannelStore;
-    activeChannel: Channel;
+    public channelStore: ChannelStore;
+    public activeChannel: Channel;
 }
 
 class ChatPanelState {
-    message: string;
-    messages: Array<String>;
+    public message: string;
+    public messages: Array<String>;
 }
 
 export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanelState> {
-    
+
     constructor(props: ChatPanelProps) {
         super(props);
-        
+
         this.state = {
             message: null,
             messages: []
         };
     }
 
-    onMessageChanged = (event) => {
+    private onMessageChanged = (event: any): void => {
         this.setState({
             message: event.target.value,
             messages: this.state.messages
         });
-    }
+    };
 
-    onNewMessage = (newMessage: NewMessageAction) => {
-        this.props.channelStore.getMessagesForChannel(this.props.activeChannel).then((messages) => {
+    private onNewMessage = () => {
+        this.props.channelStore.getMessagesForChannel(this.props.activeChannel).then((messages: Array<string>) => {
             this.setState({
                 messages: messages,
                 message: this.state.message
@@ -44,36 +43,30 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
         });
     };
 
-    messageUpdated = (event) => {
-        this.setState({
-            message: event.target.value,
-            messages: this.state.messages
-        });
-    }
-
-    sendMessage = (event) => {
+    private sendMessage = (event: any): void => {
         event.preventDefault();
         dispatcher.dispatch(new NewMessageAction(this.props.activeChannel, this.state.message));
         this.setState({
             message: null,
             messages: this.state.messages
         });
-    }
+    };
 
-    componentDidMount() {
+    public componentDidMount(): void {
         this.props.channelStore.addListener(ChannelStoreEvents.NEW_MESSAGE, this.onNewMessage);
 
         this.props.channelStore.getMessagesForChannel(this.props.activeChannel)
-            .then((messages) => {
+            .then((messages: Array<string>) => {
                 this.setState({
                     message: this.state.message,
                     messages: messages
                 });
             });
-    }
-    
-    public render() {
-        var messages = [];
+    };
+
+    public render(): JSX.Element {
+
+        let messages: Array<JSX.Element> = [];
 
         for (var i = 0; i < this.state.messages.length; i++) {
             messages.push(<div>{this.state.messages[i]}</div>);

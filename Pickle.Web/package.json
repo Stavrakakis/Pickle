@@ -27,6 +27,8 @@
     "react": "^0.14.0",
     "react-addons-linked-state-mixin": "^0.14.0",
     "ts-loader": "^0.6.0",
+    "tslint": "^2.5.1",
+    "tslint-loader": "^1.0.2",
     "typescript": "^1.6.2",
     "webpack": "^1.12.2"
   }

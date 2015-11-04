@@ -53,7 +53,6 @@ namespace Pickle.Web
                 options.RedirectUri = "https://localhost:44303/";
                 options.SignInScheme = "Cookies";
                 options.AutomaticAuthentication = true;
-
                 options.Notifications = new OpenIdConnectAuthenticationNotifications
                 {
                     SecurityTokenValidated = n =>

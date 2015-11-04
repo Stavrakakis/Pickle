@@ -6,6 +6,7 @@ using Microsoft.AspNet.Authorization;
 
 namespace Pickle.Api.Controllers
 {
+    [Authorize]
     public class MessagesController : Controller
     {
         private static Dictionary<string, IList<string>> messages = 

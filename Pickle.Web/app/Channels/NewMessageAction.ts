@@ -1,22 +1,24 @@
 import Channel from "./Channel";
-import Action = require('../Actions/Action')
+import Action from "../Actions/Action";
 
-export default class NewMessageAction extends Action{
+export default class NewMessageAction extends Action {
 
     private _message: string;
     private _channel: Channel;
-    constructor(channel: Channel, message: string){
 
-        super(Action.Source.View)
+    constructor(channel: Channel, message: string) {
+
+        super();
+
         this._message = message;
         this._channel = channel;
     }
 
-    get message() {
+    get message(): string {
         return this._message;
     }
 
-    get channel() {
+    get channel(): Channel {
       return this._channel;
     }
 }

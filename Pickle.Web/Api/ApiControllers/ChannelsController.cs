@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Pickle.Api.Models;
+using Microsoft.AspNet.Authorization;
 
 namespace Pickle.Api.Controllers
 {
+    [Authorize]
     public class ChannelsController : Controller
     {
         [HttpGet]

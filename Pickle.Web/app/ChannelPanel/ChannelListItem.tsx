@@ -1,16 +1,14 @@
 /// <reference path="../../typings/react/react-global.d.ts" />
 
-import dispatcher = require("../Dispatcher/Dispatcher");
-
+import dispatcher from "../Dispatcher/Dispatcher";
 import Channel from "../Channels/Channel";
 import ChannelActivationAction from "../Channels/ChannelActivationAction";
 
 class ChannelListItemProps {
-    channel: Channel;
+    public channel: Channel;
 }
 
 class ChannelListItemState {
-
 }
 
 export default class ChannelListItem extends React.Component<ChannelListItemProps, ChannelListItemState> {
@@ -22,11 +20,11 @@ export default class ChannelListItem extends React.Component<ChannelListItemProp
     this.channel = props.channel;
   }
 
-  channelClicked = (event) => {
+  private channelClicked = () => {
       dispatcher.dispatch(new ChannelActivationAction(this.channel));
-  }
+  };
 
-  public render() {
+  public render(): JSX.Element {
 
     return (
       <li onClick={this.channelClicked}>{this.channel.name}</li>

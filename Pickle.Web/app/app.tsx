@@ -1,78 +1,63 @@
 /// <reference path="../typings/react/react-global.d.ts" />
 /// <reference path="./Actions/Action.ts"/>
 
-import dispatcher = require("./Dispatcher/Dispatcher")
-
 import Channel from "./Channels/Channel";
-import ChannelActivationAction from "./Channels/ChannelActivationAction";
-import ChannelStoreEvents from "./Channels/ChannelStoreEvents";
 import ChannelStore from "./Channels/ChannelStore";
 import ChannelPanel from "./ChannelPanel/ChannelPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
-import NewMessageAction from "./Channels/NewMessageAction";
 
-namespace app.components {
 
-    class ChatAppProps {
+class ChatAppProps {
 
-    }
-    
-    class ChatAppState {
-        activeChatChannels: Array<Channel>;
-    }
-    
-    export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
-
-        private messages: Array<string>;
-        private channelStore: ChannelStore;
-        private channels: Array<Channel>;
-        private ChannelStore: ChannelStore;
-
-        constructor(props: ChatAppProps) {
-            super(props);
-
-            this.channelStore = new ChannelStore();
-
-            this.state = {
-                activeChatChannels: []
-            };
-        }
-
-        onChannelActivated = (channelActivationAction: ChannelActivationAction) => {
-            
-        }
-
-        componentDidMount() {
-            this.channelStore.addListener(ChannelStoreEvents.CHANNEL_ACTIVATED, this.onChannelActivated);
-
-            this.channelStore.getChannels().then((channels) => {
-                this.setState({
-                    activeChatChannels: channels
-                });
-            });
-        }
-
-        public render() {
-
-            var chatPanels = this.state.activeChatChannels.map((channel) => {
-                return <ChatPanel channelStore={this.channelStore} activeChannel={channel}/>
-            }); 
-
-            return (
-                <div>
-                <ChannelPanel channelStore={this.channelStore}></ChannelPanel>
-                {chatPanels}
-                </div>
-            );
-        };
-    }
 }
 
-var ChatApp = app.components.ChatApp;
-function render() {
+class ChatAppState {
+    public activeChatChannels: Array<Channel>;
+}
+
+export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
+
+    private channelStore: ChannelStore;
+
+    constructor(props: ChatAppProps) {
+        super(props);
+
+        this.channelStore = new ChannelStore();
+
+        this.state = {
+            activeChatChannels: []
+        };
+    }
+
+    public render(): JSX.Element {
+
+        let chatPanels = this.state.activeChatChannels.map((channel: Channel) => {
+            return <ChatPanel channelStore={this.channelStore} activeChannel={channel}/>;
+        });
+
+        return (
+            <div>
+            <ChannelPanel channelStore={this.channelStore}></ChannelPanel>
+            {chatPanels}
+                </div>
+        );
+    };
+
+    public componentDidMount(): void {
+
+        this.channelStore.getChannels().then((channels: Array<Channel>) => {
+            this.setState({
+                activeChatChannels: channels
+            });
+        });
+    };
+}
+
+
+function render(): void {
     React.render(
         <ChatApp/>,
-        document.getElementsByClassName('chatapp')[0]
+        document.getElementsByClassName("chatapp")[0]
     );
 }
 
