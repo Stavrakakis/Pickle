@@ -1,4 +1,4 @@
-/// <reference path="../../typings/react/react-global.d.ts" />
+/// <reference path="../typings/react/react-global.d.ts" />
 
 import Channel from "../Channels/Channel";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";

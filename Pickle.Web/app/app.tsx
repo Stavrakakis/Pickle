@@ -1,11 +1,10 @@
-/// <reference path="../typings/react/react-global.d.ts" />
+/// <reference path="./typings/react/react-global.d.ts" />
 /// <reference path="./Actions/Action.ts"/>
 
 import Channel from "./Channels/Channel";
 import ChannelStore from "./Channels/ChannelStore";
 import ChannelPanel from "./ChannelPanel/ChannelPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
-
 
 class ChatAppProps {
 
@@ -52,7 +51,6 @@ export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
         });
     };
 }
-
 
 function render(): void {
     React.render(

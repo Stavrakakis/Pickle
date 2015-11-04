@@ -1,4 +1,4 @@
-/// <reference path="../../typings/react/react-global.d.ts" />
+/// <reference path="../typings/react/react-global.d.ts" />
 
 import dispatcher from "../Dispatcher/Dispatcher";
 import Channel from "../Channels/Channel";
