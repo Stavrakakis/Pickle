@@ -1,6 +1,6 @@
 import "../test-globals.ts";
 
-import Channel from "../../app/Channels/Channel";
+import Channel from "../../Channels/Channel";
 
 describe("Channel", () => {
     it("constructor should correctly set properties", () => {

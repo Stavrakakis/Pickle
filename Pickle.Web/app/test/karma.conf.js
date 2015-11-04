@@ -2,7 +2,6 @@ var webpack = require('webpack');
 
 module.exports = function (config) {
     config.set({
-        basePath: '../',
         frameworks: ['mocha', 'chai'],
         preprocessors: {
             '**/*.ts': ['webpack'],
@@ -19,7 +18,7 @@ module.exports = function (config) {
             }
         },
         files: [
-            'test/**/*spec.ts'
+            './**/*spec.ts'
         ],
         reporters: ['progress'],
         port: 9876,
