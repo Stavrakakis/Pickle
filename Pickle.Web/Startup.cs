@@ -5,6 +5,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
 using Newtonsoft.Json.Serialization;
+using Pickle.Web.Api.Providers;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
@@ -25,6 +26,8 @@ namespace Pickle.Web
                           new CamelCasePropertyNamesContractResolver();
                       options.OutputFormatters.Insert(0, jsonOutputFormatter);
                   });
+
+            services.AddTransient<IUsernameProvider, TokenUsernameProvider>();
 
             services.AddSignalR(options =>
             {

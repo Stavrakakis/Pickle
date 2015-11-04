@@ -1,5 +1,8 @@
 /// <reference path="./typings/react/react-global.d.ts" />
+/// <reference path="./typings/jquery/jquery.d.ts" />
 /// <reference path="./Actions/Action.ts"/>
+
+import $ = require("jquery");
 
 import Channel from "./Channels/Channel";
 import ChannelStore from "./Channels/ChannelStore";
@@ -59,4 +62,8 @@ function render(): void {
     );
 }
 
-render();
+
+
+$(document).ready(() => {
+    render();
+});

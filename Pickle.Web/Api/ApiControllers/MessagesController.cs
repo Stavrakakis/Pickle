@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Pickle.Api.ApiRequestModels;
 using Microsoft.AspNet.Authorization;
+using Pickle.Web.Api.Providers;
 
 namespace Pickle.Api.Controllers
 {
@@ -14,6 +15,12 @@ namespace Pickle.Api.Controllers
                 { "bristol", new List<string> {""} },
                 { "edinburgh", new List<string> { ""} },
             };
+        private IUsernameProvider usernameProvider;
+
+        public MessagesController(IUsernameProvider usernameProvider)
+        {
+            this.usernameProvider = usernameProvider;
+        }
 
         [HttpGet]
         [Authorize]
@@ -37,11 +44,13 @@ namespace Pickle.Api.Controllers
         [HttpPost]
         [Authorize]
         [Route("/api/messages/{channelId}")]
-        public Task<IActionResult> Post(string channelId, [FromBody] NewMessageModel message)
+        public async Task<IActionResult> Post(string channelId, [FromBody] NewMessageModel message)
         {
+            var username = await this.usernameProvider.GetUsername();
+
             if (!messages.ContainsKey(channelId))
             {
-                return Task.FromResult<IActionResult>(new HttpNotFoundResult());
+                return new HttpNotFoundResult();
             }
 
             if (messages[channelId] == null) {
@@ -50,7 +59,7 @@ namespace Pickle.Api.Controllers
 
             messages[channelId].Add(message.Message);
 
-            return Task.FromResult<IActionResult>(new CreatedAtRouteResult("/api/messages/", message));
+            return new CreatedAtRouteResult("/api/messages/", message);
         }
     }
 }

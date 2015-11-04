@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Pickle.Web.Hubs
 {
-    public class ChatHub : Hub
+    public class ChatHub : Hub<IChatHubClient>
     {
         private static List<string> connectionIds = new List<string>();
 
@@ -19,7 +19,7 @@ namespace Pickle.Web.Hubs
         {
             var user = Context.User.Identity;
 
-            Clients.Clients(connectionIds).broadcastMessage(user.Name, message);
+            Clients.Clients(connectionIds).BroadcastMessage(user.Name, message);
         }
     }
 }

@@ -7,6 +7,9 @@ module.exports = {
     resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.js', '.tsx']
     },
+    externals: {
+        'jquery': '$'
+    },
     module: {
         preLoaders: [
             { test: /\.ts$/, loader: "tslint" },

@@ -1,7 +1,7 @@
 /// <reference path="../typings/react/react-global.d.ts" />
 
 import dispatcher from "../Dispatcher/Dispatcher";
-import NewMessageAction from "../Channels/NewMessageAction";
+import SendMessageAction from "../Channels/SendMessageAction";
 import ChannelStore from "../Channels/ChannelStore";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 import Channel from "../Channels/Channel";
@@ -45,7 +45,7 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
 
     private sendMessage = (event: any): void => {
         event.preventDefault();
-        dispatcher.dispatch(new NewMessageAction(this.props.activeChannel, this.state.message));
+        dispatcher.dispatch(new SendMessageAction(this.props.activeChannel, this.state.message));
         this.setState({
             message: null,
             messages: this.state.messages
