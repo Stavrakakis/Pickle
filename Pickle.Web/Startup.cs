@@ -1,22 +1,24 @@
-﻿using Microsoft.AspNet.Authentication;
+﻿using Autofac;
+using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Authentication.OpenIdConnect;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Runtime;
 using Newtonsoft.Json.Serialization;
-using Pickle.Web.Api.Providers;
+using Pickle.Web.Registration;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
+using Microsoft.Framework.DependencyInjection;
+using Autofac.Framework.DependencyInjection;
 namespace Pickle.Web
 {
     public class Startup
     {
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
                   .Configure<MvcOptions>(options => {
@@ -27,12 +29,20 @@ namespace Pickle.Web
                       options.OutputFormatters.Insert(0, jsonOutputFormatter);
                   });
 
-            services.AddTransient<IUsernameProvider, TokenUsernameProvider>();
-
             services.AddSignalR(options =>
             {
                 options.Hubs.EnableDetailedErrors = true;
             });
+
+            var builder = new ContainerBuilder();
+
+            builder.RegisterModule(new AutofacModule());
+
+            builder.Populate(services);
+
+            var container = builder.Build();
+
+            return container.Resolve<IServiceProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env)

@@ -15,7 +15,9 @@
     "Microsoft.Owin.Security.Google": "3.0.1",
     "Microsoft.AspNet.Mvc": "6.0.0-beta5",
     "Microsoft.AspNet.Authentication.OpenIdConnect": "1.0.0-beta5",
-    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta5"
+    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta5",
+    "Autofac": "4.0.0-beta5-90",
+    "Autofac.Framework.DependencyInjection": "4.0.0-beta5-90"
   },
 
   "commands": {

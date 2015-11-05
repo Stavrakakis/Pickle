@@ -3,6 +3,40 @@
   "version": -9996,
   "targets": {
     "DNX,Version=v4.5.1": {
+      "Autofac/4.0.0-beta5-90": {
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/dnx451/Autofac.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Autofac.dll": {}
+        }
+      },
+      "Autofac.Framework.DependencyInjection/4.0.0-beta5-90": {
+        "dependencies": {
+          "Autofac": "4.0.0-beta5-90",
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta5"
+        },
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/dnx451/Autofac.dll": {},
+          "lib/dnx451/Autofac.Framework.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Autofac.dll": {},
+          "lib/dnx451/Autofac.Framework.DependencyInjection.dll": {}
+        }
+      },
       "autofixture/3.36.9": {
         "compile": {
           "lib/net40/Ploeh.AutoFixture.dll": {}
@@ -1637,6 +1671,36 @@
     }
   },
   "libraries": {
+    "Autofac/4.0.0-beta5-90": {
+      "sha512": "W03LtKJXDUBdRdXOK0Al7cW8Pc0cxEO9TpTHmOejw0EKpcusuHb3d5+sIQAjMMMFaMkKvZTXMeLgpYbAC60r7Q==",
+      "files": [
+        "Autofac.4.0.0-beta5-90.nupkg",
+        "Autofac.4.0.0-beta5-90.nupkg.sha512",
+        "Autofac.nuspec",
+        "lib/dnx451/Autofac.dll",
+        "lib/dnx451/Autofac.xml",
+        "lib/dnxcore50/Autofac.dll",
+        "lib/dnxcore50/Autofac.xml",
+        "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10/Autofac.dll",
+        "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10/Autofac.xml"
+      ]
+    },
+    "Autofac.Framework.DependencyInjection/4.0.0-beta5-90": {
+      "sha512": "15521f7ipqCcx9KPdHcma1wir5mkyzGmSgY8/5srD9MUfwdA+tYjZQIgmaP2wGXER1hffVAGvpZd5n4qlYqYGg==",
+      "files": [
+        "Autofac.Framework.DependencyInjection.4.0.0-beta5-90.nupkg",
+        "Autofac.Framework.DependencyInjection.4.0.0-beta5-90.nupkg.sha512",
+        "Autofac.Framework.DependencyInjection.nuspec",
+        "lib/dnx451/Autofac.dll",
+        "lib/dnx451/Autofac.Framework.DependencyInjection.dll",
+        "lib/dnx451/Autofac.Framework.DependencyInjection.xml",
+        "lib/dnx451/Autofac.xml",
+        "lib/dnxcore50/Autofac.dll",
+        "lib/dnxcore50/Autofac.Framework.DependencyInjection.dll",
+        "lib/dnxcore50/Autofac.Framework.DependencyInjection.xml",
+        "lib/dnxcore50/Autofac.xml"
+      ]
+    },
     "autofixture/3.36.9": {
       "sha512": "t/xlJhvdap+cwJb8z4Lu7qtCi5ogvYEf6Eb3PUjjmXDvfVKcjBkMKmAI4tFmSVoHtLPc5kHbo2+6zkwNpw5Ktg==",
       "files": [
