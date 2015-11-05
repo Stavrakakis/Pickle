@@ -23,9 +23,9 @@ namespace Pickle.Api.Controllers
         [HttpGet]
         [Authorize]
         [Route("/api/messages/{channelId}")]
-        public async Task<IActionResult> GetAll(string channelId)
+        public async Task<IActionResult> GetAll(string channelId, int pageNumber = 1, int pageSize = 100)
         {
-            var messages = await this.messageRepository.GetPaged(1, 100, m => m.ChannelId == channelId);
+            var messages = await this.messageRepository.GetPaged(pageNumber, pageSize, m => m.ChannelId == channelId);
 
             return new ObjectResult(messages);
         }

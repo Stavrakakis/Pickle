@@ -1,3 +1,5 @@
+var path = require("path");
+
 module.exports = {
     entry: './app/App.tsx',
     watch: true,

@@ -14,5 +14,5 @@ interface ChatClient {
 }
 
 interface ChatServer {
-    send(message: string): JQueryPromise<void>;
+    send(channelId: string, message: string): JQueryPromise<void>;
 }

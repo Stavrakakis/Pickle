@@ -13,7 +13,7 @@ namespace Pickle.Data.Repositories
 
         public Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, Expression<Func<T, bool>> filter = null)
         {
-            var pagedResults = objects.FilterIfDefined(filter)
+            var pagedResults = objects.Filter(filter)
                                       .ToPagedList(pageNumber, pageSize);
 
             return Task.FromResult(pagedResults);

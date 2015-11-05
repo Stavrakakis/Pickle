@@ -14,7 +14,7 @@ namespace Pickle.Data.Extensions
         /// <param name="collection">The collection to filter</param>
         /// <param name="filter">A filter function to use if not null</param>
         /// <returns></returns>
-        public static IEnumerable<T> FilterIfDefined<T>(this IEnumerable<T> collection, Expression<Func<T, bool>> filter)
+        public static IEnumerable<T> Filter<T>(this IEnumerable<T> collection, Expression<Func<T, bool>> filter)
         {
             if (filter == null)
             {
