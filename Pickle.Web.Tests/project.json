@@ -13,10 +13,16 @@
     "System.Runtime": "4.0.10-beta-23109",
     "Microsoft.CSharp": "4.0.0-beta-23109",
     "xunit": "2.1.0-beta3-build3029",
-    "xunit.runner.dnx": "2.1.0-beta3-build99"
+    "xunit.runner.dnx": "2.1.0-beta3-build99",
+    "Moq": "4.2.1510.2205",
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta8",
+    "AutoFixture.Xunit2": "3.36.9",
+    "AutoMoq": "1.6.2",
+    "Pickle.Web": "1.0.0-*",
+    "AutoFixture.AutoMoq": "3.36.9"
   },
   "commands": {
-      "test": "xunit.runner.dnx"
+    "test": "xunit.runner.dnx"
   },
   "frameworks": {
     "dnx451": { }

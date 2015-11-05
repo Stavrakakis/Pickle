@@ -8,6 +8,7 @@ namespace Pickle.Web.Api.Providers
     public class TokenUsernameProvider : IUsernameProvider
     {
         private readonly IHttpContextAccessor contextAccessor;
+        private readonly string usernameClaim = "given_name";
 
         public TokenUsernameProvider(IHttpContextAccessor contextAccessor)
         {
@@ -18,12 +19,19 @@ namespace Pickle.Web.Api.Providers
         {
             var context = this.contextAccessor.HttpContext;
 
-            if (context.User == null) {
-                throw new Exception();
+            if (context.User == null)
+            {
+                throw new InvalidOperationException("There is no User in the current context");
             }
+            
+            var claimsPrincipal = (context.User as ClaimsPrincipal);
 
-            var c = (context.User as ClaimsPrincipal);
-            var name = c.FindFirst("given_name").Value;
+            if (!claimsPrincipal.HasClaim(c => c.Type == usernameClaim))
+            {
+                throw new InvalidOperationException("There is no given_name claim in the current claims principal");
+            }
+            
+            var name = claimsPrincipal.FindFirst(usernameClaim).Value;
 
             return Task.FromResult(name);
         }
