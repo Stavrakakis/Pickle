@@ -8,7 +8,6 @@ namespace Pickle.Web.Hubs
     [Authorize]
     public class ChatHub : Hub<IChatHubClient>
     {
-        private static List<string> connectionIds = new List<string>();
         private readonly IUsernameProvider usernameProvider;
 
         public ChatHub(IUsernameProvider usernameProvider)
@@ -18,8 +17,6 @@ namespace Pickle.Web.Hubs
 
         public override Task OnConnected()
         {
-            connectionIds.Add(Context.ConnectionId);
-
             return base.OnConnected();
         }
 
@@ -27,7 +24,7 @@ namespace Pickle.Web.Hubs
         {
             var username = await this.usernameProvider.GetUsername();
 
-            Clients.Clients(connectionIds).BroadcastMessage(channelId, username, message);
+            Clients.All.BroadcastMessage(channelId, username, message);
         }
     }
 }

@@ -24,7 +24,7 @@ export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
     constructor(props: ChatAppProps) {
         super(props);
 
-        this.channelStore = new ChannelStore();
+        this.channelStore = new ChannelStore($);
 
         this.state = {
             activeChatChannels: []

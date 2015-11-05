@@ -2,14 +2,15 @@ var webpack = require('webpack');
 
 module.exports = function (config) {
     config.set({
-        frameworks: ['mocha', 'chai'],
+        frameworks: ['mocha', 'chai', 'sinon'],
         preprocessors: {
-            '**/*.ts': ['webpack'],
+            './**/*spec.ts': ['webpack'],
         },
         webpack: {
             resolve: {
                 extensions: ['', '.ts', '.js', '.tsx']
             },
+            externals: {sinon: "sinon"},
             module: {                
                 loaders: [
                   { test: /\.tsx$/, loader: 'ts-loader' },

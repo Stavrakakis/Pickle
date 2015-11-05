@@ -13,6 +13,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Framework.DependencyInjection;
 using Autofac.Framework.DependencyInjection;
+using Pickle.Data.Models;
+using Pickle.Data.Repositories;
+
 namespace Pickle.Web
 {
     public class Startup
@@ -45,8 +48,14 @@ namespace Pickle.Web
             return container.Resolve<IServiceProvider>();
         }
 
-        public void Configure(IApplicationBuilder app, IApplicationEnvironment env)
+        public void Configure(IApplicationBuilder app, IApplicationEnvironment env, IServiceProvider serviceProvider)
         {
+
+            var repo = serviceProvider.GetService<IRepository<Channel>>();
+
+            repo.Insert(new Channel("bristol", "Bristol", new List<string>()));
+            repo.Insert(new Channel("edinburgh", "Edinburgh", new List<string>()));
+            repo.Insert(new Channel("newcastle", "Newcastle", new List<string>()));
 
             // really? still?
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();

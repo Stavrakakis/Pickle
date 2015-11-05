@@ -7,3 +7,7 @@
 /// <reference path="mocha/mocha.d.ts" />
 /// <reference path="webpack/webpack.d.ts" />
 /// <reference path="signalr/signalr.d.ts" />
+/// <reference path="sinon/sinon.d.ts" />
+/// <reference path="jasmine/jasmine.d.ts" />
+/// <reference path="jest/jest.d.ts" />
+/// <reference path="node/node.d.ts" />

@@ -28,6 +28,18 @@
     },
     "signalr/signalr.d.ts": {
       "commit": "001ca36ba58cef903c4c063555afb07bbc36bb58"
+    },
+    "sinon/sinon.d.ts": {
+      "commit": "dd9c3b5f98767b4a80dfc636cfa563402fa657f9"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
+    },
+    "jest/jest.d.ts": {
+      "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
+    },
+    "node/node.d.ts": {
+      "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
     }
   }
 }

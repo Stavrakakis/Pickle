@@ -4,8 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start app/test/karma.conf.js"
+    "test": "jest"
   },
+   "jest": {
+      "scriptPreprocessor": "app/preprocessor.js",
+      "unmockedModulePathPatterns": [
+        "react"
+      ],
+      "testPathDirs": [
+        "./app"
+      ],
+      "testFileExtensions": [
+        "ts",
+        "tsx"
+      ]
+   },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -23,14 +36,17 @@
     "karma-chrome-launcher": "^0.2.1",
     "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
+    "karma-sinon": "^1.0.4",
     "karma-webpack": "^1.7.0",
     "phantomjs": "^1.9.18",
     "react": "^0.14.0",
     "react-addons-linked-state-mixin": "^0.14.0",
     "signalrjs": "^0.2.2",
+    "sinon": "^1.17.2",
     "ts-loader": "^0.6.0",
     "tslint": "^2.5.1",
     "tslint-loader": "^1.0.2",
+    "tsunit.external": "^2.0.1",
     "typescript": "^1.6.2",
     "webpack": "^1.12.2"
   },
