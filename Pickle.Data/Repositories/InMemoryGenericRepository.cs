@@ -1,6 +1,8 @@
 ﻿using PagedList;
+using Pickle.Data.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Pickle.Data.Repositories
@@ -9,9 +11,10 @@ namespace Pickle.Data.Repositories
     {
         private static List<T> objects = new List<T>();
 
-        public Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, System.Linq.Expressions.Expression<Func<T, bool>> filter = null)
+        public Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, Expression<Func<T, bool>> filter = null)
         {
-            var pagedResults = objects.ToPagedList(pageNumber, pageSize);
+            var pagedResults = objects.FilterIfDefined(filter)
+                                      .ToPagedList(pageNumber, pageSize);
 
             return Task.FromResult(pagedResults);
         }
