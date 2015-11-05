@@ -2,7 +2,7 @@
 /// <reference path="../typings/node/node.d.ts" />
 /// <reference path="../typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/signalr/signalr.d.ts" />
-/// <reference path="../Hubs/ChatHub" />
+/// <reference path="../Hubs/ChatHub.ts" />
 
 import events = require("events");
 import $ = require("jquery");
@@ -15,6 +15,7 @@ import NewChannelAction from "./NewChannelAction";
 import Channel from "./Channel";
 import IChannelStore from "./IChannelStore";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
+import ChatMessageApiModel from "./Models/ChatMessageApiModel";
 
 export default class ChannelStore extends events.EventEmitter implements IChannelStore {
 
@@ -55,16 +56,15 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
     public getChannels(): JQueryPromise<Array<Channel>> {
         return $.get(
             "/api/channels",
-            function (result: Array<Channel>): Array<Channel> {
+            (result: Array<Channel>): Array<Channel> => {
                 let data: Array<Channel> = result.map((apiModel: any) => { return new Channel(apiModel.id, apiModel.name); });
                 return data;
             });
     }
 
-    public getMessagesForChannel(channel: Channel): JQueryPromise<Array<string>> {
+    public getMessagesForChannel(channel: Channel): JQueryPromise<Array<ChatMessageApiModel>> {
 
-        return $.get("/api/messages/" + channel.id, function (messages: Array<string>): Array<string> {
-
+        return $.get("/api/messages/" + channel.id, (messages: Array<ChatMessageApiModel>) => {
             return messages;
         });
     }

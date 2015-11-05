@@ -1,63 +1,48 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Pickle.Api.ApiRequestModels;
-using Microsoft.AspNet.Authorization;
+using Pickle.Data.Models;
+using Pickle.Data.Repositories;
 using Pickle.Web.Api.Providers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Pickle.Api.Controllers
 {
     [Authorize]
     public class MessagesController : Controller
     {
-        private static Dictionary<string, IList<string>> messages = 
-            new Dictionary<string, IList<string>>(){
-                { "bristol", new List<string> {""} },
-                { "edinburgh", new List<string> { ""} },
-            };
+        private readonly IRepository<ChatMessage> messageRepository;
         private IUsernameProvider usernameProvider;
 
-        public MessagesController(IUsernameProvider usernameProvider)
+        public MessagesController(IUsernameProvider usernameProvider, IRepository<ChatMessage> messageRepository)
         {
+            this.messageRepository = messageRepository;
             this.usernameProvider = usernameProvider;
         }
 
         [HttpGet]
         [Authorize]
         [Route("/api/messages/{channelId}")]
-        public Task<IActionResult> GetAll(string channelId)
+        public async Task<IActionResult> GetAll(string channelId)
         {
             var user = User;
 
-            var channel = messages[channelId];
+            var messages = await this.messageRepository.GetPaged(1, 100, m => m.ChannelId == channelId);
 
-            if (channel == null)
-            {
-                return Task.FromResult<IActionResult>(new HttpNotFoundResult());
-            }
-
-            var channelMessages = messages[channelId];
-
-            return Task.FromResult<IActionResult>(new ObjectResult(channelMessages));
+            return new ObjectResult(messages);
         }
 
         [HttpPost]
         [Authorize]
         [Route("/api/messages/{channelId}")]
-        public async Task<IActionResult> Post(string channelId, [FromBody] NewMessageModel message)
+        public async Task<IActionResult> Post(string channelId, [FromBody] NewMessageModel messageContent)
         {
             var username = await this.usernameProvider.GetUsername();
 
-            if (!messages.ContainsKey(channelId))
-            {
-                return new HttpNotFoundResult();
-            }
+            var message = new ChatMessage(username, channelId, messageContent.Message);
 
-            if (messages[channelId] == null) {
-                messages[channelId] = new List<string>();
-            }
-
-            messages[channelId].Add(message.Message);
+            message = await this.messageRepository.Insert(message);
 
             return new CreatedAtRouteResult("/api/messages/", message);
         }

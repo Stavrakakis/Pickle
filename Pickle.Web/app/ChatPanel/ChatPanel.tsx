@@ -5,6 +5,7 @@ import SendMessageAction from "../Channels/SendMessageAction";
 import ChannelStore from "../Channels/ChannelStore";
 import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 import Channel from "../Channels/Channel";
+import ChatMessageApiModel from "../Channels/Models/ChatMessageApiModel";
 
 class ChatPanelProps {
     public channelStore: ChannelStore;
@@ -13,7 +14,7 @@ class ChatPanelProps {
 
 class ChatPanelState {
     public message: string;
-    public messages: Array<String>;
+    public messages: Array<ChatMessageApiModel>;
 }
 
 export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanelState> {
@@ -35,12 +36,13 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
     };
 
     private onNewMessage = () => {
-        this.props.channelStore.getMessagesForChannel(this.props.activeChannel).then((messages: Array<string>) => {
-            this.setState({
-                messages: messages,
-                message: this.state.message
+        this.props.channelStore.getMessagesForChannel(this.props.activeChannel)
+            .then((messages: Array<ChatMessageApiModel>) => {
+                this.setState({
+                    messages: messages,
+                    message: this.state.message
+                });
             });
-        });
     };
 
     private sendMessage = (event: any): void => {
@@ -56,7 +58,7 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
         this.props.channelStore.addListener(ChannelStoreEvents.NEW_MESSAGE, this.onNewMessage);
 
         this.props.channelStore.getMessagesForChannel(this.props.activeChannel)
-            .then((messages: Array<string>) => {
+            .then((messages: Array<ChatMessageApiModel>) => {
                 this.setState({
                     message: this.state.message,
                     messages: messages
@@ -69,7 +71,7 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
         let messages: Array<JSX.Element> = [];
 
         for (var i = 0; i < this.state.messages.length; i++) {
-            messages.push(<div>{this.state.messages[i]}</div>);
+            messages.push(<div>{this.state.messages[i].message}</div>);
         }
 
         return (

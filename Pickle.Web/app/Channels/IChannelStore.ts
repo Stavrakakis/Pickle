@@ -5,11 +5,12 @@ import Events = require("events");
 import jquery = require("jquery");
 
 import Channel from "./Channel";
+import ChatMessageApiModel from "./Models/ChatMessageApiModel";
 
 interface IChannelStore {
 
     getChannels(): JQueryPromise<Array<Channel>>;
-    getMessagesForChannel(channel: Channel): JQueryPromise<Array<string>>;
+    getMessagesForChannel(channel: Channel): JQueryPromise<Array<ChatMessageApiModel>>;
 }
 
 export default IChannelStore;

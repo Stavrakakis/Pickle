@@ -1,0 +1,16 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Pickle.Data Class Library",
+  "authors": [ "nstavrakakis" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "PagedList": "1.17.0"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}
