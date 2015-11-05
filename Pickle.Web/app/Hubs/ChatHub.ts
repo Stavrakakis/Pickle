@@ -10,7 +10,7 @@ interface IChatHub {
 }
 
 interface ChatClient {
-    broadcastMessage(name: string, message: string): void;
+    broadcastMessage(channelId: string, name: string, message: string): void;
 }
 
 interface ChatServer {

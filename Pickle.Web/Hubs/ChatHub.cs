@@ -27,7 +27,7 @@ namespace Pickle.Web.Hubs
         {
             var username = await this.usernameProvider.GetUsername();
 
-            Clients.Clients(connectionIds).BroadcastMessage(username, message);
+            Clients.Clients(connectionIds).BroadcastMessage(channelId, username, message);
         }
     }
 }

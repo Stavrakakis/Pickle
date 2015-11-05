@@ -35,14 +35,17 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
         });
     };
 
-    private onNewMessage = () => {
-        this.props.channelStore.getMessagesForChannel(this.props.activeChannel)
-            .then((messages: Array<ChatMessageApiModel>) => {
-                this.setState({
-                    messages: messages,
-                    message: this.state.message
-                });
-            });
+    private onNewMessage = (newMessage: ChatMessageApiModel) => {
+
+        if (newMessage.channelId === this.props.activeChannel.id) {
+
+            this.state.messages.push(newMessage);
+
+            this.setState({
+                messages: this.state.messages,
+                message: this.state.message
+            });        
+        }        
     };
 
     private sendMessage = (event: any): void => {
@@ -71,13 +74,16 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
         let messages: Array<JSX.Element> = [];
 
         for (var i = 0; i < this.state.messages.length; i++) {
-            messages.push(<div>{this.state.messages[i].message}</div>);
+            let message = this.state.messages[i];
+            messages.push(<div><span>{message.username}: </span><span>{message.message}</span></div>);
         }
 
         return (
             <div>
           <header>Chat Panel - {this.props.activeChannel.name}</header>
-          <div>{messages}</div>
+          <ul>
+              {messages}
+          </ul>
           <form onSubmit={this.sendMessage}>
             <input type="text" value={this.state.message} onChange={this.onMessageChanged}/>
             <button type="submit">Send</button>

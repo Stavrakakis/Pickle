@@ -23,9 +23,9 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
 
         super();
         
-        $.connection.chatHub.client.broadcastMessage = (username: string, message: string): void => {
-            console.log(username + " = " + message);
-            this.emit(ChannelStoreEvents.NEW_MESSAGE);
+        $.connection.chatHub.client.broadcastMessage = (channelId: string, username: string, message: string): void => {
+            
+            this.emit(ChannelStoreEvents.NEW_MESSAGE, new ChatMessageApiModel(channelId, username, message));
         };
 
         $.connection.hub.start();
@@ -71,9 +71,7 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
     }
 
     private sendMessageToChatHub(channel: Channel, message: string): void {
-
-        console.log("sending message to " + channel.name);
-        
+                
         $.connection.chatHub.server.send(channel.id, message);
     };
 
@@ -92,3 +90,4 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
         );
     };
 }
+
