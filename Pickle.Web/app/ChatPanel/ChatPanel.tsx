@@ -107,7 +107,7 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
 
         for (var i = 0; i < this.state.messages.length; i++) {
             let message = this.state.messages[i];
-            messages.push(<div><span>{message.username}: </span><span>{message.message}</span></div>);
+            messages.push(<div className="p-chat-message"><div>{message.username}</div><div>{message.message}</div></div>);
         }
 
         return (

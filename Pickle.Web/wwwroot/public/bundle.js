@@ -1548,7 +1548,7 @@
 	        var messages = [];
 	        for (var i = 0; i < this.state.messages.length; i++) {
 	            var message = this.state.messages[i];
-	            messages.push(React.createElement("div", null, React.createElement("span", null, message.username, ": "), React.createElement("span", null, message.message)));
+	            messages.push(React.createElement("div", {"className": "p-chat-message"}, React.createElement("div", null, message.username), React.createElement("div", null, message.message)));
 	        }
 	        return (React.createElement("section", {"id": "p-chat-panel-container-" + this.chatId, "className": "p-chat-panel-container"}, React.createElement("header", null, this.props.activeChannel.name), React.createElement("div", {"id": "p-chat-panel-" + this.chatId, "className": "p-chat-panel"}, React.createElement("ul", null, messages)), React.createElement("form", {"onSubmit": this.sendMessage}, React.createElement("input", {"type": "text", "value": this.state.message, "onChange": this.onMessageChanged}), React.createElement("button", {"type": "submit"}, "Send"))));
 	    };
