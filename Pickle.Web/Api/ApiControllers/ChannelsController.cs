@@ -31,7 +31,7 @@ namespace Pickle.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/api/{hubSlug}/channels")]
+        [Route("/api/hub/{hubSlug}/channels")]
         public async Task<IActionResult> GetPagedChannelsForHub(string hubSlug, int pageNumber = 1, int pageSize = 100)
         {
             var channels = await this.channelRepository.GetPaged(pageNumber, pageSize, channel => channel.HubId == hubSlug);

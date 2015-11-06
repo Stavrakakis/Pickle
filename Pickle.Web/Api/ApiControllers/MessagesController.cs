@@ -25,7 +25,7 @@ namespace Pickle.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("/api/{hubSlug}/{channelId}/messages/")]
+        [Route("/api/hub/{hubSlug}/{channelId}/messages/")]
         public async Task<IActionResult> GetPagedMessagesForChannel(string hubSlug, string channelId, int pageNumber = 1, int pageSize = 100)
         {
             var messages = await this.messageRepository.GetPaged(pageNumber, pageSize, m => m.ChannelId == channelId);
@@ -35,7 +35,7 @@ namespace Pickle.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("/api/{hubSlug}/{channelId}/messages")]
+        [Route("/api/hub/{hubSlug}/{channelId}/messages")]
         public async Task<IActionResult> PostNewMessage(string hubSlug, string channelId, [FromBody] NewMessageModel messageContent)
         {
             var username = await this.usernameProvider.GetUsername();

@@ -93,7 +93,7 @@ describe("ChannelStore", () => {
         
         expect(getSpy.calledOnce).to.be.true;
 
-        expect(getSpy.calledWith("/api/test-hub/1/messages", sinon.match.any)).to.be.true;
+        expect(getSpy.calledWith("/api/hub/test-hub/1/messages", sinon.match.any)).to.be.true;
 
         channelStore.dispose();
     });
@@ -125,15 +125,18 @@ describe("ChannelStore", () => {
 
         expect(getSpy.calledOnce).to.be.true;
 
-        expect(getSpy.calledWith("/api/test-hub/channels", sinon.match.any)).to.be.true;
+        expect(getSpy.calledWith("/api/hub/test-hub/channels", sinon.match.any)).to.be.true;
 
         channelStore.dispose();
     });
 
     it("sendMessageToApi calls the correct API endpoint", () => {
-        let ajaxSpy = sinon.spy();
+
+        let ajaxSpy = sinon.mock();
 
         $.ajax = ajaxSpy;
+
+        ajaxSpy.returns({ then: () => { return { fail: () => { }}}, fail: () => { } });
 
         let channelStore = new ChannelStore($);
 
@@ -142,7 +145,7 @@ describe("ChannelStore", () => {
         expect(ajaxSpy.calledOnce).to.be.true;
 
         expect(ajaxSpy.calledWith({
-            url: "/api/test-hub/1/messages",
+            url: "/api/hub/test-hub/1/messages",
             type: "POST",
             dataType: "json",
             contentType: "application/json",

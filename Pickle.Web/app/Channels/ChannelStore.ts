@@ -81,7 +81,7 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
 
     public getChannelsForHub(hubId: string): JQueryPromise<Array<Channel>> {
 
-        let uri = "/api/" + hubId + "/channels";
+        let uri = "/api/hub/" + hubId + "/channels";
 
         return this.$.get(
             uri,
@@ -95,7 +95,7 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
 
     public getMessagesForChannel(channel: Channel): JQueryPromise<Array<ChatMessageApiModel>> {
 
-        let uri = "/api/" + channel.hubId + "/" + channel.id + "/messages";
+        let uri = "/api/hub/" + channel.hubId + "/" + channel.id + "/messages";
 
         return this.$.get(uri, (messages: Array<ChatMessageApiModel>) => {
             return messages;
@@ -115,7 +115,7 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
 
     private sendMessageToApi(channel: Channel, message: string): JQueryPromise<void> {
 
-        let uri = "/api/" + channel.hubId + "/" + channel.id + "/messages";
+        let uri = "/api/hub/" + channel.hubId + "/" + channel.id + "/messages";
 
         return this.$.ajax(
             {
