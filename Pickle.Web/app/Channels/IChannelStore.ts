@@ -10,6 +10,7 @@ import ChatMessageApiModel from "./Models/ChatMessageApiModel";
 interface IChannelStore {
 
     getChannels(): JQueryPromise<Array<Channel>>;
+    getChannelsForHub(hubId: string): JQueryPromise<Array<Channel>>;
     getMessagesForChannel(channel: Channel): JQueryPromise<Array<ChatMessageApiModel>>;
 }
 

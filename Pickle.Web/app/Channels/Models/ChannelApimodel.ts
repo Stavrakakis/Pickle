@@ -1,4 +1,4 @@
-export default class Channel {
+export default class ChannelApiModel {
 
     private _id: string;
     private _name: string;

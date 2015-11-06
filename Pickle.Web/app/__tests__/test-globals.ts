@@ -6,7 +6,7 @@
 ///<reference path="../typings/chai/chai.d.ts"/>
 ///<reference path="../typings/sinon/sinon.d.ts"/>
 ///<reference path="../typings/signalr/signalr.d.ts"/>
-///<reference path="../Hubs/ChatHub.ts"/>
+///<reference path="../Socket/ChatSocket.ts"/>
 ///<reference path="../../node_modules/tsunit.external/tsUnit.ts"/>
 
 

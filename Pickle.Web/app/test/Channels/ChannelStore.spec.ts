@@ -9,6 +9,7 @@ import Dispatcher from "../../Dispatcher/Dispatcher";
 import Channel from "../../Channels/Channel";
 import ChannelStore from "../../Channels/ChannelStore";
 import SendMessageAction from "../../Channels/SendMessageAction";
+import ChatMessageApiModel from "../../Channels/Models/ChatMessageApiModel";
 import ChannelStoreEvents from "../../Channels/ChannelStoreEvents";
 
 describe("ChannelStore", () => {
@@ -19,7 +20,7 @@ describe("ChannelStore", () => {
 
     beforeEach(() => {
         
-        testChannel = new Channel("1", "Channel");
+        testChannel = new Channel("1", "test-hub", "test-channel");
         
         //ARGH TypeScript!
 
@@ -29,9 +30,9 @@ describe("ChannelStore", () => {
         hubConnectionFake.start = (): any => { };
 
         signalRFake.chatHub = {
-            client: { broadcastMessage: (channelId: string, name: string, message: string): void => { } },
+            client: { broadcastMessage: (hubId: string, channelId: string, name: string, message: string): void => { } },
             server: {
-                send: (channelId: string, message: string): any => { }
+                send: (hubId: string, channelId: string, message: string): any => { }
             }
         };
 
@@ -68,10 +69,13 @@ describe("ChannelStore", () => {
         let channelStore = new ChannelStore($);
 
         channelStore.addListener(ChannelStoreEvents.NEW_MESSAGE, onNewMessage);
+        
+        signalRFake.chatHub.client.broadcastMessage(testChannel.hubId, testChannel.id, "username", "message");
 
-        signalRFake.chatHub.client.broadcastMessage("", "", "");
+        let expectedCallParameter = new ChatMessageApiModel(testChannel.hubId, testChannel.id, "username", "message");
 
         expect(onNewMessage.calledOnce).to.be.true;
+        expect(onNewMessage.calledWith(expectedCallParameter)).to.be.true;
 
         channelStore.dispose();
     });
@@ -89,7 +93,7 @@ describe("ChannelStore", () => {
         
         expect(getSpy.calledOnce).to.be.true;
 
-        expect(getSpy.calledWith("/api/messages/1", sinon.match.any)).to.be.true;
+        expect(getSpy.calledWith("/api/test-hub/1/messages", sinon.match.any)).to.be.true;
 
         channelStore.dispose();
     });
@@ -110,6 +114,22 @@ describe("ChannelStore", () => {
         channelStore.dispose();
     });
 
+    it("getChannelsForHub calls the correct API endpoint", () => {
+        let getSpy = sinon.spy();
+
+        $.get = getSpy;
+
+        let channelStore = new ChannelStore($);
+
+        channelStore.getChannelsForHub("test-hub");
+
+        expect(getSpy.calledOnce).to.be.true;
+
+        expect(getSpy.calledWith("/api/test-hub/channels", sinon.match.any)).to.be.true;
+
+        channelStore.dispose();
+    });
+
     it("sendMessageToApi calls the correct API endpoint", () => {
         let ajaxSpy = sinon.spy();
 
@@ -122,7 +142,7 @@ describe("ChannelStore", () => {
         expect(ajaxSpy.calledOnce).to.be.true;
 
         expect(ajaxSpy.calledWith({
-            url: "/api/messages/1",
+            url: "/api/test-hub/1/messages",
             type: "POST",
             dataType: "json",
             contentType: "application/json",

@@ -10,9 +10,9 @@ interface IChatHub {
 }
 
 interface ChatClient {
-    broadcastMessage(channelId: string, name: string, message: string): void;
+    broadcastMessage(hubId: string, channelId: string, name: string, message: string): void;
 }
 
 interface ChatServer {
-    send(channelId: string, message: string): JQueryPromise<void>;
+    send(hubId: string, channelId: string, message: string): JQueryPromise<void>;
 }

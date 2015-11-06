@@ -1,3 +1,4 @@
+/// <reference path="../typings/react/react.d.ts" />
 /// <reference path="../typings/react/react-global.d.ts" />
 
 import Channel from "../Channels/Channel";
@@ -5,41 +6,37 @@ import ChannelStoreEvents from "../Channels/ChannelStoreEvents";
 import ChannelListItem from "./ChannelListItem";
 import ChannelStore from "../Channels/ChannelStore";
 
-class ChannelPanelProps {
+export class ChannelPanelProps {
     public channelStore: ChannelStore;
+    public hubId: string;
 }
 
 class ChannelPanelState {
     public channels: Array<Channel>;
 }
 
-export default class ChannelPanel extends React.Component<ChannelPanelProps, ChannelPanelState> {
+export class ChannelPanel extends React.Component<ChannelPanelProps, ChannelPanelState> {
 
     constructor(props: ChannelPanelProps) {
         super(props);
-
+        
         this.state = {
             channels: []
         };
     }
 
-    private onNewChannel = (): void => {
+    // handlers
 
-        this.props.channelStore.getChannels().then((channels: Array<Channel>) => {
-            this.setState({
-                channels: channels
-            });
-        });
+    private onNewChannel = (): void => {
+        this.getChannels();
     };
 
+    // public
+        
     public componentDidMount(): void {
         this.props.channelStore.addListener(ChannelStoreEvents.NEW_CHANNEL, this.onNewChannel);
 
-        this.props.channelStore.getChannels().then((channels: Array<Channel>) => {
-            this.setState({
-                channels: channels
-            });
-        });
+        this.getChannels();
     };
 
     public render(): JSX.Element {
@@ -55,4 +52,20 @@ export default class ChannelPanel extends React.Component<ChannelPanelProps, Cha
                 </div>
         );
     };
+    
+    // private 
+
+    private getChannels(): JQueryPromise<void> {
+
+        let channels = this.props.hubId
+            ? this.props.channelStore.getChannelsForHub(this.props.hubId)
+            : this.props.channelStore.getChannels();
+
+        return channels.then((chans: Array<Channel>) => {
+            this.setState({
+                channels: chans
+            });
+        });
+    };
+
 }

@@ -6,7 +6,7 @@ import $ = require("jquery");
 
 import Channel from "./Channels/Channel";
 import ChannelStore from "./Channels/ChannelStore";
-import ChannelPanel from "./ChannelPanel/ChannelPanel";
+import { ChannelPanel } from "./ChannelPanel/ChannelPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
 
 class ChatAppProps {
@@ -39,7 +39,7 @@ export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
 
         return (
             <div>
-            <ChannelPanel channelStore={this.channelStore}></ChannelPanel>
+            <ChannelPanel channelStore={this.channelStore} hubId="scottlogic"></ChannelPanel>
             {chatPanels}
                 </div>
         );

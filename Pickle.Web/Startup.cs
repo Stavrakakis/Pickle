@@ -53,9 +53,9 @@ namespace Pickle.Web
 
             var repo = serviceProvider.GetService<IRepository<Channel>>();
 
-            repo.Insert(new Channel("bristol", "Bristol", new List<string>()));
-            repo.Insert(new Channel("edinburgh", "Edinburgh", new List<string>()));
-            repo.Insert(new Channel("newcastle", "Newcastle", new List<string>()));
+            repo.Insert(new Channel("bristol", "scottlogic", "Bristol", new List<string>()));
+            repo.Insert(new Channel("edinburgh", "scottlogic", "Edinburgh", new List<string>()));
+            repo.Insert(new Channel("newcastle", "scottlogic", "Newcastle", new List<string>()));
 
             // really? still?
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();

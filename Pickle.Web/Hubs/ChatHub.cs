@@ -20,11 +20,11 @@ namespace Pickle.Web.Hubs
             return base.OnConnected();
         }
 
-        public async void Send(string channelId, string message)
+        public async void Send(string hubId, string channelId, string message)
         {
             var username = await this.usernameProvider.GetUsername();
 
-            Clients.All.BroadcastMessage(channelId, username, message);
+            Clients.All.BroadcastMessage(hubId, channelId, username, message);
         }
     }
 }

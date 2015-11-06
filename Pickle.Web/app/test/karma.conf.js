@@ -8,9 +8,9 @@ module.exports = function (config) {
         },
         webpack: {
             resolve: {
-                extensions: ['', '.ts', '.js', '.tsx']
+                extensions: ['', '.ts', '.js', '.jsx', '.tsx']
             },
-            externals: {sinon: "sinon"},
+            externals: { sinon: "sinon" },
             module: {                
                 loaders: [
                   { test: /\.tsx$/, loader: 'ts-loader' },

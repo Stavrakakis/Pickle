@@ -4,7 +4,6 @@ using Microsoft.AspNet.Authorization;
 using Pickle.Data.Repositories;
 using System;
 using Pickle.Data.Models;
-
 namespace Pickle.Api.Controllers
 {
     [Authorize]
@@ -24,9 +23,18 @@ namespace Pickle.Api.Controllers
 
         [HttpGet]
         [Route("/api/channels")]
-        public async Task<IActionResult> GetPaged(int pageNumber = 1, int pageSize = 100)
+        public async Task<IActionResult> GetAllPagedHubs(int pageNumber = 1, int pageSize = 100)
         {
             var channels = await this.channelRepository.GetPaged(pageNumber, pageSize);
+
+            return new ObjectResult(channels);
+        }
+
+        [HttpGet]
+        [Route("/api/{hubSlug}/channels")]
+        public async Task<IActionResult> GetPagedChannelsForHub(string hubSlug, int pageNumber = 1, int pageSize = 100)
+        {
+            var channels = await this.channelRepository.GetPaged(pageNumber, pageSize, channel => channel.HubId == hubSlug);
             
             return new ObjectResult(channels);
         }

@@ -3,12 +3,15 @@ using Microsoft.AspNet.Mvc;
 using Pickle.Api.ApiRequestModels;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
+using Pickle.Web.Api.Filters;
 using Pickle.Web.Api.Providers;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pickle.Api.Controllers
 {
     [Authorize]
+    [ValidateModelState]
     public class MessagesController : Controller
     {
         private readonly IRepository<ChatMessage> messageRepository;
@@ -22,8 +25,8 @@ namespace Pickle.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("/api/messages/{channelId}")]
-        public async Task<IActionResult> GetAll(string channelId, int pageNumber = 1, int pageSize = 100)
+        [Route("/api/{hubSlug}/{channelId}/messages/")]
+        public async Task<IActionResult> GetPagedMessagesForChannel(string hubSlug, string channelId, int pageNumber = 1, int pageSize = 100)
         {
             var messages = await this.messageRepository.GetPaged(pageNumber, pageSize, m => m.ChannelId == channelId);
 
@@ -32,8 +35,8 @@ namespace Pickle.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("/api/messages/{channelId}")]
-        public async Task<IActionResult> Post(string channelId, [FromBody] NewMessageModel messageContent)
+        [Route("/api/{hubSlug}/{channelId}/messages")]
+        public async Task<IActionResult> PostNewMessage(string hubSlug, string channelId, [FromBody] NewMessageModel messageContent)
         {
             var username = await this.usernameProvider.GetUsername();
 
@@ -41,7 +44,7 @@ namespace Pickle.Api.Controllers
 
             message = await this.messageRepository.Insert(message);
 
-            return new CreatedAtRouteResult("/api/messages/", message);
+            return new CreatedAtRouteResult(string.Format("/api/{0}/{1}/messages/", hubSlug, channelId), message);
         }
     }
 }

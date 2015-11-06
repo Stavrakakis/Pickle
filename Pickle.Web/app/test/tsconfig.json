@@ -4,7 +4,15 @@
         "module": "commonjs",
         "jsx": "react",
         "sourceMap": true,
-        "preserveConstEnums": true
+        "preserveConstEnums": true,
+        "outDir": "./wwwroot/js/"
     },
-    "exclude": []
+    "filesGlob": [
+        "**/*.ts",
+        "**/*.tsx",
+        "!node_modules/**"
+    ],
+    "exclude": [],
+    "files": [
+    ]
 }

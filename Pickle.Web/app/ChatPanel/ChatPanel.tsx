@@ -50,6 +50,11 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
 
     private sendMessage = (event: any): void => {
         event.preventDefault();
+
+        if (!this.state.message) {
+            return;
+        }
+
         dispatcher.dispatch(new SendMessageAction(this.props.activeChannel, this.state.message));
         this.setState({
             message: null,

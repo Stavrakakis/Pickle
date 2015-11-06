@@ -2,6 +2,6 @@
 {
     public interface IChatHubClient
     {
-        void BroadcastMessage(string channelId, string username, string message);
+        void BroadcastMessage(string hubId, string channelId, string username, string message);
     }
 }

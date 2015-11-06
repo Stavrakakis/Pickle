@@ -3,23 +3,17 @@ using System.Collections.Generic;
 
 namespace Pickle.Data.Models
 {
-    public class Channel
+    public class Hub
     {
+        private readonly IEnumerable<Channel> channels;
         private readonly string id;
-        private readonly string hubId;
         private readonly string name;
-        private readonly IEnumerable<string> userIds;
 
-        public Channel(string id, string hubId, string name, IEnumerable<string> userIds)
+        public Hub(string id, string name, IEnumerable<Channel> channels)
         {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
-            }
-
-            if (hubId == null)
-            {
-                throw new ArgumentNullException(nameof(hubId));
             }
 
             if (name == null)
@@ -27,15 +21,22 @@ namespace Pickle.Data.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
-            if (userIds == null)
+            if (channels == null)
             {
-                throw new ArgumentNullException(nameof(userIds));
+                throw new ArgumentNullException(nameof(channels));
             }
 
             this.id = id;
-            this.hubId = hubId;
             this.name = name;
-            this.userIds = userIds;
+            this.channels = channels;
+        }
+
+        public IEnumerable<Channel> Channels
+        {
+            get
+            {
+                return channels;
+            }
         }
 
         public string Id
@@ -46,27 +47,11 @@ namespace Pickle.Data.Models
             }
         }
 
-        public string HubId
-        {
-            get
-            {
-                return hubId;
-            }
-        }
-
         public string Name
         {
             get
             {
                 return name;
-            }
-        }
-
-        public IEnumerable<string> UserIds
-        {
-            get
-            {
-                return userIds;
             }
         }
     }
