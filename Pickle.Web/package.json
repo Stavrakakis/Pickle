@@ -6,19 +6,19 @@
   "scripts": {
     "test": "jest"
   },
-   "jest": {
-      "scriptPreprocessor": "app/preprocessor.js",
-      "unmockedModulePathPatterns": [
-        "react"
-      ],
-      "testPathDirs": [
-        "./app"
-      ],
-      "testFileExtensions": [
-        "ts",
-        "tsx"
-      ]
-   },
+  "jest": {
+    "scriptPreprocessor": "app/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "react"
+    ],
+    "testPathDirs": [
+      "./app"
+    ],
+    "testFileExtensions": [
+      "ts",
+      "tsx"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -38,6 +38,8 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sinon": "^1.0.4",
     "karma-webpack": "^1.7.0",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
     "phantomjs": "^1.9.18",
     "react": "^0.14.0",
     "react-addons-linked-state-mixin": "^0.14.0",

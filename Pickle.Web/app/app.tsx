@@ -42,13 +42,11 @@ export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
             return <ChatPanel channelStore={this.channelStore} activeChannel={channel}/>;
         });
 
-        return (
-            <div>
+        return (<div>
                 <h2>{ this.hub ? this.hub.name : null }</h2>
-            <ChannelPanel channelStore={this.channelStore} hubId={ this.hub ? this.hub.id : null }></ChannelPanel>
+            <ChannelPanel channelStore={this.channelStore} hubId={ this.hub ? this.hub.id : null }/>
             {chatPanels}
-                </div>
-        );
+                </div>);
     };
 
     public componentDidMount(): void {
