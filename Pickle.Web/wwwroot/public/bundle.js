@@ -55,11 +55,13 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var $ = __webpack_require__(/*! jquery */ 1);
-	var ChannelStore_1 = __webpack_require__(/*! ./Channels/ChannelStore */ 2);
-	var HubStore_1 = __webpack_require__(/*! ./Hubs/HubStore */ 16);
-	var ChannelPanel_1 = __webpack_require__(/*! ./ChannelPanel/ChannelPanel */ 17);
-	var ChatPanel_1 = __webpack_require__(/*! ./ChatPanel/ChatPanel */ 19);
+	var $ = __webpack_require__(/*! jquery */ 3);
+	__webpack_require__(/*! ./App.less */ 4);
+	var ChannelStore_1 = __webpack_require__(/*! ./Channels/ChannelStore */ 8);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ./Channels/ChannelStoreEvents */ 20);
+	var HubStore_1 = __webpack_require__(/*! ./Hubs/HubStore */ 22);
+	var ChannelPanel_1 = __webpack_require__(/*! ./ChannelPanel/ChannelPanel */ 23);
+	var ChatPanel_1 = __webpack_require__(/*! ./ChatPanel/ChatPanel */ 26);
 	var ChatAppProps = (function () {
 	    function ChatAppProps() {
 	    }
@@ -73,29 +75,36 @@
 	var ChatApp = (function (_super) {
 	    __extends(ChatApp, _super);
 	    function ChatApp(props) {
+	        var _this = this;
 	        _super.call(this, props);
+	        // handlers
+	        this.onChannelActivated = function (event) {
+	            _this.setState({
+	                activeChannel: event.channel
+	            });
+	        };
 	        this.channelStore = new ChannelStore_1.default($);
 	        this.hubStore = new HubStore_1.default();
 	        this.state = {
-	            activeChatChannels: []
+	            activeChannel: null
 	        };
 	    }
 	    ChatApp.prototype.render = function () {
-	        var _this = this;
-	        var chatPanels = this.state.activeChatChannels.map(function (channel) {
-	            return React.createElement(ChatPanel_1.default, {"channelStore": _this.channelStore, "activeChannel": channel});
-	        });
-	        return (React.createElement("div", null, React.createElement("h2", null, this.hub ? this.hub.name : null), React.createElement(ChannelPanel_1.ChannelPanel, {"channelStore": this.channelStore, "hubId": this.hub ? this.hub.id : null}), chatPanels));
+	        if (!this.hub) {
+	            return React.createElement("div", null);
+	        }
+	        return (React.createElement("div", null, React.createElement(ChannelPanel_1.ChannelPanel, {"channelStore": this.channelStore, "hub": this.hub, "activeChannel": this.state.activeChannel}), React.createElement(ChatPanel_1.default, {"channelStore": this.channelStore, "activeChannel": this.state.activeChannel})));
 	    };
 	    ;
 	    ChatApp.prototype.componentDidMount = function () {
 	        var _this = this;
+	        this.channelStore.addListener(ChannelStoreEvents_1.default.CHANNEL_ACTIVATED, this.onChannelActivated);
 	        this.hubStore.getHubs()
 	            .then(function (hubs) {
 	            _this.hub = hubs[0];
 	            return _this.channelStore.getChannelsForHub(_this.hub.id).then(function (channels) {
 	                _this.setState({
-	                    activeChatChannels: channels
+	                    activeChannel: channels[0]
 	                });
 	            });
 	        });
@@ -113,7 +122,9 @@
 
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */
 /*!********************!*\
   !*** external "$" ***!
   \********************/
@@ -122,7 +133,19 @@
 	module.exports = $;
 
 /***/ },
-/* 2 */
+/* 4 */
+/*!**********************!*\
+  !*** ./app/App.less ***!
+  \**********************/
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */
 /*!**************************************!*\
   !*** ./app/Channels/ChannelStore.ts ***!
   \**************************************/
@@ -138,14 +161,14 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var events = __webpack_require__(/*! events */ 3);
-	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 4);
-	var SendMessageAction_1 = __webpack_require__(/*! ./SendMessageAction */ 9);
-	var ChannelActivationAction_1 = __webpack_require__(/*! ./ChannelActivationAction */ 11);
-	var NewChannelAction_1 = __webpack_require__(/*! ./NewChannelAction */ 12);
-	var Channel_1 = __webpack_require__(/*! ./Channel */ 13);
-	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 14);
-	var ChatMessageApiModel_1 = __webpack_require__(/*! ./Models/ChatMessageApiModel */ 15);
+	var events = __webpack_require__(/*! events */ 9);
+	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 10);
+	var SendMessageAction_1 = __webpack_require__(/*! ./SendMessageAction */ 15);
+	var ChannelActivationAction_1 = __webpack_require__(/*! ./ChannelActivationAction */ 17);
+	var NewChannelAction_1 = __webpack_require__(/*! ./NewChannelAction */ 18);
+	var Channel_1 = __webpack_require__(/*! ./Channel */ 19);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 20);
+	var ChatMessageApiModel_1 = __webpack_require__(/*! ./Models/ChatMessageApiModel */ 21);
 	var ChannelStore = (function (_super) {
 	    __extends(ChannelStore, _super);
 	    function ChannelStore($) {
@@ -171,6 +194,10 @@
 	                if (action instanceof NewChannelAction_1.default) {
 	                }
 	                if (action instanceof ChannelActivationAction_1.default) {
+	                    var channelActivationAction = action;
+	                    // TODO
+	                    // unsubscribe from full text broadcastMessage() inactive chat panels shouldn't waste bandwidth
+	                    _this.emit(ChannelStoreEvents_1.default.CHANNEL_ACTIVATED, channelActivationAction);
 	                }
 	            });
 	    }
@@ -225,7 +252,7 @@
 
 
 /***/ },
-/* 3 */
+/* 9 */
 /*!****************************!*\
   !*** ./~/events/events.js ***!
   \****************************/
@@ -532,7 +559,7 @@
 
 
 /***/ },
-/* 4 */
+/* 10 */
 /*!**************************************!*\
   !*** ./app/Dispatcher/Dispatcher.ts ***!
   \**************************************/
@@ -544,7 +571,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var flux = __webpack_require__(/*! flux */ 5);
+	var flux = __webpack_require__(/*! flux */ 11);
 	var Dispatcher = (function (_super) {
 	    __extends(Dispatcher, _super);
 	    function Dispatcher() {
@@ -558,7 +585,7 @@
 
 
 /***/ },
-/* 5 */
+/* 11 */
 /*!*************************!*\
   !*** ./~/flux/index.js ***!
   \*************************/
@@ -573,11 +600,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 	
-	module.exports.Dispatcher = __webpack_require__(/*! ./lib/Dispatcher */ 6);
+	module.exports.Dispatcher = __webpack_require__(/*! ./lib/Dispatcher */ 12);
 
 
 /***/ },
-/* 6 */
+/* 12 */
 /*!**********************************!*\
   !*** ./~/flux/lib/Dispatcher.js ***!
   \**********************************/
@@ -602,7 +629,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var invariant = __webpack_require__(/*! fbjs/lib/invariant */ 8);
+	var invariant = __webpack_require__(/*! fbjs/lib/invariant */ 14);
 	
 	var _prefix = 'ID_';
 	
@@ -814,10 +841,10 @@
 	})();
 	
 	module.exports = Dispatcher;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 13)))
 
 /***/ },
-/* 7 */
+/* 13 */
 /*!**********************************************************!*\
   !*** (webpack)/~/node-libs-browser/~/process/browser.js ***!
   \**********************************************************/
@@ -917,7 +944,7 @@
 
 
 /***/ },
-/* 8 */
+/* 14 */
 /*!****************************************!*\
   !*** ./~/flux/~/fbjs/lib/invariant.js ***!
   \****************************************/
@@ -972,10 +999,10 @@
 	};
 	
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 13)))
 
 /***/ },
-/* 9 */
+/* 15 */
 /*!*******************************************!*\
   !*** ./app/Channels/SendMessageAction.ts ***!
   \*******************************************/
@@ -986,7 +1013,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 10);
+	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 16);
 	var SendMessageAction = (function (_super) {
 	    __extends(SendMessageAction, _super);
 	    function SendMessageAction(channel, message) {
@@ -1015,7 +1042,7 @@
 
 
 /***/ },
-/* 10 */
+/* 16 */
 /*!*******************************!*\
   !*** ./app/Actions/Action.ts ***!
   \*******************************/
@@ -1031,7 +1058,7 @@
 
 
 /***/ },
-/* 11 */
+/* 17 */
 /*!*************************************************!*\
   !*** ./app/Channels/ChannelActivationAction.ts ***!
   \*************************************************/
@@ -1042,7 +1069,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 10);
+	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 16);
 	var ChannelActivationEvent = (function (_super) {
 	    __extends(ChannelActivationEvent, _super);
 	    function ChannelActivationEvent(channel) {
@@ -1063,7 +1090,7 @@
 
 
 /***/ },
-/* 12 */
+/* 18 */
 /*!******************************************!*\
   !*** ./app/Channels/NewChannelAction.ts ***!
   \******************************************/
@@ -1074,7 +1101,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 10);
+	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 16);
 	var NewChannelAction = (function (_super) {
 	    __extends(NewChannelAction, _super);
 	    function NewChannelAction(channel) {
@@ -1095,7 +1122,7 @@
 
 
 /***/ },
-/* 13 */
+/* 19 */
 /*!*********************************!*\
   !*** ./app/Channels/Channel.ts ***!
   \*********************************/
@@ -1138,7 +1165,7 @@
 
 
 /***/ },
-/* 14 */
+/* 20 */
 /*!********************************************!*\
   !*** ./app/Channels/ChannelStoreEvents.ts ***!
   \********************************************/
@@ -1157,7 +1184,7 @@
 
 
 /***/ },
-/* 15 */
+/* 21 */
 /*!****************************************************!*\
   !*** ./app/Channels/Models/ChatMessageApiModel.ts ***!
   \****************************************************/
@@ -1207,7 +1234,7 @@
 
 
 /***/ },
-/* 16 */
+/* 22 */
 /*!******************************!*\
   !*** ./app/Hubs/HubStore.ts ***!
   \******************************/
@@ -1223,8 +1250,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var events = __webpack_require__(/*! events */ 3);
-	var $ = __webpack_require__(/*! jquery */ 1);
+	var events = __webpack_require__(/*! events */ 9);
+	var $ = __webpack_require__(/*! jquery */ 3);
 	var HubStore = (function (_super) {
 	    __extends(HubStore, _super);
 	    function HubStore() {
@@ -1244,7 +1271,7 @@
 
 
 /***/ },
-/* 17 */
+/* 23 */
 /*!*******************************************!*\
   !*** ./app/ChannelPanel/ChannelPanel.tsx ***!
   \*******************************************/
@@ -1257,8 +1284,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 14);
-	var ChannelListItem_1 = __webpack_require__(/*! ./ChannelListItem */ 18);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 20);
+	var ChannelListItem_1 = __webpack_require__(/*! ./ChannelListItem */ 24);
 	var ChannelPanelProps = (function () {
 	    function ChannelPanelProps() {
 	    }
@@ -1276,35 +1303,45 @@
 	        var _this = this;
 	        _super.call(this, props);
 	        // handlers
+	        this.onChannelActivated = function (event) {
+	            _this.setState({
+	                channels: _this.state.channels,
+	                activeChannel: event.channel
+	            });
+	        };
 	        this.onNewChannel = function () {
 	            _this.getChannels();
 	        };
 	        this.state = {
-	            channels: []
+	            channels: [],
+	            activeChannel: props.activeChannel
 	        };
 	    }
 	    // public
 	    ChannelPanel.prototype.componentDidMount = function () {
+	        this.props.channelStore.addListener(ChannelStoreEvents_1.default.CHANNEL_ACTIVATED, this.onChannelActivated);
 	        this.props.channelStore.addListener(ChannelStoreEvents_1.default.NEW_CHANNEL, this.onNewChannel);
 	        this.getChannels();
 	    };
 	    ;
 	    ChannelPanel.prototype.render = function () {
+	        var _this = this;
 	        var channelList = this.state.channels.map(function (channel) {
-	            return React.createElement(ChannelListItem_1.default, {"channel": channel});
+	            return React.createElement(ChannelListItem_1.default, {"channel": channel, "active": _this.state.activeChannel.id === channel.id});
 	        });
-	        return (React.createElement("div", null, React.createElement("ul", null, channelList)));
+	        return (React.createElement("div", {"id": "pickle-channel-panel"}, React.createElement("h2", null, this.props.hub ? this.props.hub.name : ""), React.createElement("ul", null, channelList)));
 	    };
 	    ;
 	    // private 
 	    ChannelPanel.prototype.getChannels = function () {
 	        var _this = this;
-	        var channels = this.props.hubId
-	            ? this.props.channelStore.getChannelsForHub(this.props.hubId)
+	        var channels = this.props.hub
+	            ? this.props.channelStore.getChannelsForHub(this.props.hub.id)
 	            : this.props.channelStore.getChannels();
 	        return channels.then(function (chans) {
 	            _this.setState({
-	                channels: chans
+	                channels: chans,
+	                activeChannel: _this.state.activeChannel
 	            });
 	        });
 	    };
@@ -1315,20 +1352,22 @@
 
 
 /***/ },
-/* 18 */
+/* 24 */
 /*!**********************************************!*\
   !*** ./app/ChannelPanel/ChannelListItem.tsx ***!
   \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../typings/react/react-global.d.ts" />
+	/// <reference path="../typings/classnames/classnames.d.ts" />
 	var __extends = (this && this.__extends) || function (d, b) {
 	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 4);
-	var ChannelActivationAction_1 = __webpack_require__(/*! ../Channels/ChannelActivationAction */ 11);
+	var classNames = __webpack_require__(/*! classnames */ 25);
+	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 10);
+	var ChannelActivationAction_1 = __webpack_require__(/*! ../Channels/ChannelActivationAction */ 17);
 	var ChannelListItemProps = (function () {
 	    function ChannelListItemProps() {
 	    }
@@ -1350,7 +1389,7 @@
 	        this.channel = props.channel;
 	    }
 	    ChannelListItem.prototype.render = function () {
-	        return (React.createElement("li", {"onClick": this.channelClicked}, this.channel.name));
+	        return (React.createElement("li", {"onClick": this.channelClicked, "className": classNames({ "p-active": this.props.active })}, this.channel.name));
 	    };
 	    ;
 	    return ChannelListItem;
@@ -1360,7 +1399,64 @@
 
 
 /***/ },
-/* 19 */
+/* 25 */
+/*!*******************************!*\
+  !*** ./~/classnames/index.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = '';
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes += ' ' + arg;
+				} else if (Array.isArray(arg)) {
+					classes += ' ' + classNames.apply(null, arg);
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes += ' ' + key;
+						}
+					}
+				}
+			}
+	
+			return classes.substr(1);
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 26 */
 /*!*************************************!*\
   !*** ./app/ChatPanel/ChatPanel.tsx ***!
   \*************************************/
@@ -1372,9 +1468,10 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 4);
-	var SendMessageAction_1 = __webpack_require__(/*! ../Channels/SendMessageAction */ 9);
-	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 14);
+	var $ = __webpack_require__(/*! jquery */ 3);
+	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 10);
+	var SendMessageAction_1 = __webpack_require__(/*! ../Channels/SendMessageAction */ 15);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 20);
 	var ChatPanelProps = (function () {
 	    function ChatPanelProps() {
 	    }
@@ -1390,6 +1487,16 @@
 	    function ChatPanel(props) {
 	        var _this = this;
 	        _super.call(this, props);
+	        this.onChannelActivated = function (event) {
+	            _this.getMessages(event.channel).then(function (messages) {
+	                _this.chatId = _this.props.activeChannel.hubId + _this.props.activeChannel.id;
+	                _this.setState({
+	                    message: "",
+	                    messages: messages
+	                });
+	                _this.scrollToBottom();
+	            });
+	        };
 	        this.onMessageChanged = function (event) {
 	            _this.setState({
 	                message: event.target.value,
@@ -1403,6 +1510,7 @@
 	                    messages: _this.state.messages,
 	                    message: _this.state.message
 	                });
+	                _this.scrollToBottom();
 	            }
 	        };
 	        this.sendMessage = function (event) {
@@ -1416,6 +1524,7 @@
 	                messages: _this.state.messages
 	            });
 	        };
+	        this.chatId = this.props.activeChannel.hubId + this.props.activeChannel.id;
 	        this.state = {
 	            message: null,
 	            messages: []
@@ -1424,12 +1533,14 @@
 	    ChatPanel.prototype.componentDidMount = function () {
 	        var _this = this;
 	        this.props.channelStore.addListener(ChannelStoreEvents_1.default.NEW_MESSAGE, this.onNewMessage);
-	        this.props.channelStore.getMessagesForChannel(this.props.activeChannel)
+	        this.props.channelStore.addListener(ChannelStoreEvents_1.default.CHANNEL_ACTIVATED, this.onChannelActivated);
+	        this.getMessages(this.props.activeChannel)
 	            .then(function (messages) {
 	            _this.setState({
-	                message: _this.state.message,
-	                messages: messages
+	                messages: messages,
+	                message: null
 	            });
+	            _this.scrollToBottom();
 	        });
 	    };
 	    ;
@@ -1439,7 +1550,20 @@
 	            var message = this.state.messages[i];
 	            messages.push(React.createElement("div", null, React.createElement("span", null, message.username, ": "), React.createElement("span", null, message.message)));
 	        }
-	        return (React.createElement("div", null, React.createElement("header", null, "Chat Panel - ", this.props.activeChannel.name), React.createElement("ul", null, messages), React.createElement("form", {"onSubmit": this.sendMessage}, React.createElement("input", {"type": "text", "value": this.state.message, "onChange": this.onMessageChanged}), React.createElement("button", {"type": "submit"}, "Send"))));
+	        return (React.createElement("section", {"id": "p-chat-panel-container-" + this.chatId, "className": "p-chat-panel-container"}, React.createElement("header", null, this.props.activeChannel.name), React.createElement("div", {"id": "p-chat-panel-" + this.chatId, "className": "p-chat-panel"}, React.createElement("ul", null, messages)), React.createElement("form", {"onSubmit": this.sendMessage}, React.createElement("input", {"type": "text", "value": this.state.message, "onChange": this.onMessageChanged}), React.createElement("button", {"type": "submit"}, "Send"))));
+	    };
+	    ;
+	    // private
+	    ChatPanel.prototype.scrollToBottom = function () {
+	        var element = $("#p-chat-panel-" + this.chatId)[0];
+	        element.scrollTop = element.scrollHeight;
+	    };
+	    ;
+	    ChatPanel.prototype.getMessages = function (channel) {
+	        return this.props.channelStore.getMessagesForChannel(channel)
+	            .then(function (messages) {
+	            return messages;
+	        });
 	    };
 	    ;
 	    return ChatPanel;

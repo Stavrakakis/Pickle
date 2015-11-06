@@ -8,11 +8,6 @@
     ],
     "ban": false,
     "class-name": true,
-    "comment-format": [
-      true,
-      "check-space",
-      "check-lowercase"
-    ],
     "curly": true,
     "eofline": true,
     "forin": true,
@@ -26,7 +21,7 @@
     "label-undefined": true,
     "max-line-length": [
       true,
-      1404
+      140
     ],
     "member-access": true,
     "member-ordering": [

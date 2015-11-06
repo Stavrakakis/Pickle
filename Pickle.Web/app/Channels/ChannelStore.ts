@@ -58,9 +58,12 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
             }
 
             if (action instanceof ChannelActivationAction) {
-                // let channelActivationAction = (<ChannelActivationAction>action);
+                let channelActivationAction = (<ChannelActivationAction>action);
+                
+                // TODO
+                // unsubscribe from full text broadcastMessage() inactive chat panels shouldn't waste bandwidth
 
-                // this.emit(ChannelStoreEvents.CHANNEL_ACTIVATED, channelActivationAction);
+                this.emit(ChannelStoreEvents.CHANNEL_ACTIVATED, channelActivationAction);
             }
         });
     }

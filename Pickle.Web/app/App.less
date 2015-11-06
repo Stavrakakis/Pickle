@@ -1,15 +1,30 @@
 ﻿@import "./ChannelPanel/ChannelPanelStyle.less";
+@import "./ChatPanel/ChatPanelStyle.less";
 
-html {
-    .no-padding();
-
-    body {
-        .no-padding();
-        background-color: aliceblue;
-    }
-}
+@sidebar-width: 300px;
 
 .no-padding() {
     padding: 0;
     margin: 0;
+}
+
+
+// Structure
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    .no-padding();
+    
+    font-family: "Segoe UI";
+
+    body {
+        .no-padding();
+    }
+}
+
+h1, h2, h3, h4 {
+    font-weight: normal;
 }

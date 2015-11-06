@@ -11,3 +11,4 @@
 /// <reference path="jasmine/jasmine.d.ts" />
 /// <reference path="jest/jest.d.ts" />
 /// <reference path="node/node.d.ts" />
+/// <reference path="classnames/classnames.d.ts" />

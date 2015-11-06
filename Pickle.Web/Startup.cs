@@ -15,6 +15,7 @@ using Microsoft.Framework.DependencyInjection;
 using Autofac.Framework.DependencyInjection;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
+using Pickle.Web.Api.Seed;
 
 namespace Pickle.Web
 {
@@ -50,15 +51,12 @@ namespace Pickle.Web
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env, IServiceProvider serviceProvider)
         {
+
             var hubRepository = serviceProvider.GetService<IRepository<Hub>>();
-
-            hubRepository.Insert(new Hub("scottlogic", "ScottLogic", new List<Channel>()));
-
             var channelRepository = serviceProvider.GetService<IRepository<Channel>>();
+            var messageRepository = serviceProvider.GetService<IRepository<ChatMessage>>();
 
-            channelRepository.Insert(new Channel("bristol", "scottlogic", "Bristol", new List<string>()));
-            channelRepository.Insert(new Channel("edinburgh", "scottlogic", "Edinburgh", new List<string>()));
-            channelRepository.Insert(new Channel("newcastle", "scottlogic", "Newcastle", new List<string>()));
+            InMemoryDataSeeder.Seed(hubRepository, channelRepository, messageRepository);
 
             // really? still?
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();

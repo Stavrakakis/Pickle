@@ -4,8 +4,12 @@
 
 import $ = require("jquery");
 
+require("./App.less");
+
 import Channel from "./Channels/Channel";
 import ChannelStore from "./Channels/ChannelStore";
+import ChannelStoreEvents from "./Channels/ChannelStoreEvents";
+import ChannelActivationAction from "./Channels/ChannelActivationAction";
 import HubStore from "./Hubs/HubStore";
 import { ChannelPanel } from "./ChannelPanel/ChannelPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
@@ -16,7 +20,7 @@ class ChatAppProps {
 }
 
 class ChatAppState {
-    public activeChatChannels: Array<Channel>;
+    public activeChannel: Channel;
 }
 
 export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
@@ -32,24 +36,33 @@ export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
         this.hubStore = new HubStore();
 
         this.state = {
-            activeChatChannels: []
+            activeChannel: null
         };
     }
 
-    public render(): JSX.Element {
+    // handlers
 
-        let chatPanels = this.state.activeChatChannels.map((channel: Channel) => {
-            return <ChatPanel channelStore={this.channelStore} activeChannel={channel}/>;
+    private onChannelActivated = (event: ChannelActivationAction): void => {
+        this.setState({
+            activeChannel: event.channel
         });
+    };
+
+    public render(): JSX.Element {
+        
+        if (!this.hub) {
+            return <div></div>;
+        }
 
         return (<div>
-                <h2>{ this.hub ? this.hub.name : null }</h2>
-            <ChannelPanel channelStore={this.channelStore} hubId={ this.hub ? this.hub.id : null }/>
-            {chatPanels}
+                    <ChannelPanel channelStore={this.channelStore} hub={this.hub} activeChannel={this.state.activeChannel} />
+                    <ChatPanel channelStore={this.channelStore} activeChannel={this.state.activeChannel} />
                 </div>);
     };
 
     public componentDidMount(): void {
+
+        this.channelStore.addListener(ChannelStoreEvents.CHANNEL_ACTIVATED, this.onChannelActivated);
 
         this.hubStore.getHubs()
             .then((hubs: Array<HubApiModel>) => {
@@ -58,7 +71,7 @@ export class ChatApp extends React.Component<ChatAppProps, ChatAppState> {
 
                 return this.channelStore.getChannelsForHub(this.hub.id).then((channels: Array<Channel>) => {
                     this.setState({
-                        activeChatChannels: channels
+                        activeChannel: channels[0]
                     });
                 });
             });        
