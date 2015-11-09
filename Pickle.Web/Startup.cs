@@ -56,7 +56,10 @@ namespace Pickle.Web
             var channelRepository = serviceProvider.GetService<IRepository<Channel>>();
             var messageRepository = serviceProvider.GetService<IRepository<ChatMessage>>();
 
+            var mongoHubRepo = new MongoRepository<Hub>();
+
             InMemoryDataSeeder.Seed(hubRepository, channelRepository, messageRepository);
+            MongoSeeder.Seed(mongoHubRepo, null, null);
 
             // really? still?
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();

@@ -4,7 +4,7 @@ using PagedList;
 using Pickle.Api.Controllers;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
-using Pickle.Web.Tests.Attributes;
+using Pickle.Tests.Common.Attributes;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,7 +20,7 @@ namespace Pickle.Web.Tests.Controllers
         {
             var controllerUnderTest = new HubController(hubRepository.Object);
 
-            var result = await controllerUnderTest.GetPaged(hubSlug, 1, 100);
+            var result = await controllerUnderTest.GetPagedHubs(1, 100);
 
             hubRepository.Verify(mock => mock.GetPaged(1, 100, null), Times.Once);
         }
@@ -36,7 +36,7 @@ namespace Pickle.Web.Tests.Controllers
 
             var controllerUnderTest = new HubController(hubRepository.Object);
 
-            var result = await controllerUnderTest.GetPaged(hubSlug, 1, 100);
+            var result = await controllerUnderTest.GetPagedHubs(1, 100);
 
             Assert.IsType<ObjectResult>(result);
         }

@@ -1,0 +1,35 @@
+{
+  "locked": false,
+  "version": -9996,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "PagedList/1.17.0.0": {
+        "compile": {
+          "lib/net40/PagedList.dll": {}
+        },
+        "runtime": {
+          "lib/net40/PagedList.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PagedList/1.17.0.0": {
+      "sha512": "Ou6F3WKXh49hOo0TxWM+SkIGuKllYPuPPvnSYOlQ1sTrtuEyuDUhYbSJd5Sdb06i/sWUJZTjiUecEs3Ht/Hx3g==",
+      "files": [
+        "PagedList.1.17.0.0.nupkg",
+        "PagedList.1.17.0.0.nupkg.sha512",
+        "PagedList.nuspec",
+        "lib/net40/PagedList.dll",
+        "lib/net40/PagedList.xml"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Pickle.Data >= 1.0.0-*",
+      "PagedList >= 1.17.0"
+    ],
+    "DNX,Version=v4.5.1": []
+  }
+}

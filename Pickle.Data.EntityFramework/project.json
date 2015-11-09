@@ -1,0 +1,17 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Pickle.Data.EntityFramework Class Library",
+  "authors": [ "nstavrakakis" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "Pickle.Data": "1.0.0-*",
+    "PagedList": "1.17.0"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

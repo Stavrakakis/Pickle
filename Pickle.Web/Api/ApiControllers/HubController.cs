@@ -23,19 +23,11 @@ namespace Pickle.Api.Controllers
         }
         [HttpGet]
         [Route("/api/hubs")]
-        public async Task<IActionResult> GetPagedHubs(string hubSlug, int pageNumber = 1, int pageSize = 100)
+        public async Task<IActionResult> GetPagedHubs(int pageNumber = 1, int pageSize = 100)
         {
             var hubs = await this.hubRepository.GetPaged(pageNumber, pageSize);
 
             return new ObjectResult(hubs);
-        }
-
-
-        [HttpGet]
-        [Route("/api/hub/{hubSlug}")]
-        public Task<IActionResult> GetPagedChannelsForHub(string hubSlug, int pageNumber = 1, int pageSize = 100)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNet.Mvc;
-using Moq;
+﻿using Moq;
 using Pickle.Api.ApiRequestModels;
 using Pickle.Api.Controllers;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
+using Pickle.Tests.Common.Attributes;
+using Pickle.Tests.Common.Helpers;
 using Pickle.Web.Api.Providers;
-using Pickle.Web.Tests.Attributes;
-using Pickle.Web.Tests.Helpers;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;

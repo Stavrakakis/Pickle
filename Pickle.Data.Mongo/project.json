@@ -1,0 +1,19 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Pickle.Data.Mongo Class Library",
+  "authors": [ "nstavrakakis" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "Pickle.Data": "1.0.0-*",
+    "PagedList": "1.17.0",
+    "MongoDB.Driver": "2.1.0",
+    "Newtonsoft.Json": "7.0.1"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

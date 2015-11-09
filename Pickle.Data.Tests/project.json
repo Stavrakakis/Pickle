@@ -18,10 +18,9 @@
     "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta8",
     "AutoFixture.Xunit2": "3.36.9",
     "AutoMoq": "1.6.2",
-    "PagedList": "1.17.0",
     "Pickle.Web": "1.0.0-*",
     "AutoFixture.AutoMoq": "3.36.9",
-"Pickle.Tests.Common": "1.0.0-*"
+    "Pickle.Tests.Common": "1.0.0-*"
   },
   "commands": {
     "test": "xunit.runner.dnx"

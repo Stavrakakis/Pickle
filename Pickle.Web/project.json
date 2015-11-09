@@ -18,7 +18,8 @@
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta5",
     "Autofac": "4.0.0-beta5-90",
     "Autofac.Framework.DependencyInjection": "4.0.0-beta5-90",
-    "Pickle.Data": "1.0.0-*"
+    "Pickle.Data": "1.0.0-*",
+    "Pickle.Data.Mongo": "1.0.0-*"
   },
 
   "commands": {

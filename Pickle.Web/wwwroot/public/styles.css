@@ -4,8 +4,8 @@
   top: 0;
   bottom: 0;
   width: 300px;
-  background-color: #333;
-  color: #fff;
+  background-color: #252839;
+  color: #b5b5b7;
   padding-left: 1rem;
 }
 #pickle-channel-panel ul {
@@ -20,10 +20,11 @@
   cursor: pointer;
 }
 #pickle-channel-panel ul li.p-active {
-  color: tomato;
+  color: #f2b632;
 }
 .p-chat-panel-container {
   background-color: #fff;
+  border-left: solid 1px #ABA8A8;
   color: #333;
   position: fixed;
   left: 300px;
@@ -34,7 +35,6 @@
 .p-chat-panel-container header {
   line-height: 50px;
   height: 50px;
-  border-bottom: solid 1px silver;
   padding: 0 1rem;
 }
 .p-chat-panel-container .p-chat-panel {
@@ -56,7 +56,6 @@
   min-width: 150px;
 }
 .p-chat-panel-container form {
-  border-top: solid 1px silver;
   padding: 1rem;
   height: 60px;
 }

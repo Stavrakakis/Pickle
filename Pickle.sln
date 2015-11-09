@@ -11,6 +11,25 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pickle.Web.Tests", "Pickle.
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pickle.Data", "Pickle.Data\Pickle.Data.xproj", "{0D899198-1291-4E04-B165-C741F3F6355D}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pickle.Data.Tests", "Pickle.Data.Tests\Pickle.Data.Tests.xproj", "{33D6511D-F27C-4286-B227-77672FA2D95C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pickle.Tests.Common", "Pickle.Tests.Common\Pickle.Tests.Common.xproj", "{FAB64B4A-2510-41B4-A4E4-D63A3248524C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9B9B2B22-7E85-41AE-BB46-CC42FB7FF173}"
+	ProjectSection(SolutionItems) = preProject
+		Pickle.Data\global.json = Pickle.Data\global.json
+		Pickle.Api\global.json = Pickle.Api\global.json
+		Pickle.Data.Tests\global.json = Pickle.Data.Tests\global.json
+		Pickle.Tests.Common\global.json = Pickle.Tests.Common\global.json
+		Pickle.Web\global.json = Pickle.Web\global.json
+		Pickle.Web.Tests\global.json = Pickle.Web.Tests\global.json
+		Pickle.Data.Mongo\global.json = Pickle.Data.Mongo\global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pickle.Data.Mongo", "Pickle.Data.Mongo\Pickle.Data.Mongo.xproj", "{C190565C-DB2B-45A6-9E78-D9D89F8AC89A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pickle.Data.EntityFramework", "Pickle.Data.EntityFramework\Pickle.Data.EntityFramework.xproj", "{DA4DA6A1-FAA8-49F4-B1D4-030A46CDB9AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +52,22 @@ Global
 		{0D899198-1291-4E04-B165-C741F3F6355D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D899198-1291-4E04-B165-C741F3F6355D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D899198-1291-4E04-B165-C741F3F6355D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D6511D-F27C-4286-B227-77672FA2D95C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D6511D-F27C-4286-B227-77672FA2D95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D6511D-F27C-4286-B227-77672FA2D95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D6511D-F27C-4286-B227-77672FA2D95C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAB64B4A-2510-41B4-A4E4-D63A3248524C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB64B4A-2510-41B4-A4E4-D63A3248524C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB64B4A-2510-41B4-A4E4-D63A3248524C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB64B4A-2510-41B4-A4E4-D63A3248524C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C190565C-DB2B-45A6-9E78-D9D89F8AC89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C190565C-DB2B-45A6-9E78-D9D89F8AC89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C190565C-DB2B-45A6-9E78-D9D89F8AC89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C190565C-DB2B-45A6-9E78-D9D89F8AC89A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA4DA6A1-FAA8-49F4-B1D4-030A46CDB9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA4DA6A1-FAA8-49F4-B1D4-030A46CDB9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA4DA6A1-FAA8-49F4-B1D4-030A46CDB9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA4DA6A1-FAA8-49F4-B1D4-030A46CDB9AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

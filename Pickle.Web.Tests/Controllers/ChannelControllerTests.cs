@@ -2,9 +2,8 @@
 using Pickle.Api.Controllers;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
-using Pickle.Web.Tests.Attributes;
+using Pickle.Tests.Common.Attributes;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
