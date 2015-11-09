@@ -51,7 +51,11 @@ namespace Pickle.Web.Tests.Controllers
 
             var expectedMessageParameter = new ChatMessage(username, channelId, newMessage.Message);
             
-            messageRepository.Verify(mock => mock.Insert(It.Is<ChatMessage>(parameter => parameter.JsonEquals(expectedMessageParameter))), Times.Once);
+            messageRepository.Verify(mock => mock.Insert(It.Is<ChatMessage>(parameter =>
+                parameter.ChannelId == channelId && 
+                parameter.Message == newMessage.Message &&
+                parameter.Username == username
+            )), Times.Once);
         }
     }
 }

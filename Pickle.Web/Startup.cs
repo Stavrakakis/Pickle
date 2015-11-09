@@ -16,6 +16,10 @@ using Autofac.Framework.DependencyInjection;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
 using Pickle.Web.Api.Seed;
+using Pickle.Data.EntityFramework.Context;
+using Microsoft.Data.Entity;
+using AutoMapper;
+using Pickle.Data.DataModels;
 
 namespace Pickle.Web
 {
@@ -33,6 +37,12 @@ namespace Pickle.Web
                       options.OutputFormatters.Insert(0, jsonOutputFormatter);
                   });
 
+            var connection = @"Server=(localdb)\v11.0;Database=Pickle;Trusted_Connection=True;";
+
+            services.AddEntityFramework()
+                    .AddSqlServer()
+                    .AddDbContext<PickleContext>(o => o.UseSqlServer(connection));
+
             services.AddSignalR(options =>
             {
                 options.Hubs.EnableDetailedErrors = true;
@@ -46,20 +56,30 @@ namespace Pickle.Web
 
             var container = builder.Build();
 
-            return container.Resolve<IServiceProvider>();
+            return container.ResolveOptional<IServiceProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env, IServiceProvider serviceProvider)
         {
+            Mapper.Initialize(cfg => {
+
+                cfg.CreateMap<Hub, HubDataModel>();
+                cfg.CreateMap<HubDataModel, Hub>();
+
+                cfg.CreateMap<Channel, ChannelDataModel>();
+                cfg.CreateMap<ChannelDataModel, Channel>();
+
+                cfg.CreateMap<ChatMessage, ChatMessageDataModel>();
+                cfg.CreateMap<ChatMessageDataModel, ChatMessage>();
+            });
+
+            Mapper.AssertConfigurationIsValid();
 
             var hubRepository = serviceProvider.GetService<IRepository<Hub>>();
             var channelRepository = serviceProvider.GetService<IRepository<Channel>>();
             var messageRepository = serviceProvider.GetService<IRepository<ChatMessage>>();
-
-            var mongoHubRepo = new MongoRepository<Hub>();
-
-            InMemoryDataSeeder.Seed(hubRepository, channelRepository, messageRepository);
-            MongoSeeder.Seed(mongoHubRepo, null, null);
+            
+            //EntityFrameworkSeeder.Seed(hubRepository, channelRepository, messageRepository).Wait();
 
             // really? still?
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();

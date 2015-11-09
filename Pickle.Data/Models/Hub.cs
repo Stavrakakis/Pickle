@@ -9,6 +9,10 @@ namespace Pickle.Data.Models
         private readonly string id;
         private readonly string name;
 
+        public Hub()
+        {
+        }
+
         public Hub(string id, string name, IEnumerable<Channel> channels)
         {
             if (id == null)

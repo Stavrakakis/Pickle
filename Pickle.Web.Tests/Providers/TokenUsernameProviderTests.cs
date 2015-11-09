@@ -1,4 +1,7 @@
-﻿using Moq;
+﻿using Microsoft.AspNet.Hosting;
+using Moq;
+using Pickle.Tests.Common.Attributes;
+using Pickle.Web.Api.Providers;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;

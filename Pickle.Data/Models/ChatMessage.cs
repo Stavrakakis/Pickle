@@ -4,10 +4,11 @@ namespace Pickle.Data.Models
 {
     public class ChatMessage
     {
+        private readonly string id;
         private readonly string channelId;
         private readonly string message;
         private readonly string username;
-
+        
         public ChatMessage(string username, string channelId, string message)
         {
             if (username == null)
@@ -25,9 +26,18 @@ namespace Pickle.Data.Models
                 throw new ArgumentNullException(nameof(message));
             }
 
+            this.id = Guid.NewGuid().ToString();
             this.username = username;
             this.channelId = channelId;
             this.message = message;
+        }
+
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
         }
 
         public string ChannelId

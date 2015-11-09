@@ -8,9 +8,8 @@ namespace Pickle.Data.Models
         private readonly string id;
         private readonly string hubId;
         private readonly string name;
-        private readonly IEnumerable<string> userIds;
-
-        public Channel(string id, string hubId, string name, IEnumerable<string> userIds)
+        
+        public Channel(string id, string hubId, string name)
         {
             if (id == null)
             {
@@ -27,15 +26,9 @@ namespace Pickle.Data.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
-            if (userIds == null)
-            {
-                throw new ArgumentNullException(nameof(userIds));
-            }
-
             this.id = id;
             this.hubId = hubId;
             this.name = name;
-            this.userIds = userIds;
         }
 
         public string Id
@@ -59,14 +52,6 @@ namespace Pickle.Data.Models
             get
             {
                 return name;
-            }
-        }
-
-        public IEnumerable<string> UserIds
-        {
-            get
-            {
-                return userIds;
             }
         }
     }

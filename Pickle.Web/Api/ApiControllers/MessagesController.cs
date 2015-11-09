@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using PagedList;
 using Pickle.Api.ApiRequestModels;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
 using Pickle.Web.Api.Filters;
 using Pickle.Web.Api.Providers;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pickle.Api.Controllers
@@ -26,11 +26,9 @@ namespace Pickle.Api.Controllers
         [HttpGet]
         [Authorize]
         [Route("/api/hub/{hubSlug}/{channelId}/messages/")]
-        public async Task<IActionResult> GetPagedMessagesForChannel(string hubSlug, string channelId, int pageNumber = 1, int pageSize = 100)
+        public async Task<IPagedList<ChatMessage>> GetPagedMessagesForChannel(string hubSlug, string channelId, int pageNumber = 1, int pageSize = 100)
         {
-            var messages = await this.messageRepository.GetPaged(pageNumber, pageSize, m => m.ChannelId == channelId);
-
-            return new ObjectResult(messages);
+            return await this.messageRepository.GetPaged(pageNumber, pageSize, m => m.ChannelId == channelId);
         }
 
         [HttpPost]

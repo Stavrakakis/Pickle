@@ -11,6 +11,11 @@ namespace Pickle.Data.Repositories
     {
         private static List<T> objects = new List<T>();
 
+        public void Dispose()
+        {
+            
+        }
+
         public Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, Expression<Func<T, bool>> filter = null)
         {
             var pagedResults = objects.Filter(filter)

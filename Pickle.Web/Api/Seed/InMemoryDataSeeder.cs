@@ -11,9 +11,9 @@ namespace Pickle.Web.Api.Seed
 
             hubRepository.Insert(new Hub("scottlogic", "Scott Logic", new List<Channel>()));
 
-            channelRepository.Insert(new Channel("bristol", "scottlogic", "Bristol", new List<string>()));
-            channelRepository.Insert(new Channel("edinburgh", "scottlogic", "Edinburgh", new List<string>()));
-            channelRepository.Insert(new Channel("newcastle", "scottlogic", "Newcastle", new List<string>()));
+            channelRepository.Insert(new Channel("bristol", "scottlogic", "Bristol"));
+            channelRepository.Insert(new Channel("edinburgh", "scottlogic", "Edinburgh"));
+            channelRepository.Insert(new Channel("newcastle", "scottlogic", "Newcastle"));
 
             messageRepository.Insert(new ChatMessage("nico", "bristol", "Bristol message"));
             messageRepository.Insert(new ChatMessage("nico", "edinburgh", "Edinburgh message"));

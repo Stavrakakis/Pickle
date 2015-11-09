@@ -7,10 +7,14 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "Pickle.Data": "1.0.0-*",
-    "PagedList": "1.17.0"
+    "PagedList": "1.17.0",
+    "EntityFramework.Commands": "7.0.0-beta5",
+    "EntityFramework.SqlServer": "7.0.0-beta5",
+    "Pickle.Data": "1.0.0-*"
   },
-
+  "commands": {
+    "ef": "EntityFramework.Commands"
+  },
   "frameworks": {
     "dnx451": { }
   }

@@ -1,0 +1,8 @@
+﻿{
+  "AppSettings": {
+    "SiteTitle": "Pickle"
+  },
+  "Data": {
+    "ConnectionString": "Server=(localdb)\\v11.0;Database=Pickle;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}

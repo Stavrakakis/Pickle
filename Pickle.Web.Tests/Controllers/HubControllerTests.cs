@@ -5,6 +5,7 @@ using Pickle.Api.Controllers;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
 using Pickle.Tests.Common.Attributes;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -38,7 +39,7 @@ namespace Pickle.Web.Tests.Controllers
 
             var result = await controllerUnderTest.GetPagedHubs(1, 100);
 
-            Assert.IsType<ObjectResult>(result);
+            Assert.IsAssignableFrom<IPagedList<Hub>>(result);
         }
     }
 }
