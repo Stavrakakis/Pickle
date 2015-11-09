@@ -63,7 +63,8 @@ namespace Pickle.Api
                     AuthenticationOptions = new IdentityServer3.Core.Configuration.AuthenticationOptions
                     {
                         EnableLocalLogin = false,
-                        IdentityProviders = ConfigureIdentityProviders
+                        IdentityProviders = ConfigureIdentityProviders,
+                        SignInMessageThreshold = 5
                     }
                 });
             });

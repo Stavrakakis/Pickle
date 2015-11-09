@@ -17,11 +17,10 @@
   display: block;
   padding: 0.5rem 0 0.5rem 0.5rem;
   transition: 0.3s ease all;
+  cursor: pointer;
 }
 #pickle-channel-panel ul li.p-active {
-  /*background-color: #fff;
-            color: #333;*/
-  border-right: solid 15px #fff;
+  color: tomato;
 }
 .p-chat-panel-container {
   background-color: #fff;

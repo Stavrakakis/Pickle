@@ -55,13 +55,13 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var $ = __webpack_require__(/*! jquery */ 3);
-	__webpack_require__(/*! ./App.less */ 4);
-	var ChannelStore_1 = __webpack_require__(/*! ./Channels/ChannelStore */ 8);
-	var ChannelStoreEvents_1 = __webpack_require__(/*! ./Channels/ChannelStoreEvents */ 20);
-	var HubStore_1 = __webpack_require__(/*! ./Hubs/HubStore */ 22);
-	var ChannelPanel_1 = __webpack_require__(/*! ./ChannelPanel/ChannelPanel */ 23);
-	var ChatPanel_1 = __webpack_require__(/*! ./ChatPanel/ChatPanel */ 26);
+	var $ = __webpack_require__(/*! jquery */ 4);
+	__webpack_require__(/*! ./App.less */ 5);
+	var ChannelStore_1 = __webpack_require__(/*! ./Channels/ChannelStore */ 9);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ./Channels/ChannelStoreEvents */ 21);
+	var HubStore_1 = __webpack_require__(/*! ./Hubs/HubStore */ 23);
+	var ChannelPanel_1 = __webpack_require__(/*! ./ChannelPanel/ChannelPanel */ 24);
+	var ChatPanel_1 = __webpack_require__(/*! ./ChatPanel/ChatPanel */ 27);
 	var ChatAppProps = (function () {
 	    function ChatAppProps() {
 	    }
@@ -124,7 +124,8 @@
 /***/ },
 /* 1 */,
 /* 2 */,
-/* 3 */
+/* 3 */,
+/* 4 */
 /*!********************!*\
   !*** external "$" ***!
   \********************/
@@ -133,7 +134,7 @@
 	module.exports = $;
 
 /***/ },
-/* 4 */
+/* 5 */
 /*!**********************!*\
   !*** ./app/App.less ***!
   \**********************/
@@ -142,10 +143,10 @@
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 5 */,
 /* 6 */,
 /* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */
 /*!**************************************!*\
   !*** ./app/Channels/ChannelStore.ts ***!
   \**************************************/
@@ -161,14 +162,14 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var events = __webpack_require__(/*! events */ 9);
-	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 10);
-	var SendMessageAction_1 = __webpack_require__(/*! ./SendMessageAction */ 15);
-	var ChannelActivationAction_1 = __webpack_require__(/*! ./ChannelActivationAction */ 17);
-	var NewChannelAction_1 = __webpack_require__(/*! ./NewChannelAction */ 18);
-	var Channel_1 = __webpack_require__(/*! ./Channel */ 19);
-	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 20);
-	var ChatMessageApiModel_1 = __webpack_require__(/*! ./Models/ChatMessageApiModel */ 21);
+	var events = __webpack_require__(/*! events */ 10);
+	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 11);
+	var SendMessageAction_1 = __webpack_require__(/*! ./SendMessageAction */ 16);
+	var ChannelActivationAction_1 = __webpack_require__(/*! ./ChannelActivationAction */ 18);
+	var NewChannelAction_1 = __webpack_require__(/*! ./NewChannelAction */ 19);
+	var Channel_1 = __webpack_require__(/*! ./Channel */ 20);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 21);
+	var ChatMessageApiModel_1 = __webpack_require__(/*! ./Models/ChatMessageApiModel */ 22);
 	var ChannelStore = (function (_super) {
 	    __extends(ChannelStore, _super);
 	    function ChannelStore($) {
@@ -252,7 +253,7 @@
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /*!****************************!*\
   !*** ./~/events/events.js ***!
   \****************************/
@@ -559,7 +560,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /*!**************************************!*\
   !*** ./app/Dispatcher/Dispatcher.ts ***!
   \**************************************/
@@ -571,7 +572,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var flux = __webpack_require__(/*! flux */ 11);
+	var flux = __webpack_require__(/*! flux */ 12);
 	var Dispatcher = (function (_super) {
 	    __extends(Dispatcher, _super);
 	    function Dispatcher() {
@@ -585,7 +586,7 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /*!*************************!*\
   !*** ./~/flux/index.js ***!
   \*************************/
@@ -600,11 +601,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 	
-	module.exports.Dispatcher = __webpack_require__(/*! ./lib/Dispatcher */ 12);
+	module.exports.Dispatcher = __webpack_require__(/*! ./lib/Dispatcher */ 13);
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /*!**********************************!*\
   !*** ./~/flux/lib/Dispatcher.js ***!
   \**********************************/
@@ -629,7 +630,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var invariant = __webpack_require__(/*! fbjs/lib/invariant */ 14);
+	var invariant = __webpack_require__(/*! fbjs/lib/invariant */ 15);
 	
 	var _prefix = 'ID_';
 	
@@ -841,10 +842,10 @@
 	})();
 	
 	module.exports = Dispatcher;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 13)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 14)))
 
 /***/ },
-/* 13 */
+/* 14 */
 /*!**********************************************************!*\
   !*** (webpack)/~/node-libs-browser/~/process/browser.js ***!
   \**********************************************************/
@@ -944,7 +945,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /*!****************************************!*\
   !*** ./~/flux/~/fbjs/lib/invariant.js ***!
   \****************************************/
@@ -999,10 +1000,10 @@
 	};
 	
 	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 13)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 14)))
 
 /***/ },
-/* 15 */
+/* 16 */
 /*!*******************************************!*\
   !*** ./app/Channels/SendMessageAction.ts ***!
   \*******************************************/
@@ -1013,7 +1014,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 16);
+	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 17);
 	var SendMessageAction = (function (_super) {
 	    __extends(SendMessageAction, _super);
 	    function SendMessageAction(channel, message) {
@@ -1042,7 +1043,7 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /*!*******************************!*\
   !*** ./app/Actions/Action.ts ***!
   \*******************************/
@@ -1058,7 +1059,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /*!*************************************************!*\
   !*** ./app/Channels/ChannelActivationAction.ts ***!
   \*************************************************/
@@ -1069,7 +1070,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 16);
+	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 17);
 	var ChannelActivationEvent = (function (_super) {
 	    __extends(ChannelActivationEvent, _super);
 	    function ChannelActivationEvent(channel) {
@@ -1090,7 +1091,7 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /*!******************************************!*\
   !*** ./app/Channels/NewChannelAction.ts ***!
   \******************************************/
@@ -1101,7 +1102,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 16);
+	var Action_1 = __webpack_require__(/*! ../Actions/Action */ 17);
 	var NewChannelAction = (function (_super) {
 	    __extends(NewChannelAction, _super);
 	    function NewChannelAction(channel) {
@@ -1122,7 +1123,7 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /*!*********************************!*\
   !*** ./app/Channels/Channel.ts ***!
   \*********************************/
@@ -1165,7 +1166,7 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /*!********************************************!*\
   !*** ./app/Channels/ChannelStoreEvents.ts ***!
   \********************************************/
@@ -1184,7 +1185,7 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /*!****************************************************!*\
   !*** ./app/Channels/Models/ChatMessageApiModel.ts ***!
   \****************************************************/
@@ -1234,7 +1235,7 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /*!******************************!*\
   !*** ./app/Hubs/HubStore.ts ***!
   \******************************/
@@ -1250,8 +1251,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var events = __webpack_require__(/*! events */ 9);
-	var $ = __webpack_require__(/*! jquery */ 3);
+	var events = __webpack_require__(/*! events */ 10);
+	var $ = __webpack_require__(/*! jquery */ 4);
 	var HubStore = (function (_super) {
 	    __extends(HubStore, _super);
 	    function HubStore() {
@@ -1271,7 +1272,7 @@
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /*!*******************************************!*\
   !*** ./app/ChannelPanel/ChannelPanel.tsx ***!
   \*******************************************/
@@ -1284,8 +1285,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 20);
-	var ChannelListItem_1 = __webpack_require__(/*! ./ChannelListItem */ 24);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 21);
+	var ChannelListItem_1 = __webpack_require__(/*! ./ChannelListItem */ 25);
 	var ChannelPanelProps = (function () {
 	    function ChannelPanelProps() {
 	    }
@@ -1352,7 +1353,7 @@
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /*!**********************************************!*\
   !*** ./app/ChannelPanel/ChannelListItem.tsx ***!
   \**********************************************/
@@ -1365,9 +1366,9 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var classNames = __webpack_require__(/*! classnames */ 25);
-	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 10);
-	var ChannelActivationAction_1 = __webpack_require__(/*! ../Channels/ChannelActivationAction */ 17);
+	var classNames = __webpack_require__(/*! classnames */ 26);
+	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 11);
+	var ChannelActivationAction_1 = __webpack_require__(/*! ../Channels/ChannelActivationAction */ 18);
 	var ChannelListItemProps = (function () {
 	    function ChannelListItemProps() {
 	    }
@@ -1399,7 +1400,7 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -1456,7 +1457,7 @@
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /*!*************************************!*\
   !*** ./app/ChatPanel/ChatPanel.tsx ***!
   \*************************************/
@@ -1468,10 +1469,10 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var $ = __webpack_require__(/*! jquery */ 3);
-	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 10);
-	var SendMessageAction_1 = __webpack_require__(/*! ../Channels/SendMessageAction */ 15);
-	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 20);
+	var $ = __webpack_require__(/*! jquery */ 4);
+	var Dispatcher_1 = __webpack_require__(/*! ../Dispatcher/Dispatcher */ 11);
+	var SendMessageAction_1 = __webpack_require__(/*! ../Channels/SendMessageAction */ 16);
+	var ChannelStoreEvents_1 = __webpack_require__(/*! ../Channels/ChannelStoreEvents */ 21);
 	var ChatPanelProps = (function () {
 	    function ChatPanelProps() {
 	    }
