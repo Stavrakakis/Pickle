@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
-using System.Collections.Generic;
 using Pickle.Web.Api.Providers;
 using System;
 

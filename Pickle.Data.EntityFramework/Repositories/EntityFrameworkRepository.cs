@@ -7,7 +7,6 @@ using Microsoft.Data.Entity;
 using Pickle.Data.EntityFramework.Context;
 using System.Linq;
 using Pickle.Data.Mapping;
-using Pickle.Data.Extensions;
 
 namespace Pickle.Data.EntityFramework.Repositories
 {
@@ -24,7 +23,10 @@ namespace Pickle.Data.EntityFramework.Repositories
             this.dbSet = context.Set<TDto>();
         }
 
-        public Task<IPagedList<TDomain>> GetPaged(int pageNumber = 1, int pageSize = 100, Expression<Func<TDomain, bool>> filter = null)
+        public Task<IPagedList<TDomain>> GetPaged(
+            int pageNumber = 1, int pageSize = 100,
+            Expression<Func<TDomain, bool>> filter = null, 
+            Func<TDomain, object> orderBy = null)
         {
             var items = this.dbSet.AsQueryable();
 
@@ -33,9 +35,7 @@ namespace Pickle.Data.EntityFramework.Repositories
                 var dtoFilter = MappingHelper.ConvertExpression<TDomain, TDto>(filter);
                 items = items.Where(dtoFilter);
             }
-
-
-
+            
             var mapped = items.ToList().Select(o => this.mapper.Map<TDto, TDomain>(o));
 
             return Task.FromResult(mapped.ToPagedList(pageNumber, pageSize));

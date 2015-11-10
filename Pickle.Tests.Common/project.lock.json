@@ -1,9 +1,10 @@
 {
   "locked": false,
-  "version": -9996,
+  "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "autofixture/3.36.9": {
+      "autofixture/3.36.10": {
+        "type": "package",
         "compile": {
           "lib/net40/Ploeh.AutoFixture.dll": {}
         },
@@ -11,9 +12,10 @@
           "lib/net40/Ploeh.AutoFixture.dll": {}
         }
       },
-      "AutoFixture.AutoMoq/3.36.9": {
+      "AutoFixture.AutoMoq/3.36.10": {
+        "type": "package",
         "dependencies": {
-          "autofixture": "3.36.9",
+          "autofixture": "3.36.10",
           "moq": "4.1.1308.2120"
         },
         "compile": {
@@ -23,40 +25,30 @@
           "lib/net40/Ploeh.AutoFixture.AutoMoq.dll": {}
         }
       },
-      "AutoFixture.Xunit2/3.36.9": {
+      "AutoFixture.Xunit2/3.36.10": {
+        "type": "package",
         "dependencies": {
-          "autofixture": "3.36.9",
-          "xunit.core": "[2.0, 3.0)"
+          "autofixture": "3.36.10",
+          "xunit.core": "[2.0.0, 3.0.0)"
         },
         "compile": {
           "lib/net45/Ploeh.AutoFixture.Xunit2.dll": {}
         },
         "runtime": {
           "lib/net45/Ploeh.AutoFixture.Xunit2.dll": {}
-        }
-      },
-      "AutoMoq/1.6.2.0": {
-        "dependencies": {
-          "Moq": "4.0.10827",
-          "Unity": "2.0"
-        },
-        "compile": {
-          "lib/net35/AutoMoq.dll": {}
-        },
-        "runtime": {
-          "lib/net35/AutoMoq.dll": {}
         }
       },
       "Microsoft.AspNet.Http.Abstractions/1.0.0-beta8": {
+        "type": "package",
         "dependencies": {
           "Microsoft.AspNet.Http.Features": "1.0.0-beta8",
           "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8"
         },
         "frameworkAssemblies": [
+          "Microsoft.CSharp",
           "mscorlib",
           "System",
-          "System.Core",
-          "Microsoft.CSharp"
+          "System.Core"
         ],
         "compile": {
           "lib/dnx451/Microsoft.AspNet.Http.Abstractions.dll": {}
@@ -66,14 +58,15 @@
         }
       },
       "Microsoft.AspNet.Http.Features/1.0.0-beta8": {
+        "type": "package",
         "dependencies": {
           "Microsoft.Framework.Primitives": "1.0.0-beta8"
         },
         "frameworkAssemblies": [
+          "Microsoft.CSharp",
           "mscorlib",
           "System",
-          "System.Core",
-          "Microsoft.CSharp"
+          "System.Core"
         ],
         "compile": {
           "lib/dnx451/Microsoft.AspNet.Http.Features.dll": {}
@@ -83,11 +76,12 @@
         }
       },
       "Microsoft.Framework.Primitives/1.0.0-beta8": {
+        "type": "package",
         "frameworkAssemblies": [
+          "Microsoft.CSharp",
           "mscorlib",
           "System",
-          "System.Core",
-          "Microsoft.CSharp"
+          "System.Core"
         ],
         "compile": {
           "lib/dnx451/Microsoft.Framework.Primitives.dll": {}
@@ -97,11 +91,12 @@
         }
       },
       "Microsoft.Framework.WebEncoders.Core/1.0.0-beta8": {
+        "type": "package",
         "frameworkAssemblies": [
+          "Microsoft.CSharp",
           "mscorlib",
           "System",
-          "System.Core",
-          "Microsoft.CSharp"
+          "System.Core"
         ],
         "compile": {
           "lib/dnx451/Microsoft.Framework.WebEncoders.Core.dll": {}
@@ -110,7 +105,8 @@
           "lib/dnx451/Microsoft.Framework.WebEncoders.Core.dll": {}
         }
       },
-      "Moq/4.2.1510.2205": {
+      "moq/4.1.1308.2120": {
+        "type": "package",
         "compile": {
           "lib/net40/Moq.dll": {}
         },
@@ -119,36 +115,16 @@
         }
       },
       "Newtonsoft.Json/7.0.1": {
+        "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
           "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Unity/2.0": {
-        "compile": {
-          "lib/20/Microsoft.Practices.ServiceLocation.dll": {},
-          "lib/20/Microsoft.Practices.Unity.Configuration.dll": {},
-          "lib/20/Microsoft.Practices.Unity.dll": {},
-          "lib/20/Microsoft.Practices.Unity.Interception.Configuration.dll": {},
-          "lib/20/Microsoft.Practices.Unity.Interception.dll": {}
-        },
-        "runtime": {
-          "lib/20/Microsoft.Practices.ServiceLocation.dll": {},
-          "lib/20/Microsoft.Practices.Unity.Configuration.dll": {},
-          "lib/20/Microsoft.Practices.Unity.dll": {},
-          "lib/20/Microsoft.Practices.Unity.Interception.Configuration.dll": {},
-          "lib/20/Microsoft.Practices.Unity.Interception.dll": {}
-        }
-      },
-      "xunit/2.1.0-beta3-build3029": {
-        "dependencies": {
-          "xunit.core": "[2.1.0-beta3-build3029]",
-          "xunit.assert": "[2.1.0-beta3-build3029]"
         }
       },
       "xunit.abstractions/2.0.0": {
+        "type": "package",
         "compile": {
           "lib/net35/xunit.abstractions.dll": {}
         },
@@ -156,89 +132,369 @@
           "lib/net35/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-beta3-build3029": {
-        "compile": {
-          "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.dll": {}
-        }
-      },
-      "xunit.core/2.1.0-beta3-build3029": {
+      "xunit.core/2.0.0": {
+        "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-beta3-build3029]",
-          "xunit.extensibility.execution": "[2.1.0-beta3-build3029]"
+          "xunit.extensibility.core": "[2.0.0]"
         }
       },
-      "xunit.extensibility.core/2.1.0-beta3-build3029": {
+      "xunit.extensibility.core/2.0.0": {
+        "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
         },
         "compile": {
-          "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {}
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {}
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.tdnet.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.utility.desktop.dll": {}
+        }
+      }
+    },
+    "DNX,Version=v4.5.1/win7-x86": {
+      "autofixture/3.36.10": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Ploeh.AutoFixture.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Ploeh.AutoFixture.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-beta3-build3029": {
+      "AutoFixture.AutoMoq/3.36.10": {
+        "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-beta3-build3029]"
+          "autofixture": "3.36.10",
+          "moq": "4.1.1308.2120"
         },
         "compile": {
-          "lib/dnx451/xunit.execution.dnx.dll": {}
+          "lib/net40/Ploeh.AutoFixture.AutoMoq.dll": {}
         },
         "runtime": {
-          "lib/dnx451/xunit.execution.dnx.dll": {}
+          "lib/net40/Ploeh.AutoFixture.AutoMoq.dll": {}
+        }
+      },
+      "AutoFixture.Xunit2/3.36.10": {
+        "type": "package",
+        "dependencies": {
+          "autofixture": "3.36.10",
+          "xunit.core": "[2.0.0, 3.0.0)"
+        },
+        "compile": {
+          "lib/net45/Ploeh.AutoFixture.Xunit2.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Ploeh.AutoFixture.Xunit2.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Features": "1.0.0-beta8",
+          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Features/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Primitives": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.AspNet.Http.Features.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.Framework.Primitives/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Framework.WebEncoders.Core/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.WebEncoders.Core.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.WebEncoders.Core.dll": {}
+        }
+      },
+      "moq/4.1.1308.2120": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Moq.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Moq.dll": {}
+        }
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "xunit.abstractions/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/xunit.abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net35/xunit.abstractions.dll": {}
+        }
+      },
+      "xunit.core/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "xunit.extensibility.core": "[2.0.0]"
+        }
+      },
+      "xunit.extensibility.core/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "xunit.abstractions": "[2.0.0]"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.tdnet.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.utility.desktop.dll": {}
+        }
+      }
+    },
+    "DNX,Version=v4.5.1/win7-x64": {
+      "autofixture/3.36.10": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Ploeh.AutoFixture.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Ploeh.AutoFixture.dll": {}
+        }
+      },
+      "AutoFixture.AutoMoq/3.36.10": {
+        "type": "package",
+        "dependencies": {
+          "autofixture": "3.36.10",
+          "moq": "4.1.1308.2120"
+        },
+        "compile": {
+          "lib/net40/Ploeh.AutoFixture.AutoMoq.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Ploeh.AutoFixture.AutoMoq.dll": {}
+        }
+      },
+      "AutoFixture.Xunit2/3.36.10": {
+        "type": "package",
+        "dependencies": {
+          "autofixture": "3.36.10",
+          "xunit.core": "[2.0.0, 3.0.0)"
+        },
+        "compile": {
+          "lib/net45/Ploeh.AutoFixture.Xunit2.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Ploeh.AutoFixture.Xunit2.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Http.Features": "1.0.0-beta8",
+          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.AspNet.Http.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Http.Features/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Primitives": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.AspNet.Http.Features.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.AspNet.Http.Features.dll": {}
+        }
+      },
+      "Microsoft.Framework.Primitives/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Framework.WebEncoders.Core/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.WebEncoders.Core.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.WebEncoders.Core.dll": {}
+        }
+      },
+      "moq/4.1.1308.2120": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Moq.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Moq.dll": {}
+        }
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "xunit.abstractions/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/xunit.abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net35/xunit.abstractions.dll": {}
+        }
+      },
+      "xunit.core/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "xunit.extensibility.core": "[2.0.0]"
+        }
+      },
+      "xunit.extensibility.core/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "xunit.abstractions": "[2.0.0]"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.tdnet.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.utility.desktop.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "autofixture/3.36.9": {
-      "sha512": "t/xlJhvdap+cwJb8z4Lu7qtCi5ogvYEf6Eb3PUjjmXDvfVKcjBkMKmAI4tFmSVoHtLPc5kHbo2+6zkwNpw5Ktg==",
+    "autofixture/3.36.10": {
+      "type": "package",
+      "sha512": "Uua2WpOnK2DD3uFpoSiMi2+1xdx6SRy5bvTNNl0GrMcb3sR02mxX0QbOivVx31ycJi1tM+xRCQVBe2jxbjiaCQ==",
       "files": [
-        "autofixture.3.36.9.nupkg",
-        "autofixture.3.36.9.nupkg.sha512",
+        "autofixture.3.36.10.nupkg",
+        "autofixture.3.36.10.nupkg.sha512",
         "autofixture.nuspec",
         "lib/net40/Ploeh.AutoFixture.dll",
         "lib/net40/Ploeh.AutoFixture.XML",
         "tools/Install.ps1"
       ]
     },
-    "AutoFixture.AutoMoq/3.36.9": {
-      "sha512": "T+b4oAyXyEXhMiFUdc8hKamakoy5nOEjD8jEJKOE3aqc/X7dcNf92pRtqTIUWWX1EUbNTdPdrXb9GjzmeUeHng==",
+    "AutoFixture.AutoMoq/3.36.10": {
+      "type": "package",
+      "sha512": "LKLYVU3+BzRYoJUBg6gwWyaSt54nXlyUWBi8dplWmFjCDRLgJCx+sx8v265H3ZjGscOHcGKDZKNNwkhc2yCUlg==",
       "files": [
-        "AutoFixture.AutoMoq.3.36.9.nupkg",
-        "AutoFixture.AutoMoq.3.36.9.nupkg.sha512",
+        "AutoFixture.AutoMoq.3.36.10.nupkg",
+        "AutoFixture.AutoMoq.3.36.10.nupkg.sha512",
         "AutoFixture.AutoMoq.nuspec",
         "lib/net40/Ploeh.AutoFixture.AutoMoq.dll",
         "lib/net40/Ploeh.AutoFixture.AutoMoq.XML",
         "tools/Install.ps1"
       ]
     },
-    "AutoFixture.Xunit2/3.36.9": {
-      "sha512": "uP6QnWi+AXtCzOyECmRFc27T7ADf9fOTVxVTT1FC17H1zgvxLgbOyk0QUhnqVhh1ygPX+TsZDz9GlixBDRpzAA==",
+    "AutoFixture.Xunit2/3.36.10": {
+      "type": "package",
+      "sha512": "ZPq9D8QLuez5rpYKT+SrwUrUiQzw0+elG8XHqdTAbg2njGyc6NLbVDQ26Q1LfOtt7OEDuh3JLv0hTl0LwSxx3w==",
       "files": [
-        "AutoFixture.Xunit2.3.36.9.nupkg",
-        "AutoFixture.Xunit2.3.36.9.nupkg.sha512",
+        "AutoFixture.Xunit2.3.36.10.nupkg",
+        "AutoFixture.Xunit2.3.36.10.nupkg.sha512",
         "AutoFixture.Xunit2.nuspec",
         "lib/net45/Ploeh.AutoFixture.Xunit2.dll",
         "lib/net45/Ploeh.AutoFixture.Xunit2.XML",
         "tools/Install.ps1"
       ]
     },
-    "AutoMoq/1.6.2.0": {
-      "sha512": "12sfFSvBl+DwJ6gOE6cv1XT6y2WBuYCWg7EV0xf2s4N6ILYlDW6BpBR9pX5lMHRGKhfAbc5RsTGh6qickIiKjA==",
-      "files": [
-        "AutoMoq.1.6.2.0.nupkg",
-        "AutoMoq.1.6.2.0.nupkg.sha512",
-        "AutoMoq.nuspec",
-        "content/License.txt",
-        "lib/net35/AutoMoq.dll"
-      ]
-    },
     "Microsoft.AspNet.Http.Abstractions/1.0.0-beta8": {
+      "type": "package",
       "serviceable": true,
       "sha512": "/ACoXcPQcqsNmHLN+ZvlgIGn/oRrIFOKO6its0EJLLRTq/qhcAgbTPhweEJlM8DtE56Q12xEO/+DyeSh/ZBldg==",
       "files": [
@@ -252,6 +508,7 @@
       ]
     },
     "Microsoft.AspNet.Http.Features/1.0.0-beta8": {
+      "type": "package",
       "serviceable": true,
       "sha512": "fXUDl/0HSqgJFXE4MBjJQG3CQGwnYu6h2ALnnhOi66uf1379dngAQUyFJTUNQC9u+raRV8ocEsTRfyMq+0BBKQ==",
       "files": [
@@ -265,6 +522,7 @@
       ]
     },
     "Microsoft.Framework.Primitives/1.0.0-beta8": {
+      "type": "package",
       "serviceable": true,
       "sha512": "tCmbjiE+AgwTfikByvv0xEsnA/z5SOAecZT6gb7EbjuanlzzCUyqTSnvi5SRLGBQsTNKjLiQFFlVOeWHZPOcDg==",
       "files": [
@@ -282,6 +540,7 @@
       ]
     },
     "Microsoft.Framework.WebEncoders.Core/1.0.0-beta8": {
+      "type": "package",
       "serviceable": true,
       "sha512": "Y+UN+pzp/Ac+eidW82i3DDB+1IjfAYF33721SRA2E3Tc+KNgcbbQWCQrD1mq1qmKz+nzBgc8P/etWMQ7vyOMlw==",
       "files": [
@@ -296,21 +555,23 @@
         "Microsoft.Framework.WebEncoders.Core.nuspec"
       ]
     },
-    "Moq/4.2.1510.2205": {
-      "sha512": "nqMoHSP5f04/kyKbRUjGgzqtIb5LUUs0H6llHOkQJ5Takx4Ezr2H+59pkIgxkmpbHAcGmc/KsyRZUs1ehnPYag==",
+    "moq/4.1.1308.2120": {
+      "type": "package",
+      "sha512": "HyvoHvSWedidancoSBeyNcASfq7y8Bm5o0/tFsSfCxSWp162zJ/ld1q0PpP2HeAGuJAJyU1TgA/yJhrjXO8Cyg==",
       "files": [
         "lib/net35/Moq.dll",
         "lib/net35/Moq.xml",
         "lib/net40/Moq.dll",
         "lib/net40/Moq.xml",
-        "lib/sl5/Moq.Silverlight.dll",
-        "lib/sl5/Moq.Silverlight.xml",
-        "Moq.4.2.1510.2205.nupkg",
-        "Moq.4.2.1510.2205.nupkg.sha512",
-        "Moq.nuspec"
+        "lib/sl4/Moq.Silverlight.dll",
+        "lib/sl4/Moq.Silverlight.xml",
+        "moq.4.1.1308.2120.nupkg",
+        "moq.4.1.1308.2120.nupkg.sha512",
+        "moq.nuspec"
       ]
     },
     "Newtonsoft.Json/7.0.1": {
+      "type": "package",
       "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
       "files": [
         "lib/net20/Newtonsoft.Json.dll",
@@ -331,35 +592,8 @@
         "tools/install.ps1"
       ]
     },
-    "Unity/2.0": {
-      "sha512": "gZ7jSKJH1mqhMtkL65h0qlZHbyQOEXHfgw6bjsh8NCIfDHeO80AyE30bmNXYWJRqTLMmWs4jQr+YibrNMkcZ9A==",
-      "files": [
-        "lib/20/Microsoft.Practices.ServiceLocation.dll",
-        "lib/20/Microsoft.Practices.Unity.Configuration.dll",
-        "lib/20/Microsoft.Practices.Unity.Configuration.xml",
-        "lib/20/Microsoft.Practices.Unity.dll",
-        "lib/20/Microsoft.Practices.Unity.Interception.Configuration.dll",
-        "lib/20/Microsoft.Practices.Unity.Interception.Configuration.xml",
-        "lib/20/Microsoft.Practices.Unity.Interception.dll",
-        "lib/20/Microsoft.Practices.Unity.Interception.xml",
-        "lib/20/Microsoft.Practices.Unity.xml",
-        "lib/SL30/Microsoft.Practices.ServiceLocation.dll",
-        "lib/SL30/Microsoft.Practices.Unity.Silverlight.dll",
-        "lib/SL30/Microsoft.Practices.Unity.Silverlight.xml",
-        "Unity.2.0.nupkg",
-        "Unity.2.0.nupkg.sha512",
-        "Unity.nuspec"
-      ]
-    },
-    "xunit/2.1.0-beta3-build3029": {
-      "sha512": "NMFXV0ePe/GrfhMSPGAlWmiUZCzjaatpdAGcavf2B6vYTRyMTpyJT01LI6jemMV/VSDXLrtHp0Ov9xZyR1cLLg==",
-      "files": [
-        "xunit.2.1.0-beta3-build3029.nupkg",
-        "xunit.2.1.0-beta3-build3029.nupkg.sha512",
-        "xunit.nuspec"
-      ]
-    },
     "xunit.abstractions/2.0.0": {
+      "type": "package",
       "sha512": "NAdxKQRzuLnCZ0g++x6i87/8rMBpQoRiRlRNLAqfODm2zJPbteHRoSER3DXfxnqrHXyBJT8rFaZ8uveBeQyaMA==",
       "files": [
         "lib/net35/xunit.abstractions.dll",
@@ -371,100 +605,58 @@
         "xunit.abstractions.nuspec"
       ]
     },
-    "xunit.assert/2.1.0-beta3-build3029": {
-      "sha512": "AMS7Fv77DayXVRCBMmVEDwOXPcbxk8dCBA/iACsve+6+UQqopMtNyAynyIcXPFRK/peeitUKID4ChOXWisJmUw==",
+    "xunit.core/2.0.0": {
+      "type": "package",
+      "sha512": "nL+V/XosvtydF8qwJWRjGQJEzwJpXcEw4AtYq+JtM7FIsLnolB+lG8iGS+N2V1Jo1FOnFj0Wtte6TAuTUtUh1g==",
       "files": [
-        "xunit.assert.2.1.0-beta3-build3029.nupkg",
-        "xunit.assert.2.1.0-beta3-build3029.nupkg.sha512",
-        "xunit.assert.nuspec",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.dll",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.pdb",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.xml"
-      ]
-    },
-    "xunit.core/2.1.0-beta3-build3029": {
-      "sha512": "uDUBbwZSRx226BMwj6VylzXQPVpEIelNIulT+LxbSEH52y2a4btR9d5ptQmkSVjmJXP5/hGCc4cu1DSCu0pgUA==",
-      "files": [
-        "xunit.core.2.1.0-beta3-build3029.nupkg",
-        "xunit.core.2.1.0-beta3-build3029.nupkg.sha512",
-        "xunit.core.nuspec",
+        "build/_Desktop/xunit.execution.desktop.dll",
         "build/monoandroid/xunit.core.props",
         "build/monoandroid/xunit.execution.MonoAndroid.dll",
         "build/monotouch/xunit.core.props",
         "build/monotouch/xunit.execution.MonoTouch.dll",
-        "build/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.props",
+        "build/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.props",
         "build/portable-win81+wpa81/xunit.core.props",
         "build/portable-win81+wpa81/xunit.core.targets",
         "build/portable-win81+wpa81/xunit.execution.universal.dll",
         "build/portable-win81+wpa81/xunit.execution.universal.pri",
+        "build/win8/xunit.core.props",
+        "build/win8/xunit.core.targets",
+        "build/win8/xunit.execution.win8.dll",
         "build/wp8/xunit.core.props",
         "build/wp8/xunit.core.targets",
         "build/wp8/xunit.execution.wp8.dll",
         "build/Xamarin.iOS/xunit.core.props",
         "build/Xamarin.iOS/xunit.execution.iOS-Universal.dll",
-        "build/_Desktop/xunit.execution.desktop.dll"
+        "xunit.core.2.0.0.nupkg",
+        "xunit.core.2.0.0.nupkg.sha512",
+        "xunit.core.nuspec"
       ]
     },
-    "xunit.extensibility.core/2.1.0-beta3-build3029": {
-      "sha512": "lsPro5U3NLasHI/RwqjKzXiRlh9N0IOlR3cluwXYVtihXbGtySeSnU/Fh5MTcWYxh+MVpoNop5zDD0/A2nrHsA==",
+    "xunit.extensibility.core/2.0.0": {
+      "type": "package",
+      "sha512": "QDmEvruvqIfnzraEjPq0tcDBEhrLuSbkLY38xFnrv+H2Q6kHULq1l2nyj5W/xrY2Om3wmkaSs4FMaDXPmK7QCA==",
       "files": [
-        "xunit.extensibility.core.2.1.0-beta3-build3029.nupkg",
-        "xunit.extensibility.core.2.1.0-beta3-build3029.nupkg.sha512",
-        "xunit.extensibility.core.nuspec",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll.tdnet",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.pdb",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.xml",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.tdnet.dll",
-        "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.utility.desktop.dll"
-      ]
-    },
-    "xunit.extensibility.execution/2.1.0-beta3-build3029": {
-      "sha512": "WuUYamK4RHrHxihvNuX7NkryMhQrpH1+ziJ/mPIQbm18zevSgre8BwUuVZvmLZa8uVob3xS4dvAah2+HCgLiXg==",
-      "files": [
-        "xunit.extensibility.execution.2.1.0-beta3-build3029.nupkg",
-        "xunit.extensibility.execution.2.1.0-beta3-build3029.nupkg.sha512",
-        "xunit.extensibility.execution.nuspec",
-        "lib/dnx451/xunit.execution.dnx.dll",
-        "lib/dnx451/xunit.execution.dnx.pdb",
-        "lib/dnx451/xunit.execution.dnx.xml",
-        "lib/dnxcore50/xunit.execution.dnx.dll",
-        "lib/dnxcore50/xunit.execution.dnx.pdb",
-        "lib/dnxcore50/xunit.execution.dnx.xml",
-        "lib/monoandroid/xunit.execution.MonoAndroid.dll",
-        "lib/monoandroid/xunit.execution.MonoAndroid.pdb",
-        "lib/monoandroid/xunit.execution.MonoAndroid.xml",
-        "lib/monotouch/xunit.execution.MonoTouch.dll",
-        "lib/monotouch/xunit.execution.MonoTouch.pdb",
-        "lib/monotouch/xunit.execution.MonoTouch.xml",
-        "lib/net45/xunit.execution.desktop.dll",
-        "lib/net45/xunit.execution.desktop.pdb",
-        "lib/net45/xunit.execution.desktop.xml",
-        "lib/portable-wpa81+win81/xunit.execution.universal.dll",
-        "lib/portable-wpa81+win81/xunit.execution.universal.pdb",
-        "lib/portable-wpa81+win81/xunit.execution.universal.pri",
-        "lib/portable-wpa81+win81/xunit.execution.universal.xml",
-        "lib/wp8/xunit.execution.wp8.dll",
-        "lib/wp8/xunit.execution.wp8.pdb",
-        "lib/wp8/xunit.execution.wp8.xml",
-        "lib/Xamarin.iOS/xunit.execution.iOS-Universal.dll",
-        "lib/Xamarin.iOS/xunit.execution.iOS-Universal.pdb",
-        "lib/Xamarin.iOS/xunit.execution.iOS-Universal.xml"
+        "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll",
+        "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll.tdnet",
+        "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.pdb",
+        "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.xml",
+        "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.tdnet.dll",
+        "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.utility.desktop.dll",
+        "xunit.extensibility.core.2.0.0.nupkg",
+        "xunit.extensibility.core.2.0.0.nupkg.sha512",
+        "xunit.extensibility.core.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "xunit >= 2.1.0-beta3-build3029",
-      "Moq >= 4.2.1510.2205",
+      "AutoFixture.AutoMoq >= 3.36.10",
+      "AutoFixture.Xunit2 >= 3.36.10",
       "Microsoft.AspNet.Http.Abstractions >= 1.0.0-beta8",
-      "AutoFixture.Xunit2 >= 3.36.9",
-      "AutoMoq >= 1.6.2",
-      "AutoFixture.AutoMoq >= 3.36.9",
       "Newtonsoft.Json >= 7.0.1"
     ],
     "DNX,Version=v4.5.1": [
-      "fx/System.Runtime >= 4.0.0.0"
+      "fx/System.Runtime >= 4.0.10"
     ]
   }
 }

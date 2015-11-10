@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Hosting;
+﻿using Microsoft.AspNet.Http;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;

@@ -1,9 +1,10 @@
 {
   "locked": false,
-  "version": -9996,
+  "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
       "AutoMapper/4.1.1": {
+        "type": "package",
         "compile": {
           "lib/net45/AutoMapper.dll": {}
         },
@@ -11,7 +12,48 @@
           "lib/net45/AutoMapper.dll": {}
         }
       },
-      "PagedList/1.17.0.0": {
+      "PagedList/1.17.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/PagedList.dll": {}
+        },
+        "runtime": {
+          "lib/net40/PagedList.dll": {}
+        }
+      }
+    },
+    "DNX,Version=v4.5.1/win7-x86": {
+      "AutoMapper/4.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/net45/AutoMapper.dll": {}
+        }
+      },
+      "PagedList/1.17.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/PagedList.dll": {}
+        },
+        "runtime": {
+          "lib/net40/PagedList.dll": {}
+        }
+      }
+    },
+    "DNX,Version=v4.5.1/win7-x64": {
+      "AutoMapper/4.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/net45/AutoMapper.dll": {}
+        }
+      },
+      "PagedList/1.17.0": {
+        "type": "package",
         "compile": {
           "lib/net40/PagedList.dll": {}
         },
@@ -23,6 +65,7 @@
   },
   "libraries": {
     "AutoMapper/4.1.1": {
+      "type": "package",
       "sha512": "wTNIFaF21i0heEEOMOLn4Ki991I+b6Ls+tiwTvmzVhkLo5PmSJcNLuf2eGJEtUnQ3UDBTAAdZEaXAgbTqOe2pg==",
       "files": [
         "AutoMapper.4.1.1.nupkg",
@@ -52,13 +95,14 @@
         "lib/Xamarin.iOS10/AutoMapper.XML"
       ]
     },
-    "PagedList/1.17.0.0": {
+    "PagedList/1.17.0": {
+      "type": "package",
       "sha512": "Ou6F3WKXh49hOo0TxWM+SkIGuKllYPuPPvnSYOlQ1sTrtuEyuDUhYbSJd5Sdb06i/sWUJZTjiUecEs3Ht/Hx3g==",
       "files": [
         "lib/net40/PagedList.dll",
         "lib/net40/PagedList.xml",
-        "PagedList.1.17.0.0.nupkg",
-        "PagedList.1.17.0.0.nupkg.sha512",
+        "PagedList.1.17.0.nupkg",
+        "PagedList.1.17.0.nupkg.sha512",
         "PagedList.nuspec"
       ]
     }

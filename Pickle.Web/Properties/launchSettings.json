@@ -7,11 +7,11 @@
       "environmentVariables": {
         "ASPNET_ENV": "Development"
       },
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta5"
+      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta8"
     },
     "web": {
       "commandName": "web",
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta5"
+      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta8"
     }
   }
 }

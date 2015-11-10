@@ -1,19 +1,20 @@
 ﻿using IdentityServer3.Core.Configuration;
 using Microsoft.AspNet.Builder;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Runtime;
-using Microsoft.Owin.Security.Google;
 using Owin;
 using System.Security.Cryptography.X509Certificates;
 using Pickle.Api.Configuration;
 using System.IdentityModel.Tokens;
 using System.Collections.Generic;
-using Microsoft.AspNet.Authentication.OpenIdConnect;
+
 using System.Security.Claims;
 using Microsoft.AspNet.Authentication;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNet.Mvc.Formatters;
+using Microsoft.Dnx.Runtime;
+using Microsoft.Owin.Security.Google;
 
 namespace Pickle.Api
 {
@@ -24,7 +25,7 @@ namespace Pickle.Api
         {
             services.AddDataProtection();
             services.AddMvc()
-                  .Configure<MvcOptions>(options => {
+                    .AddMvcOptions(options => {
 
                       var jsonOutputFormatter = new JsonOutputFormatter();
                       jsonOutputFormatter.SerializerSettings.ContractResolver =
@@ -40,12 +41,15 @@ namespace Pickle.Api
             policy.Methods.Add("*");
             policy.Origins.Add("*");
             policy.SupportsCredentials = true;
-
-            services.ConfigureCors(x => x.AddPolicy("mypolicy", policy));
+            
+            services.AddCors(o => o.AddPolicy("mypolicy", policy));
         }
 
         public void Configure(IApplicationBuilder app, IApplicationEnvironment env)
         {
+            app.UseIISPlatformHandler();
+            app.UseDeveloperExceptionPage();
+
             var certFile = env.ApplicationBasePath + "\\idsrv3test.pfx";
 
             app.Map("/identity", idsrvApp =>

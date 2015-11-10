@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Hosting;
+﻿using Microsoft.AspNet.Http;
 using Moq;
 using Pickle.Tests.Common.Attributes;
 using Pickle.Web.Api.Providers;

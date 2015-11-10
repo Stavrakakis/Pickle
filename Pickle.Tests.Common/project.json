@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "Pickle.Tests.Common Class Library",
   "authors": [ "nstavrakakis" ],
@@ -7,19 +7,16 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "xunit": "2.1.0-beta3-build3029",
-    "Moq": "4.2.1510.2205",
+    "AutoFixture.AutoMoq": "3.36.10",
+    "AutoFixture.Xunit2": "3.36.10",
     "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta8",
-    "AutoFixture.Xunit2": "3.36.9",
-    "AutoMoq": "1.6.2",
-    "AutoFixture.AutoMoq": "3.36.9",
     "Newtonsoft.Json": "7.0.1"
   },
 
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
-        "System.Runtime": "4.0.0.0"
+        "fx/System.Runtime": "4.0.10"
       }
     }
   }

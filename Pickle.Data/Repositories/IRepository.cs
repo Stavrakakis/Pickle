@@ -15,7 +15,7 @@ namespace Pickle.Data.Repositories
         /// <param name="filter">An optional filter expression</param>
         /// <returns></returns>
         
-        Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, Expression<Func<T, bool>> filter = null);
+        Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, Expression<Func<T, bool>> filter = null, Func<T, object> orderBy = null);
         
         /// <summary>
         /// Inserts an object into the repository

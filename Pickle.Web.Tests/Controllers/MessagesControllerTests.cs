@@ -1,4 +1,5 @@
 ﻿using Moq;
+using PagedList;
 using Pickle.Api.ApiRequestModels;
 using Pickle.Api.Controllers;
 using Pickle.Data.Models;
@@ -21,15 +22,21 @@ namespace Pickle.Web.Tests.Controllers
             Mock<IRepository<ChatMessage>> messageRepository,
             string hubId,
             string channelId,
-            string username)
+            string username,
+            IPagedList<ChatMessage> messages)
         {
-            usernameProvider.Setup(p => p.GetUsername()).ReturnsAsync(username);
+
+            messageRepository
+                .Setup(r => r.GetPaged(1, 100, It.IsAny<Expression<Func<ChatMessage, bool>>>(), null))
+                .Returns(Task.FromResult(messages.ToPagedList(1, 100)));
+
+            usernameProvider.Setup(p => p.GetUsername()).Returns(Task.FromResult(username));
 
             var controllerUnderTest = new MessagesController(usernameProvider.Object, messageRepository.Object);
 
             await controllerUnderTest.GetPagedMessagesForChannel(hubId, channelId, 1, 100);
 
-            messageRepository.Verify(mock => mock.GetPaged(1, 100, It.IsAny<Expression<Func<ChatMessage, bool>>>()), Times.Once);
+            messageRepository.Verify(mock => mock.GetPaged(1, 100, It.IsAny<Expression<Func<ChatMessage, bool>>>(), null), Times.Once());
         }
 
         [Theory]
@@ -40,9 +47,11 @@ namespace Pickle.Web.Tests.Controllers
             string hubId,
             string channelId,
             string username,
-            NewMessageModel newMessage)
+            NewMessageModel newMessage,
+            ChatMessage createdMessage)
         {
-            usernameProvider.Setup(p => p.GetUsername()).ReturnsAsync(username);
+            usernameProvider.Setup(p => p.GetUsername()).Returns(Task.FromResult(username));
+            messageRepository.Setup(r => r.Insert(It.IsAny<ChatMessage>())).Returns(Task.FromResult(createdMessage));
 
             var controllerUnderTest = new MessagesController(usernameProvider.Object, messageRepository.Object);
 
@@ -54,7 +63,7 @@ namespace Pickle.Web.Tests.Controllers
                 parameter.ChannelId == channelId && 
                 parameter.Message == newMessage.Message &&
                 parameter.Username == username
-            )), Times.Once);
+            )), Times.Once());
         }
     }
 }

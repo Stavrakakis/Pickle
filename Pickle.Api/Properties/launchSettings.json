@@ -5,8 +5,13 @@
       "launchUrl": "https://localhost:44306",
       "environmentVariables": {
         "ASPNET_ENV": "Development"
-      },
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta5"
+      }
+    },
+    "web": {
+      "commandName": "web",
+      "environmentVariables": {
+        "ASPNET_ENV": "Development"
+      }
     }
   }
 }
