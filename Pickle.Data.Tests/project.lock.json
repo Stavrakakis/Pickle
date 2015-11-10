@@ -1864,7 +1864,6 @@
         "dependencies": {
           "AutoFixture.AutoMoq": "3.36.10",
           "AutoFixture.Xunit2": "3.36.10",
-          "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta8",
           "Newtonsoft.Json": "7.0.1"
         },
         "frameworkAssemblies": [
@@ -4103,7 +4102,6 @@
         "dependencies": {
           "AutoFixture.AutoMoq": "3.36.10",
           "AutoFixture.Xunit2": "3.36.10",
-          "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta8",
           "Newtonsoft.Json": "7.0.1"
         },
         "frameworkAssemblies": [
@@ -6342,7 +6340,6 @@
         "dependencies": {
           "AutoFixture.AutoMoq": "3.36.10",
           "AutoFixture.Xunit2": "3.36.10",
-          "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta8",
           "Newtonsoft.Json": "7.0.1"
         },
         "frameworkAssemblies": [

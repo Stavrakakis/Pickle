@@ -3,17 +3,18 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 using Pickle.Data.Repositories;
 using System;
-using Pickle.Data.Models;
 using PagedList;
+using Pickle.Data.DataModels;
+using System.Linq;
 
 namespace Pickle.Api.Controllers
 {
     [Authorize]
     public class ChannelsController : Controller
     {
-        private readonly IRepository<Channel> channelRepository;
+        private readonly IRepository<ChannelDataModel> channelRepository;
 
-        public ChannelsController(IRepository<Channel> channelRepository)
+        public ChannelsController(IRepository<ChannelDataModel> channelRepository)
         {
             if (channelRepository == null)
             {
@@ -25,7 +26,7 @@ namespace Pickle.Api.Controllers
 
         [HttpGet]
         [Route("/api/channels")]
-        public async Task<IPagedList<Channel>> GetAllPagedHubs(int pageNumber = 1, int pageSize = 100)
+        public async Task<IPagedList<ChannelDataModel>> GetAllPagedHubs(int pageNumber = 1, int pageSize = 100)
         {
             var channels = await this.channelRepository.GetPaged(pageNumber, pageSize);
 
@@ -34,9 +35,9 @@ namespace Pickle.Api.Controllers
 
         [HttpGet]
         [Route("/api/hub/{hubSlug}/channels")]
-        public async Task<IPagedList<Channel>> GetPagedChannelsForHub(string hubSlug, int pageNumber = 1, int pageSize = 100)
+        public async Task<IPagedList<ChannelDataModel>> GetPagedChannelsForHub(string hubSlug, int pageNumber = 1, int pageSize = 100)
         {
-            var channels = await this.channelRepository.GetPaged(pageNumber, pageSize, channel => channel.HubId == hubSlug);
+            var channels = await this.channelRepository.GetPaged(pageNumber, pageSize, query => query.Where(channel => channel.HubId == hubSlug));
             
             return channels;
         }

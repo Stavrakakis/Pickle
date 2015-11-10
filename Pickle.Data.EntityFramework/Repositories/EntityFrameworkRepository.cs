@@ -7,10 +7,11 @@ using Microsoft.Data.Entity;
 using Pickle.Data.EntityFramework.Context;
 using System.Linq;
 using Pickle.Data.Mapping;
+using System.Collections.Generic;
 
 namespace Pickle.Data.EntityFramework.Repositories
 {
-    public class EntityFrameworkRepository<TDomain, TDto> : IRepository<TDomain> where TDomain : class where TDto : class
+    public class EntityFrameworkRepository<TDto> : IRepository<TDto> where TDto : class
     {
         private readonly PickleContext context;
         private readonly DbSet<TDto> dbSet;
@@ -23,33 +24,27 @@ namespace Pickle.Data.EntityFramework.Repositories
             this.dbSet = context.Set<TDto>();
         }
 
-        public Task<IPagedList<TDomain>> GetPaged(
+        public Task<IPagedList<TDto>> GetPaged(
             int pageNumber = 1, int pageSize = 100,
-            Expression<Func<TDomain, bool>> filter = null, 
-            Func<TDomain, object> orderBy = null)
+            Func<IEnumerable<TDto>, IEnumerable<TDto>> action = null)
         {
-            var items = this.dbSet.AsQueryable();
+            var items = this.dbSet.AsEnumerable();
 
-            if (filter != null)
-            { 
-                var dtoFilter = MappingHelper.ConvertExpression<TDomain, TDto>(filter);
-                items = items.Where(dtoFilter);
+            if (action != null)
+            {
+                items = action.Invoke(items);
             }
             
-            var mapped = items.ToList().Select(o => this.mapper.Map<TDto, TDomain>(o));
-
-            return Task.FromResult(mapped.ToPagedList(pageNumber, pageSize));
+            return Task.FromResult(items.ToPagedList(pageNumber, pageSize));
         }
 
-        public async Task<TDomain> Insert(TDomain value)
-        {
-            var dto = this.mapper.Map<TDomain, TDto>(value);
-            
+        public async Task<TDto> Insert(TDto dto)
+        {            
             this.dbSet.Add(dto);
 
             await this.context.SaveChangesAsync();
-            
-            return this.mapper.Map<TDto, TDomain>(dto);
+
+            return dto;
         }
     }
 }

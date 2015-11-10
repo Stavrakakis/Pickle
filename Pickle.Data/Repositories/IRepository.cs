@@ -1,6 +1,6 @@
 ﻿using PagedList;
 using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Pickle.Data.Repositories
@@ -14,8 +14,8 @@ namespace Pickle.Data.Repositories
         /// <param name="pageSize">Defaults to 100</param>
         /// <param name="filter">An optional filter expression</param>
         /// <returns></returns>
-        
-        Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, Expression<Func<T, bool>> filter = null, Func<T, object> orderBy = null);
+
+        Task<IPagedList<T>> GetPaged(int pageNumber = 1, int pageSize = 100, Func<IEnumerable<T>, IEnumerable<T>> action = null);
         
         /// <summary>
         /// Inserts an object into the repository
