@@ -2,6 +2,7 @@
 using Microsoft.AspNet.SignalR;
 using System.Collections.Generic;
 using Pickle.Web.Api.Providers;
+using System;
 
 namespace Pickle.Web.Hubs
 {
@@ -20,11 +21,11 @@ namespace Pickle.Web.Hubs
             return base.OnConnected();
         }
 
-        public async void Send(string hubId, string channelId, string message)
+        public async void Send(string hubId, string channelId, string message, DateTime createdDate)
         {
             var username = await this.usernameProvider.GetUsername();
 
-            Clients.All.BroadcastMessage(hubId, channelId, username, message);
+            Clients.All.BroadcastMessage(hubId, channelId, username, message, createdDate);
         }
     }
 }

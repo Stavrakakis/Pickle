@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace Pickle.Data.DataModels
 {
@@ -18,5 +18,7 @@ namespace Pickle.Data.DataModels
         {
             get; set;
         }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

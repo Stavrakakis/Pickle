@@ -1,6 +1,8 @@
 /// <reference path="../typings/react/react-global.d.ts" />
+/// <reference path="../typings/moment/moment.d.ts" />
 
 import $ = require("jquery");
+import moment = require("moment");
 
 import dispatcher from "../Dispatcher/Dispatcher";
 import SendMessageAction from "../Channels/SendMessageAction";
@@ -107,7 +109,10 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
 
         for (var i = 0; i < this.state.messages.length; i++) {
             let message = this.state.messages[i];
-            messages.push(<div className="p-chat-message"><div>{message.username}</div><div>{message.message}</div></div>);
+            messages.push(
+                <div className="p-chat-message"><div>{message.username} - { this.formatMessageTime(message.createdDate) }</div>
+                    <div>{message.message}</div>
+                </div>);
         }
 
         return (
@@ -127,6 +132,10 @@ export default class ChatPanel extends React.Component<ChatPanelProps, ChatPanel
     };
     
     // private
+
+    private formatMessageTime(dateToFormat: Date): string {
+        return moment(dateToFormat).fromNow();
+    };
 
     private scrollToBottom(): void {
         let element = $("#p-chat-panel-" + this.chatId)[0];

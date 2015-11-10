@@ -6,6 +6,7 @@ using Pickle.Data.Models;
 using Pickle.Data.Repositories;
 using Pickle.Web.Api.Filters;
 using Pickle.Web.Api.Providers;
+using System;
 using System.Threading.Tasks;
 
 namespace Pickle.Api.Controllers
@@ -38,10 +39,10 @@ namespace Pickle.Api.Controllers
         {
             var username = await this.usernameProvider.GetUsername();
 
-            var message = new ChatMessage(username, channelId, messageContent.Message);
+            var message = new ChatMessage(username, channelId, messageContent.Message, DateTime.Now);
 
             message = await this.messageRepository.Insert(message);
-
+            
             return new CreatedAtRouteResult(string.Format("/api/{0}/{1}/messages/", hubSlug, channelId), message);
         }
     }

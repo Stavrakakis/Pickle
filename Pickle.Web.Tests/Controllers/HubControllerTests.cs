@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNet.Mvc;
-using Moq;
+﻿using Moq;
 using PagedList;
 using Pickle.Api.Controllers;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
 using Pickle.Tests.Common.Attributes;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 

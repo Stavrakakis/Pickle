@@ -1,4 +1,6 @@
-﻿namespace Pickle.Data.DataModels
+﻿using System;
+
+namespace Pickle.Data.DataModels
 {
     public class ChatMessageDataModel
     {
@@ -21,5 +23,7 @@
         {
             get; set;
         }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

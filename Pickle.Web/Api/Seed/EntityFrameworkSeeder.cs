@@ -1,5 +1,6 @@
 ﻿using Pickle.Data.Models;
 using Pickle.Data.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,9 +10,9 @@ namespace Pickle.Web.Api.Seed
     {
         public static async Task Seed(IRepository<Hub> hubRepository, IRepository<Channel> channelRepository, IRepository<ChatMessage> messageRepository)
         {
-            var bristol = new Channel("bristol", "scottlogic", "Bristol");
-            var edinburgh = new Channel("edinburgh", "scottlogic", "Edinburgh");
-            var newcastle = new Channel("newcastle", "scottlogic", "Newcastle");
+            var bristol = new Channel("bristol", "scottlogic", "Bristol", DateTime.Now);
+            var edinburgh = new Channel("edinburgh", "scottlogic", "Edinburgh", DateTime.Now);
+            var newcastle = new Channel("newcastle", "scottlogic", "Newcastle", DateTime.Now);
 
             await channelRepository.Insert(bristol);
             await channelRepository.Insert(edinburgh);

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Pickle.Data.Models
 {
@@ -8,8 +7,9 @@ namespace Pickle.Data.Models
         private readonly string id;
         private readonly string hubId;
         private readonly string name;
-        
-        public Channel(string id, string hubId, string name)
+        private readonly DateTime createdDate;
+
+        public Channel(string id, string hubId, string name, DateTime createdDate)
         {
             if (id == null)
             {
@@ -26,9 +26,15 @@ namespace Pickle.Data.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
+            if (createdDate == null)
+            {
+                throw new ArgumentNullException(nameof(createdDate));
+            }
+
             this.id = id;
             this.hubId = hubId;
             this.name = name;
+            this.createdDate = createdDate;
         }
 
         public string Id
@@ -52,6 +58,14 @@ namespace Pickle.Data.Models
             get
             {
                 return name;
+            }
+        }
+
+        public DateTime CreatedDate
+        {
+            get
+            {
+                return createdDate;
             }
         }
     }

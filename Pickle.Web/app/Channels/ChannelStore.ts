@@ -28,9 +28,14 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
 
         this.$ = $;
         
-        $.connection.chatHub.client.broadcastMessage = (hubId: string, channelId: string, username: string, message: string): void => {
+        $.connection.chatHub.client.broadcastMessage = (
+            hubId: string,
+            channelId: string,
+            username: string,
+            message: string,
+            createdDate: Date): void => {
             
-            this.emit(ChannelStoreEvents.NEW_MESSAGE, new ChatMessageApiModel(hubId, channelId, username, message));
+            this.emit(ChannelStoreEvents.NEW_MESSAGE, new ChatMessageApiModel(hubId, channelId, username, message, createdDate));
         };
 
         $.connection.hub.start();
@@ -42,8 +47,9 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
                 let sendMessageAction = (<SendMessageAction>action);                
 
                 this.sendMessageToApi(sendMessageAction.channel, sendMessageAction.message)
-                    .then(() => {
-                        this.sendMessageToChatHub(sendMessageAction.channel, sendMessageAction.message);
+                    .then((createdMessage: ChatMessageApiModel) => {
+                        console.log(createdMessage);
+                        this.sendMessageToChatHub(sendMessageAction.channel, createdMessage.message, createdMessage.createdDate);
                     })
                     .fail((error: any) => {
                         console.log(error);
@@ -111,12 +117,12 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
 
     // private 
 
-    private sendMessageToChatHub(channel: Channel, message: string): void {
+    private sendMessageToChatHub(channel: Channel, message: string, createdDate: Date): void {
                 
-        this.$.connection.chatHub.server.send(channel.hubId, channel.id, message);
+        this.$.connection.chatHub.server.send(channel.hubId, channel.id, message, createdDate);
     };
 
-    private sendMessageToApi(channel: Channel, message: string): JQueryPromise<void> {
+    private sendMessageToApi(channel: Channel, message: string): JQueryPromise<ChatMessageApiModel> {
 
         let uri = "/api/hub/" + channel.hubId + "/" + channel.id + "/messages";
 

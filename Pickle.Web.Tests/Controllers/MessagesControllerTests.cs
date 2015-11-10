@@ -4,7 +4,6 @@ using Pickle.Api.Controllers;
 using Pickle.Data.Models;
 using Pickle.Data.Repositories;
 using Pickle.Tests.Common.Attributes;
-using Pickle.Tests.Common.Helpers;
 using Pickle.Web.Api.Providers;
 using System;
 using System.Linq.Expressions;
@@ -49,7 +48,7 @@ namespace Pickle.Web.Tests.Controllers
 
             await controllerUnderTest.PostNewMessage(hubId, channelId, newMessage);
 
-            var expectedMessageParameter = new ChatMessage(username, channelId, newMessage.Message);
+            var expectedMessageParameter = new ChatMessage(username, channelId, newMessage.Message, DateTime.Now);
             
             messageRepository.Verify(mock => mock.Insert(It.Is<ChatMessage>(parameter =>
                 parameter.ChannelId == channelId && 

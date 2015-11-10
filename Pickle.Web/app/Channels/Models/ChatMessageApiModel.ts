@@ -4,12 +4,14 @@ export default class ChatMessageApiModel {
     private _username: string;
     private _message: string;
     private _hubId: string;
+    private _createdDate: Date;
 
-    constructor(hubId: string, channelId: string, username: string, message: string) {
+    constructor(hubId: string, channelId: string, username: string, message: string, createdDate: Date) {
         this._channelId = channelId;
         this._username = username;
         this._message = message;
         this._hubId = hubId;
+        this._createdDate = createdDate;
     }
 
     public get channelId(): string {
@@ -26,5 +28,9 @@ export default class ChatMessageApiModel {
 
     public get message(): string {
         return this._message;
+    }
+
+    public get createdDate(): Date {
+        return this._createdDate;
     }
 }

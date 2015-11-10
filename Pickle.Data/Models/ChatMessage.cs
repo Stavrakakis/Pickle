@@ -8,8 +8,9 @@ namespace Pickle.Data.Models
         private readonly string channelId;
         private readonly string message;
         private readonly string username;
-        
-        public ChatMessage(string username, string channelId, string message)
+        private readonly DateTime createdDate;
+
+        public ChatMessage(string username, string channelId, string message, DateTime createdDate)
         {
             if (username == null)
             {
@@ -25,11 +26,17 @@ namespace Pickle.Data.Models
             {
                 throw new ArgumentNullException(nameof(message));
             }
+            
+            if (createdDate == null)
+            {
+                throw new ArgumentNullException(nameof(createdDate));
+            }
 
             this.id = Guid.NewGuid().ToString();
             this.username = username;
             this.channelId = channelId;
             this.message = message;
+            this.createdDate = createdDate;
         }
 
         public string Id
@@ -61,6 +68,14 @@ namespace Pickle.Data.Models
             get
             {
                 return username;
+            }
+        }
+
+        public DateTime CreatedDate
+        {
+            get
+            {
+                return createdDate;
             }
         }
     }

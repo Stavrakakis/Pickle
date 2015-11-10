@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.0",
+    "moment": "^2.10.6",
     "urijs": "^1.16.1"
   }
 }

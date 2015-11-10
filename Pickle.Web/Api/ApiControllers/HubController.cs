@@ -22,6 +22,7 @@ namespace Pickle.Api.Controllers
 
             this.hubRepository = hubRepository;
         }
+
         [HttpGet]
         [Route("/api/hubs")]
         public async Task<IPagedList<Hub>> GetPagedHubs(int pageNumber = 1, int pageSize = 100)
