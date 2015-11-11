@@ -31,7 +31,11 @@ namespace Pickle.Api.Controllers
         [Route("/api/hub/{hubSlug}/{channelId}/messages/")]
         public async Task<IPagedList<ChatMessageDataModel>> GetPagedMessagesForChannel(string hubSlug, string channelId, int pageNumber = 1, int pageSize = 100)
         {
-            return await this.messageRepository.GetPaged(pageNumber, pageSize, list => list.Where(channel => channel.ChannelId == channelId));
+            return await this.messageRepository.GetPaged(
+                pageNumber,
+                pageSize,
+                list => list.Where(channel => channel.ChannelId == channelId)
+                            .OrderBy(message => message.CreatedDate));
         }
 
         [HttpPost]

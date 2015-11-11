@@ -143,6 +143,7 @@ namespace Pickle.Web
 
             app.UseStaticFiles();
 
+            app.UseDeveloperExceptionPage();
             app.UseMvcWithDefaultRoute();
             app.UseSignalR();
         }

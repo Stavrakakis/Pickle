@@ -38,7 +38,7 @@ export default class ChannelStore extends events.EventEmitter implements IChanne
             this.emit(ChannelStoreEvents.NEW_MESSAGE, new ChatMessageApiModel(hubId, channelId, username, message, createdDate));
         };
 
-        $.connection.hub.start();
+        $.connection.hub.start({ transport: ["webSockets", "longPolling"] });
         
         this.dispatcherToken =
             dispatcher.register((action: Action) => {
